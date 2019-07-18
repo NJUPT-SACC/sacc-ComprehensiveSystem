@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserDao">
+
+    <sql id="columns">
+        a.id as "id",
+        a.name as "name",
+        a.login_name as "loginName",
+        a.email as "email",
+        a.tel as "tel",
+        a.password as "password",
+        a.pic_url as "picUrl",
+        a.create_date as "createDate",
+        a.create_by as "createBy",
+        a.update_date as "updateDate",
+        a.update_by as "updateBy",
+        a.del_flag as "delFlag",
+        a.remarks as "remarks",
+    </sql>
+
+    <sql id="customJoins">
+    </sql>
+
+    <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        insert into sys_user(
+            <trim prefix="" suffix="" suffixOverrides="," >
+                id,
+                name,
+                login_name,
+                email,
+                tel,
+                password,
+                pic_url,
+                create_date,
+                create_by,
+                update_date,
+                update_by,
+                del_flag,
+                remarks,
+            </trim>
+        ) values  (
+            <trim prefix="" suffixOverrides="," suffix="">
+                #{id},
+                #{name},
+                #{loginName},
+                #{email},
+                #{tel},
+                #{password},
+                #{picUrl},
+                #{createDate},
+                #{createBy},
+                #{updateDate},
+                #{updateBy},
+                #{delFlag},
+                #{remarks},
+
+            </trim>
+        )
+    </insert>
+
+    <delete id="delete">
+        update sys_user set del_flag=1
+        <where>
+            and id=#{id}
+        </where>
+    </delete>
+    
+    <delete id="realDelete">
+        delete sys_user
+        <where>
+            and id=#{id}
+        </where>
+    </delete>
+
+    <update id="update" parameterType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="id !=null">
+                id=#{id},
+            </if>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="loginName !=null">
+                login_name=#{loginName},
+            </if>
+            <if test="email !=null">
+                email=#{email},
+            </if>
+            <if test="tel !=null">
+                tel=#{tel},
+            </if>
+            <if test="password !=null">
+                password=#{password},
+            </if>
+            <if test="picUrl !=null">
+                pic_url=#{picUrl},
+            </if>
+            <if test="createDate !=null">
+                create_date=#{createDate},
+            </if>
+            <if test="createBy !=null">
+                create_by=#{createBy},
+            </if>
+            <if test="updateDate !=null">
+                update_date=#{updateDate},
+            </if>
+            <if test="updateBy !=null">
+                update_by=#{updateBy},
+            </if>
+            <if test="delFlag !=null">
+                del_flag=#{delFlag},
+            </if>
+            <if test="remarks !=null">
+                remarks=#{remarks},
+            </if>
+
+        </set>
+        <where>
+            and id=#{id}
+        </where>
+
+    </update>
+
+    <select id="get" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.id=#{id}
+        </where>
+    </select>
+
+    <select id="listAll" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.del_flag =0
+        </where>
+        <choose>
+            <when test="_orderBy != null and _orderBy != ''">
+                order by ${_orderBy}
+            </when>
+            <otherwise>
+                order by update_date desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findByLoginName" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.login_name = #{loginName}
+        </where>
+    </select>
+
+    <select id="findMenuByUserId" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        select
+        m.id as "id",
+        m.name as "name",
+        m.sort as "sort",
+        m.url as "url",
+        m.parent_id as "parentId",
+        m.is_show as "isShow",
+        m.icon as "icon",
+        m.remarks as "remarks",
+        m.create_date as "createDate",
+        m.create_by as "createBy",
+        m.update_date as "updateDate",
+        m.update_by as "updateBy",
+        m.del_flag as "delFlag"
+        from  sys_user a
+        join sys_user_role ur on a.id=ur.user_id  and ur.del_flag='0' and a.del_flag='0'
+        join sys_role_menu rm on ur.role_id=rm.role_id  and rm.del_flag='0'
+        join sys_menu m on rm.menu_id=m.id  and m.del_flag='0'
+        where a.id = #{id}
+
+    </select>
+
+    <select id="findRoleByUserId" resultType="String">
+        select
+        r.name as "name"
+        from  sys_user a
+        join sys_user_role ur on a.id=ur.user_id  and ur.del_flag='0' and a.del_flag='0'
+        join sys_role r on ur.role_id=r.id  and r.del_flag='0'
+        where a.id = #{id}
+    </select>
+
+
+    <select id="findPermissionByUserId" resultType="String">
+        select
+        p.permission as "permission"
+        from  sys_user a
+        join sys_user_role ur on a.id=ur.user_id  and ur.del_flag='0' and a.del_flag='0'
+        join sys_role_permission rp on ur.role_id=rp.role_id  and rp.del_flag='0'
+        join sys_permission p on rp.permission_id=p.id  and p.del_flag='0'
+        where a.id = #{id}
+    </select>
+
+    <select id="findUserNotAdmin" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a left join sys_user_role b on a.id = b.user_id
+        where a.site_id = #{siteId}
+        and a.del_flag = 0
+        and b.role_id = '2'
+        <choose>
+            <when test="_orderBy != null and _orderBy != ''">
+                order by ${_orderBy}
+            </when>
+            <otherwise>
+                order by a.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
