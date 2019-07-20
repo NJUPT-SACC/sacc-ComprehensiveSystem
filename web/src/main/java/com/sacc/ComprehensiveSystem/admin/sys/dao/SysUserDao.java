@@ -11,11 +11,11 @@ import java.util.List;
 public interface SysUserDao extends BasicDao<SysUser> {
     SysUser findByLoginName(String loginName);
 
-    List<SysMenu> findMenuByUserId(String id);
+    List<SysMenu> findMenuByUserId(Integer id);
 
-    List<String> findRoleByUserId(String id);
+    List<String> findRoleByUserId(Integer id);
 
-    List<String> findPermissionByUserId(String id);
+    List<String> findPermissionByUserId(Integer id);
 
     List<SysUser> findUserNotAdmin(SysUser sysUser);
 

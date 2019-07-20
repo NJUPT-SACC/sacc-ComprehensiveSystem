@@ -56,7 +56,7 @@ public class SACRealm extends AuthorizingRealm {
         if (CacheUtils.getUserCache(authKey) == null/*cacheService.getUserByAuthKey(authKey) == null*/){ //未登录
             throw new AuthenticationException("token invalid");
         }
-        return new SimpleAuthenticationInfo(authKey, authKey, "gsc_realm");
+        return new SimpleAuthenticationInfo(authKey, authKey, getName());
     }
 
 

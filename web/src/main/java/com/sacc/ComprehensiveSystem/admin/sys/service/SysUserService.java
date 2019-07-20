@@ -61,8 +61,7 @@ public class SysUserService extends BasicService<SysUser> {
     @Transactional(readOnly = false)
     public SysUser login(String username, String password) {
         SysUser user = sysUserDao.findByLoginName(username);
-        System.out.println("user"+user);
-        System.out.println(PasswordUtils.generateHash(user.getPassword()));
+
         if(user != null && PasswordUtils.checkHash(password,user.getPassword())) {
             Date d = new Date();
             user.setUpdateDate(d);
@@ -78,15 +77,15 @@ public class SysUserService extends BasicService<SysUser> {
         //TODO
     }
 
-    public List<SysMenu> findMenuByUserId(String id) {
+    public List<SysMenu> findMenuByUserId(Integer id) {
         return sysUserDao.findMenuByUserId(id);
     }
 
-    public List<String> findRoleByUserId(String id) {
+    public List<String> findRoleByUserId(Integer id) {
         return sysUserDao.findRoleByUserId(id);
     }
 
-    public List<String> findPermissionByUserId(String id) {
+    public List<String> findPermissionByUserId(Integer id) {
         return  sysUserDao.findPermissionByUserId(id);
     }
 

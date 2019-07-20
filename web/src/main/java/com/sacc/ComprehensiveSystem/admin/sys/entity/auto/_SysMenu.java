@@ -30,7 +30,7 @@ public class _SysMenu extends BasicEntity {
     // ---------------------------------
     // parent_id的属性
     // ---------------------------------
-    private String parentId;
+    private Integer parentId;
 
     // ---------------------------------
     // name的属性
@@ -59,7 +59,7 @@ public class _SysMenu extends BasicEntity {
     // ---------------------------------
     private String isShow;
 
-    public String getParentId() {
+    public Integer getParentId() {
         return this.parentId;
     }
 
@@ -91,7 +91,7 @@ public class _SysMenu extends BasicEntity {
         return this.isShow;
     }
 
-    public void setParentId(String parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

@@ -22,7 +22,7 @@ public class BasicEntity {
     // ---------------------------------
     // name的对应属性
     // ---------------------------------
-    private String id;
+    private Integer id;
 
     // ---------------------------------
     // create_date对应的属性
@@ -52,7 +52,7 @@ public class BasicEntity {
     // ---------------------------------
     // update_by对应的属性
     // ---------------------------------
-    private String updateBy;
+    private Integer updateBy;
 
     // ---------------------------------
     // del_flag对应的属性
@@ -72,11 +72,11 @@ public class BasicEntity {
     private Set<String> _updateProperties;
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -136,11 +136,11 @@ public class BasicEntity {
         this._maxUpdateDate = _maxUpdateDate;
     }
 
-    public String getUpdateBy() {
+    public Integer getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
     }
 

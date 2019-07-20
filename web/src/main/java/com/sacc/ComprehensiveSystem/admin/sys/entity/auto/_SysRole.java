@@ -15,28 +15,28 @@ public class _SysRole extends BasicEntity {
     // ---------------------------------
     // user_id的属性
     // ---------------------------------
-    private String userId;
+    private Integer userId;
 
     // ---------------------------------
     // role_id的属性
     // ---------------------------------
-    private String roleId;
+    private Integer roleId;
 
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return this.roleId;
     }
 
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId =  userId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId =  roleId;
     }
 }

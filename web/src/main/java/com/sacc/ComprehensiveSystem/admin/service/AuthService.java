@@ -22,7 +22,6 @@ public class AuthService {
     public HashMap<String, Object> authtication(String username, String password) {
         HashMap<String, Object> hashMap = null;
         SysUser sysUser = sysUserService.login(username, password);
-        System.out.println("mihuo"+sysUser);
         if (sysUser != null) {
             hashMap = new HashMap<>();
             hashMap.put("userInfo", sysUser);
@@ -44,7 +43,6 @@ public class AuthService {
             }
             hashMap.put("permission", permission);
         }
-        System.out.println("hashMap" + hashMap);
         return hashMap;
     }
 }
