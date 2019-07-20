@@ -17,30 +17,30 @@ public class _SysRolePermission extends BasicEntity {
     // ---------------------------------
     // role_id的属性
     // ---------------------------------
-    private String roleId;
+    private Integer roleId;
 
     // ---------------------------------
     // permission_id的属性
     // ---------------------------------
-    private String permissionId;
+    private Integer permissionId;
 
 
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return this.roleId;
     }
 
-    public String getPermissionId() {
+    public Integer getPermissionId() {
         return this.permissionId;
     }
 
 
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId =  roleId;
     }
 
-    public void setPermissionId(String permissionId) {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId =  permissionId;
     }
 

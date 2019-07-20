@@ -21,7 +21,7 @@ public interface BasicDao<T extends BasicEntity> {
      * @param id 数据的ID.
      * @return 删除的数据条数
      */
-    public int delete(String id);
+    public int delete(Integer id);
 
 
     /**
@@ -36,7 +36,7 @@ public interface BasicDao<T extends BasicEntity> {
      * @param id 数据ID
      * @return 数据对象
      */
-    public T get(String id);
+    public T get(Integer id);
 
     /**
      * 查询所有数据

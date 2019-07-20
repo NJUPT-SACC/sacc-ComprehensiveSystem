@@ -28,12 +28,10 @@ public class LoginService {
 
     @Transactional(readOnly = false)
     public HashMap<String, Object> login(String postJson){
-        System.out.println("login attempt");
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         HashMap<String,Object> data = null;
-        Object result = null;
         UserSimpleAuthorizationInfo userSimpleAuthorizationInfo = new UserSimpleAuthorizationInfo();
         HashMap<String, Object> hashMap = authService.authtication(username, password);
         if (hashMap != null) {

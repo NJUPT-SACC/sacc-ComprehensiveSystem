@@ -40,7 +40,7 @@ public abstract class BasicService<T extends BasicEntity> {
      * @param id 数据ID
      * @return 单条数据
      */
-    public T get(String id) {
+    public T get(Integer id) {
         return dao.get(id);
     }
 
@@ -51,7 +51,7 @@ public abstract class BasicService<T extends BasicEntity> {
      * @return 实际删除的数据条数
      */
     @Transactional(readOnly = false)
-    public int delete(String id) {
+    public int delete(Integer id) {
         return dao.delete(id);
     }
 
@@ -65,7 +65,7 @@ public abstract class BasicService<T extends BasicEntity> {
     public int save(T entity) {
         logger.debug("entity: {}", entity);
         if (!exists(entity)) {
-            if (null == entity.getId() || entity.getId().trim().length() == 0) { // new entity，do insert
+            if (null == entity.getId()) { // new entity，do insert,个人觉得0也算ID
                 _init(entity);
                 return dao.insert(entity);
             } else {
@@ -155,7 +155,6 @@ public abstract class BasicService<T extends BasicEntity> {
 
     public void _init(T entity) {
         Date date = new Date();
-        entity.setId(UUIDUtils.getUUID());
         entity.setCreateDate(date);
         entity.setUpdateDate(date);
         entity.setDelFlag(DEL_FLAG_NORMAL);
