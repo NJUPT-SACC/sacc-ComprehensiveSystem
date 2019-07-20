@@ -26,7 +26,6 @@ public class LoginService {
     @Autowired
     SysUserService sysUserService;
 
-
     @Transactional(readOnly = false)
     public HashMap<String, Object> login(String postJson){
         System.out.println("login attempt");

@@ -1,7 +1,6 @@
 package com.sacc.ComprehensiveSystem.admin.service;
 
 import com.sacc.ComprehensiveSystem.admin.sys.entity.SysMenu;
-import com.sacc.ComprehensiveSystem.admin.sys.entity.SysPermission;
 import com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser;
 import com.sacc.ComprehensiveSystem.admin.sys.service.SysUserService;
 import org.slf4j.Logger;
