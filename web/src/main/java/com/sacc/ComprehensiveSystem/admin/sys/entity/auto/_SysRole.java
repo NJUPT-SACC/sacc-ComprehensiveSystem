@@ -2,6 +2,9 @@ package com.sacc.ComprehensiveSystem.admin.sys.entity.auto;
 
 import com.sacc.ComprehensiveSystem.common.entity.BasicEntity;
 
+/**
+ * 对应的实体类父类，请勿做任何修改
+ */
 public class _SysRole extends BasicEntity {
     public static final String COLUMN_USER_ID_ = "user_id";
     public static final String COLUMN_USER_ID_ASC_ = "user_id asc";

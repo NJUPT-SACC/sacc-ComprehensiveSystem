@@ -2,6 +2,9 @@ package com.sacc.ComprehensiveSystem.admin.sys.entity.auto;
 
 import com.sacc.ComprehensiveSystem.common.entity.BasicEntity;
 
+/**
+ * 对应的实体类父类，请勿做任何修改
+ */
 public class _SysUser extends BasicEntity {
     public static final String COLUMN_NAME_ = "name";
     public static final String COLUMN_NAME_ASC_ = "name asc";
