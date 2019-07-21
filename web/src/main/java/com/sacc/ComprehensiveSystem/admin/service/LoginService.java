@@ -61,7 +61,8 @@ public class LoginService {
             String authKey = UUID.randomUUID().toString();
             data.put("authKey", authKey);
             //cacheService.cacheUser(authKey, userSimpleAuthorizationInfo);
-            CacheUtils.putUserCache(authKey, userSimpleAuthorizationInfo,3600 * 12);
+            //CacheUtils.putUserCache(authKey, userSimpleAuthorizationInfo,3600 * 12);
+            CacheUtils.put("user_info", authKey, userSimpleAuthorizationInfo);
             return data;
         } else {
             return null;
