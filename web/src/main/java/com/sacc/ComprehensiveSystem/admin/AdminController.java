@@ -2,7 +2,7 @@ package com.sacc.ComprehensiveSystem.admin;
 
 import com.sacc.ComprehensiveSystem.admin.service.LoginService;
 import com.sacc.ComprehensiveSystem.common.utils.RestResult;
-import org.apache.shiro.crypto.hash.Hash;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/admin")
-public class LoginController {
-    static Logger logger = LoggerFactory.getLogger(LoginController.class);
+public class AdminController {
+    static Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     LoginService loginService;
@@ -38,6 +38,13 @@ public class LoginController {
         }
         logger.debug("/login -> result {}",result);
         return result;
+    }
+
+    @RequestMapping("/signup")
+    public RestResult signUp(@RequestBody String postJson) {
+        logger.debug("/signUp -> postJson:{}", postJson);
+        //TODO
+        return null;
     }
 
     @RequestMapping("/401")
