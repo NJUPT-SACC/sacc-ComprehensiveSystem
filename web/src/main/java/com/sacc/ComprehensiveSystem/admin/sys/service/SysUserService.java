@@ -65,7 +65,7 @@ public class SysUserService extends BasicService<SysUser> {
     public SysUser login(String username, String password) {
         SysUser user = sysUserDao.findByLoginName(username);
 
-        //System.out.println(PasswordUtils.generateHash(password));
+        System.out.println(PasswordUtils.generateHash(password));
         if(user != null && PasswordUtils.checkHash(password,user.getPassword())) {
                 Date d = new Date();
                 user.setUpdateDate(d);
