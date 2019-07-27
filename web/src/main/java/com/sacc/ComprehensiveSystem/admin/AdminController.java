@@ -2,7 +2,6 @@ package com.sacc.ComprehensiveSystem.admin;
 
 import com.sacc.ComprehensiveSystem.admin.service.LoginService;
 import com.sacc.ComprehensiveSystem.common.utils.RestResult;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
