@@ -5,6 +5,7 @@ import com.sacc.ComprehensiveSystem.admin.sys.entity.SysMenu;
 import com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser;
 import com.sacc.ComprehensiveSystem.common.service.BasicService;
 import com.sacc.ComprehensiveSystem.common.utils.PasswordUtils;
+import com.sacc.ComprehensiveSystem.common.utils.RestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,9 @@ public class SysUserService extends BasicService<SysUser> {
     public SysUser findByLoginName(String loginName){
         return sysUserDao.findByLoginName(loginName);
     }
-
+    public String findByUserName(String name){
+        return sysUserDao.findByUserName(name);
+    }
     /**
      * 用户登录
      * <ul>
@@ -64,11 +67,11 @@ public class SysUserService extends BasicService<SysUser> {
 
         System.out.println(PasswordUtils.generateHash(password));
         if(user != null && PasswordUtils.checkHash(password,user.getPassword())) {
-            Date d = new Date();
-            user.setUpdateDate(d);
-            user.setUpdateBy(user.getId());
-            save(user);
-            return user;
+                Date d = new Date();
+                user.setUpdateDate(d);
+                user.setUpdateBy(user.getId());
+                save(user);
+                return user;
         }
         return null;
     }
@@ -93,4 +96,25 @@ public class SysUserService extends BasicService<SysUser> {
     public List<SysUser> findUserNotAdmin(SysUser sysUser) {
         return  sysUserDao.findUserNotAdmin(sysUser);
     }
+
+    public int signUp(SysUser sysUser){
+        int result=3;
+
+        String name=sysUser.getName();
+        SysUser previousSysUser = sysUserDao.findByLoginName(name);
+
+        if(previousSysUser!=null) {
+            return result;
+        } else {
+            try {
+                insert(sysUser);
+                result = 1;
+            } catch (Exception e) {
+                logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
+                result = 2;
+            }
+        }
+        return result;
+    }
+
 }

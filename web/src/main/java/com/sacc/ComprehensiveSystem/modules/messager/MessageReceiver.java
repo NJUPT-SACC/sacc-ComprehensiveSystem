@@ -6,19 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+<<<<<<< HEAD
+=======
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import java.util.Calendar;
 import java.util.Date;
+>>>>>>> 46a1d34671f82032e3a17cd67943f7a04cdcd23f
 
 /**
  * 消息接收服务
  * 接受来自评测机的实时评测结果
  */
 @Component
-public class MessageReceiver implements MessageListener {
+public class MessageReceiver {
 
     Logger logger = LoggerFactory.getLogger(MessageReceiver.class);
 
