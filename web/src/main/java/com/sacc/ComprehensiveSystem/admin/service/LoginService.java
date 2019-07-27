@@ -25,14 +25,15 @@ public class LoginService {
 
     @Autowired
     SysUserService sysUserService;
-
     @Transactional(readOnly = false)
+
     public HashMap<String, Object> login(String postJson){
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         HashMap<String,Object> data = null;
-        UserSimpleAuthorizationInfo userSimpleAuthorizationInfo = new UserSimpleAuthorizationInfo();
+        UserSimpleAuthorizationInfo userSimpleAuthorizationInfo =
+                new UserSimpleAuthorizationInfo();
         HashMap<String, Object> hashMap = authService.authtication(username, password);
         if (hashMap != null) {
             String userInfoStr = JSONUtils.toJson(hashMap.get("userInfo"));
@@ -41,7 +42,7 @@ public class LoginService {
             sysUser.setPassword(null);
             logger.debug("sysUser from auth: {}", sysUser);
 
-            List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
+                       List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
             logger.debug("menuList from auth:{}", menuList);
 
             List<String> roleList = (List<String>) hashMap.get("roleList");

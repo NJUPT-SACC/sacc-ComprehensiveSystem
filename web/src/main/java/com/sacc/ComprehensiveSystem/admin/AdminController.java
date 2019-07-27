@@ -1,6 +1,7 @@
 package com.sacc.ComprehensiveSystem.admin;
 
 import com.sacc.ComprehensiveSystem.admin.service.LoginService;
+import com.sacc.ComprehensiveSystem.admin.service.RegistService;
 import com.sacc.ComprehensiveSystem.common.utils.RestResult;
 import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
@@ -40,13 +41,36 @@ public class AdminController {
         return result;
     }
 
+
+
+
+    @Autowired
+    RegistService registService;
+
     @RequestMapping("/signup")
     public RestResult signUp(@RequestBody String postJson) {
         logger.debug("/signUp -> postJson:{}", postJson);
-        //TODO
-        return null;
-    }
+        int resultt=0;
 
+        RestResult<Object> result = null;
+        try {
+            resultt =registService.signUp(postJson);
+        } catch (Exception e) {
+            logger.error("Error: {}\n{}",e.getMessage(), e.getStackTrace());
+            result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
+        }
+        logger.debug("/signup -> result {}",result);
+        switch(resultt)
+        {
+            case 1:
+                result= new RestResult<Object>(RestResult.STATUS_SUCCESS, "注册成功",null);
+            case 2:
+                result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
+            case 3:
+                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"重复注册",null);
+        }
+        return result;
+    }
     @RequestMapping("/401")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public RestResult<Object> unauthorized() {

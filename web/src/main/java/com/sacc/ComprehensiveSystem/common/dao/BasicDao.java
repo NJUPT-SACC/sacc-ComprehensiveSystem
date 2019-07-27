@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Mapper
-public interface BasicDao<T extends BasicEntity> {
+public interface
+BasicDao<T extends BasicEntity> {
 
     /**
      * 插入数据
