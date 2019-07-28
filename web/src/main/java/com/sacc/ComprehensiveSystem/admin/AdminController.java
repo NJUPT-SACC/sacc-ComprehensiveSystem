@@ -59,17 +59,23 @@ public class AdminController {
             result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
         }
         logger.debug("/signup -> result {}",result);
-        switch(resultt)
-        {
+        switch(resultt) {
             case 1:
                 result= new RestResult<Object>(RestResult.STATUS_SUCCESS, "注册成功",null);
+                break;
             case 2:
                 result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
+                break;
             case 3:
                 result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"重复注册",null);
+                break;
+            default:
+                break;
         }
         return result;
     }
+
+
     @RequestMapping("/401")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public RestResult<Object> unauthorized() {

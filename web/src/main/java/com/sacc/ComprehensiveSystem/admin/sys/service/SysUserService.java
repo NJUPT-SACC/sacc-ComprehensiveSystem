@@ -100,7 +100,7 @@ public class SysUserService extends BasicService<SysUser> {
     public int signUp(SysUser sysUser){
         int result=3;
 
-        String name=sysUser.getName();
+        String name=sysUser.getLoginName();
         SysUser previousSysUser = sysUserDao.findByLoginName(name);
 
         if(previousSysUser!=null) {

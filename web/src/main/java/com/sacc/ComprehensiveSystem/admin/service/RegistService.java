@@ -26,18 +26,17 @@ public class RegistService {
     SysUserService sysUserService;
 
     @Transactional(readOnly = false)
-    public int  signUp(String postJson) {
+    public int signUp(String postJson) {
         int resultt = 2;
         JSONObject jsonObject = new JSONObject(postJson);
 
         SysUser sysUser=new SysUser();
-        sysUser.setName(jsonObject.getString("username"));
+        sysUser.setLoginName((jsonObject.getString("username")));
         sysUser.setEmail(jsonObject.getString("email"));
         sysUser.setPassword(jsonObject.getString("password"));
 
        try {
             resultt = sysUserService.signUp(sysUser);
-
         } catch (Exception e) {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
             resultt=2;
