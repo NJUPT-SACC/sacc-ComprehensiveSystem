@@ -12,6 +12,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 应用程序事件监听器
+ * 负责将消息队列中的消息转发至控制器.
+ */
 @Component
 public class ApplicationEventListener {
 
@@ -147,7 +151,7 @@ public class ApplicationEventListener {
         SseEmitter sseEmitter = sseEmitters.get(submissionId);
 
         if ( sseEmitter == null ) {
-            logger.warn(String.format("CANNOT get the SseEmitter for submission #%d.", submissionId));
+            logger.error("Can not get the SseEmitter for submission {}.", submissionId);
             return;
         }
         Map<String, String> mapMessage = new HashMap<>(3, 1);
