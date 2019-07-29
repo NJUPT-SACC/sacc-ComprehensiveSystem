@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -24,7 +25,7 @@ public class MessageReceiver implements MessageListener{
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
-
+    @JmsListener(destination = "vojJudgeResultQueue")
     public void onMessage(Message message) {
         if ( message instanceof MapMessage) {
             final MapMessage mapMessage = (MapMessage) message;
