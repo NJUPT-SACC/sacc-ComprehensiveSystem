@@ -204,3 +204,5 @@ INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, u
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (3, 'user', '', '2019-07-29 11:05:36', 2333, '2019-07-29 11:05:36', 2233, 0);
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (4, 'unvalidation', '', '2019-07-29 11:07:06', 2333, '2019-07-29 11:07:06', 2233, 0);
 
+ALTER TABLE `sacc_frontend`.`assignment_question`
+ADD COLUMN `question_type` int(11) NOT NULL COMMENT '题目类型（1选择题，2编程题）' AFTER `assignment_id`;

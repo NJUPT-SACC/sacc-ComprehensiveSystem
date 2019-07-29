@@ -11,3 +11,6 @@ create table sacc_frontend.assignment_question
       update_by     bigint                              not null comment '修改人ID',
       del_flag      tinyint   default 0                 not null
   );
+
+ALTER TABLE `sacc_frontend`.`assignment_question`
+ADD COLUMN `question_type` int(11) NOT NULL COMMENT '题目类型（1选择题，2编程题）' AFTER `assignment_id`;
