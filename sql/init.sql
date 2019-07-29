@@ -199,3 +199,8 @@ create table sacc_frontend.sys_user_role
     del_flag    tinyint      default 0                 not null comment '删除标记'
 );
 
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (1, 'administrator', '', '2019-07-29 10:51:59', 2333, '2019-07-29 10:51:59', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (2, 'issuer', '', '2019-07-29 10:54:20', 2333, '2019-07-29 10:54:20', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (3, 'user', '', '2019-07-29 11:05:36', 2333, '2019-07-29 11:05:36', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (4, 'unvalidation', '', '2019-07-29 11:07:06', 2333, '2019-07-29 11:07:06', 2233, 0);
+

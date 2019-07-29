@@ -17,7 +17,7 @@ import java.util.Date;
  * 接受来自评测机的实时评测结果
  */
 @Component
-public class MessageReceiver {
+public class MessageReceiver implements MessageListener{
 
     Logger logger = LoggerFactory.getLogger(MessageReceiver.class);
 
