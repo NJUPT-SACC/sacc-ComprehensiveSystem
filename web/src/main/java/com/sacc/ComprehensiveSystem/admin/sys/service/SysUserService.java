@@ -77,7 +77,7 @@ public class SysUserService extends BasicService<SysUser> {
     }
 
     @Override
-    public void customeInit(SysUser entity) {
+    public void customInit(SysUser entity) {
         //TODO
     }
 
