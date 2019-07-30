@@ -177,7 +177,7 @@ create table sacc_frontend.sys_user
     pic_url     varchar(100) default ''                not null comment '头像地址',
     create_date timestamp    default CURRENT_TIMESTAMP not null,
     update_date timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-    update_by   bigint                                 not null,
+    update_by   bigint       default -1                not null,
     del_flag    tinyint      default 0                 not null comment '删除标记'
 )
     comment '用户';
