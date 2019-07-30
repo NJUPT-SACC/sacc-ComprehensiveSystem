@@ -26,12 +26,13 @@ public class RegistService {
     SysUserService sysUserService;
 
     @Transactional(readOnly = false)
-    public int  signUp(String postJson) {
+    public int signUp(String postJson) {
         int resultt = 2;
         JSONObject jsonObject = new JSONObject(postJson);
 
         SysUser sysUser=new SysUser();
         sysUser.setLoginName(jsonObject.getString("username"));
+
         sysUser.setEmail(jsonObject.getString("email"));
         sysUser.setPassword(jsonObject.getString("password"));
 

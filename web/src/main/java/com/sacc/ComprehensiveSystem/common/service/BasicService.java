@@ -92,7 +92,7 @@ public abstract class BasicService<T extends BasicEntity> {
         }
         Date date = new Date();
         entity.setCreateDate(date);
-        entity.setUpdateDate(date);
+        // entity.setUpdateDate(date);数据库update_time字段自动更新
         entity.setDelFlag(DEL_FLAG_NORMAL);
         customeInit(entity);
         return dao.insert(entity);
@@ -156,7 +156,7 @@ public abstract class BasicService<T extends BasicEntity> {
     public void _init(T entity) {
         Date date = new Date();
         entity.setCreateDate(date);
-        entity.setUpdateDate(date);
+        //entity.setUpdateDate(date);
         entity.setDelFlag(DEL_FLAG_NORMAL);
         customeInit(entity);
     }

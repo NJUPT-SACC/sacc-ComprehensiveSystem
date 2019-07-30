@@ -10,7 +10,6 @@ create table sacc_frontend.sys_user
     tel         varchar(100) default ''                not null comment '电话',
     pic_url     varchar(100) default ''                not null comment '头像地址',
     create_date timestamp    default CURRENT_TIMESTAMP not null,
-    create_by   bigint                                 not null comment '创建者',
     update_date timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     update_by   bigint                                 not null,
     del_flag    tinyint      default 0                 not null comment '删除标记'
