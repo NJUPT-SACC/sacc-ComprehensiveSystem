@@ -42,7 +42,6 @@ public class RegistService {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
             resultt=2;
         }
-        System.out.println(resultt);
         return resultt;
 
     }
