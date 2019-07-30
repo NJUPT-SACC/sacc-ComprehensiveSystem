@@ -63,10 +63,13 @@ public class AdminController {
         {
             case 1:
                 result= new RestResult<Object>(RestResult.STATUS_SUCCESS, "注册成功",null);
+                break;
             case 2:
                 result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
+                break;
             case 3:
                 result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"重复注册",null);
+                break;
         }
         return result;
     }
