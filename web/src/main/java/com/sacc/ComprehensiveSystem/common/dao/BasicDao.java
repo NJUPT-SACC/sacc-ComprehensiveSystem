@@ -36,7 +36,7 @@ public interface BasicDao<T extends BasicEntity> {
      * @param id 数据ID
      * @return 数据对象
      */
-    public T get(Integer id);
+    public T get(Long id);
 
     /**
      * 查询所有数据
