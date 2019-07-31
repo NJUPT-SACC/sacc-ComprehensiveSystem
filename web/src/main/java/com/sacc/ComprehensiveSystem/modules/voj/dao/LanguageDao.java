@@ -1,10 +1,12 @@
 package com.sacc.ComprehensiveSystem.modules.voj.dao;
 
 import com.sacc.ComprehensiveSystem.modules.voj.entity.Language;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface LanguageDao {
     /**
      * 通过编程语言的唯一标识符获取编程语言对象.

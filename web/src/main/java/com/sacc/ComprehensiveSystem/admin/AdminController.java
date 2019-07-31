@@ -40,9 +40,6 @@ public class AdminController {
         return result;
     }
 
-
-
-
     @Autowired
     RegistService registService;
 
@@ -74,7 +71,6 @@ public class AdminController {
         }
         return result;
     }
-
 
     @RequestMapping("/401")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
