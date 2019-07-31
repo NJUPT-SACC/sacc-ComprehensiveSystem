@@ -1,5 +1,7 @@
 package com.sacc.ComprehensiveSystem;
 
+import com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserDao;
+import com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser;
 import com.sacc.ComprehensiveSystem.modules.mail.MailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SignatureServiceTest {
     @Autowired
-    private MailService mailService;
+    private SysUserDao sysUserDao;
 
     @Test
     public void testSendMail() throws Exception {
-        mailService.sendSimpleMail("1095755891@qq.com", "test邮件", "HelloMEIgeren");
+        SysUser sysUser = sysUserDao.get(2l);
+
     }
 }

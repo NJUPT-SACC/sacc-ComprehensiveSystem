@@ -1,19 +1,37 @@
-package com.sacc.ComprehensiveSystem.admin.shrio.tools;
+package com.sacc.ComprehensiveSystem.common.utils;
+
+import com.sacc.ComprehensiveSystem.admin.service.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Base64 {
     // BASE64加密
-    public String base64decoder(String unDecoderData) {
+    static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-        java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
 
-        byte[] data = encoder.encode(unDecoderData.getBytes());
-        return new String(data);
+    public static String Base64Decoder(String unDecoderData) {
+        try {
+            java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+
+            byte[] data = encoder.encode(unDecoderData.getBytes());
+            return new String(data);
+        }catch (Exception e)
+        {
+            logger.debug("加密失败");
+            return "";
+        }
     }
     //BASE64解密
-    public String Base64Decoder(String DecodedData) {
-        java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
-        byte[] bytes = decoder.decode(DecodedData);
-        return new String(bytes);
+    public static String Base64UnDecoder(String DecodedData) {
+        try {
+            java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
+            byte[] bytes = decoder.decode(DecodedData);
+            return new String(bytes);
+        }catch (Exception e)
+        {
+            logger.debug("加密失败");
+            return "";
+        }
     }
 
 }

@@ -1,8 +1,14 @@
-package com.sacc.ComprehensiveSystem.admin.shrio.tools;
+package com.sacc.ComprehensiveSystem.common.utils;
+
+import com.sacc.ComprehensiveSystem.admin.service.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
 
 public class MD5Utils {
+    static Logger logger = LoggerFactory.getLogger(LoginService.class);
+
     private static final String hexDigIts[] = {"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"};
 
     /**
@@ -22,6 +28,7 @@ public class MD5Utils {
                 resultString = byteArrayToHexString(md.digest(resultString.getBytes(charsetname)));
             }
         }catch (Exception e){
+            logger.debug("加密失败");
         }
         return resultString;
     }
