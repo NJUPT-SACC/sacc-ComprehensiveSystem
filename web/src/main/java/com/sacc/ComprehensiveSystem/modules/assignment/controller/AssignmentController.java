@@ -57,6 +57,12 @@ public class AssignmentController {
         return list;
     }
 
+    /**
+     * 获取题目详情
+     * @param type
+     * @param question
+     * @return
+     */
     @GetMapping("/questionDetail")
     public QuestionDetail getQuestionDetail(QuestionType type, Integer question){
         if(type == QuestionType.MultipleChoice){
