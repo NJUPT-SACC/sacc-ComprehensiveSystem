@@ -1,17 +1,13 @@
 package com.sacc.ComprehensiveSystem.modules.assignment.dao;
 
+import com.sacc.ComprehensiveSystem.common.dao.BasicDao;
 import com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface AssignmentMapper {
-    int deleteByPrimaryKey(Long id);
+/**
+ * @author goufaan
+ */
+@Mapper
+public interface AssignmentMapper extends BasicDao<Assignment> {
 
-    int insert(Assignment record);
-
-    int insertSelective(Assignment record);
-
-    Assignment selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Assignment record);
-
-    int updateByPrimaryKey(Assignment record);
 }

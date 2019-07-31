@@ -29,10 +29,10 @@ public abstract class BasicService<T extends BasicEntity> {
         ConvertUtils.register(new DateConverter(null), Date.class);
     }
 
-    Class<T> cls;
+    protected Class<T> cls;
 
     @Autowired
-    BasicDao<T> dao;
+    protected BasicDao<T> dao;
 
     /**
      * 获取一条数据
@@ -94,7 +94,7 @@ public abstract class BasicService<T extends BasicEntity> {
         entity.setCreateDate(date);
         // entity.setUpdateDate(date);数据库update_time字段自动更新
         entity.setDelFlag(DEL_FLAG_NORMAL);
-        customeInit(entity);
+        customInit(entity);
         return dao.insert(entity);
     }
 
@@ -158,10 +158,10 @@ public abstract class BasicService<T extends BasicEntity> {
         entity.setCreateDate(date);
         //entity.setUpdateDate(date);
         entity.setDelFlag(DEL_FLAG_NORMAL);
-        customeInit(entity);
+        customInit(entity);
     }
 
-    public abstract void customeInit(T entity);
+    public abstract void customInit(T entity);
 
 
     /**
