@@ -1,125 +1,62 @@
 package com.sacc.ComprehensiveSystem.modules.assignment.entity;
 
+import com.sacc.ComprehensiveSystem.common.entity.BasicEntity;
+
 import java.util.Date;
 
-public class AssignmentStage {
-    private Long id;
-
+/**
+ * 作业批改结果实体
+ * @author goufaan
+ */
+public class AssignmentStage extends BasicEntity {
     private Long assignmentId;
-
     private Long userId;
-
     private Long questionId;
-
     private String questionResult;
-
-    private String remarks;
-
-    private Date createDate;
-
-    private Long createBy;
-
-    private Date updateDate;
-
-    private Long updateBy;
-
     private Date saveTime;
-
-    private Byte delFlag;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getAssignmentId() {
         return assignmentId;
     }
 
-    public void setAssignmentId(Long assignmentId) {
+    public AssignmentStage setAssignmentId(Long assignmentId) {
         this.assignmentId = assignmentId;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public AssignmentStage setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public Long getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(Long questionId) {
+    public AssignmentStage setQuestionId(Long questionId) {
         this.questionId = questionId;
+        return this;
     }
 
     public String getQuestionResult() {
         return questionResult;
     }
 
-    public void setQuestionResult(String questionResult) {
-        this.questionResult = questionResult == null ? null : questionResult.trim();
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Long getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Long getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(Long updateBy) {
-        this.updateBy = updateBy;
+    public AssignmentStage setQuestionResult(String questionResult) {
+        this.questionResult = questionResult;
+        return this;
     }
 
     public Date getSaveTime() {
         return saveTime;
     }
 
-    public void setSaveTime(Date saveTime) {
+    public AssignmentStage setSaveTime(Date saveTime) {
         this.saveTime = saveTime;
-    }
-
-    public Byte getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
+        return this;
     }
 }
