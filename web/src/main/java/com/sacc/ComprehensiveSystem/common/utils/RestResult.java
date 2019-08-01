@@ -32,32 +32,35 @@ public class RestResult<T> {
 
     public RestResult(){}
 
+    @Override
+    public String toString() {
+        return JSONUtils.toJson(this);
+    }
+
     public int getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public RestResult<T> setStatus(int status) {
         this.status = status;
+        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public RestResult<T> setMessage(String message) {
         this.message = message;
+        return this;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public RestResult<T> setData(T data) {
         this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return JSONUtils.toJson(this);
+        return this;
     }
 }

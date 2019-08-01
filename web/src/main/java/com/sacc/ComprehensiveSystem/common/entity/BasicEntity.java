@@ -20,9 +20,9 @@ public class BasicEntity {
     public static final String COLUMN_REMARKS_ = "remarkss";
 
     // ---------------------------------
-    // name的对应属性
+    // id的对应属性
     // ---------------------------------
-    private Integer id;
+    private Long id;
 
     // ---------------------------------
     // create_date对应的属性
@@ -37,7 +37,7 @@ public class BasicEntity {
     // ---------------------------------
     // create_by对应的属性
     // ---------------------------------
-    private String createBy;
+    private Long createBy;
 
     // ---------------------------------
     // update_date对应的属性
@@ -52,7 +52,7 @@ public class BasicEntity {
     // ---------------------------------
     // update_by对应的属性
     // ---------------------------------
-    private Integer updateBy;
+    private Long updateBy;
 
     // ---------------------------------
     // del_flag对应的属性
@@ -71,143 +71,6 @@ public class BasicEntity {
     private Integer _pageSize;
     private Set<String> _updateProperties;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date get_minCreateDate() {
-        return _minCreateDate;
-    }
-
-    public void set_minCreateDate(Date _minCreateDate) {
-        this._minCreateDate = _minCreateDate;
-    }
-
-    public Date get_maxCreateDate() {
-        return _maxCreateDate;
-    }
-
-    public void set_maxCreateDate(Date _maxCreateDate) {
-        this._maxCreateDate = _maxCreateDate;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Date get_minUpdateDate() {
-        return _minUpdateDate;
-    }
-
-    public void set_minUpdateDate(Date _minUpdateDate) {
-        this._minUpdateDate = _minUpdateDate;
-    }
-
-    public Date get_maxUpdateDate() {
-        return _maxUpdateDate;
-    }
-
-    public void set_maxUpdateDate(Date _maxUpdateDate) {
-        this._maxUpdateDate = _maxUpdateDate;
-    }
-
-    public Integer getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(Integer updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Integer getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public String get_orderBy() {
-        return _orderBy;
-    }
-
-    public void set_orderBy(String _orderBy) {
-        this._orderBy = _orderBy;
-    }
-
-    public Integer get_pageNum() {
-        return _pageNum;
-    }
-
-    public void set_pageNum(Integer _pageNum) {
-        this._pageNum = _pageNum;
-    }
-
-    public Integer get_pageSize() {
-        return _pageSize;
-    }
-
-    public void set_pageSize(Integer _pageSize) {
-        this._pageSize = _pageSize;
-    }
-
-    public Set<String> get_updateProperties() {
-        return _updateProperties;
-    }
-
-    public void set_updateProperties(Set<String> _updateProperties) {
-        this._updateProperties = _updateProperties;
-    }
-
-    public Integer get_minDelFlag() {
-        return _minDelFlag;
-    }
-
-    public void set_minDelFlag(Integer _minDelFlag) {
-        this._minDelFlag = _minDelFlag;
-    }
-
-    public Integer get_maxDelFlag() {
-        return _maxDelFlag;
-    }
-
-    public void set_maxDelFlag(Integer _maxDelFlag) {
-        this._maxDelFlag = _maxDelFlag;
-    }
-
     public void buildOrderBy(String... orderbyStrs) {
         StringBuilder sb = new StringBuilder();
         for (String str : orderbyStrs) {
@@ -224,5 +87,158 @@ public class BasicEntity {
     @Override
     public String toString() {
         return JSONUtils.toJson(this);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BasicEntity setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public BasicEntity setCreateDate(Date createDate) {
+        this.createDate = createDate;
+        return this;
+    }
+
+    public Date get_minCreateDate() {
+        return _minCreateDate;
+    }
+
+    public BasicEntity set_minCreateDate(Date _minCreateDate) {
+        this._minCreateDate = _minCreateDate;
+        return this;
+    }
+
+    public Date get_maxCreateDate() {
+        return _maxCreateDate;
+    }
+
+    public BasicEntity set_maxCreateDate(Date _maxCreateDate) {
+        this._maxCreateDate = _maxCreateDate;
+        return this;
+    }
+
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public BasicEntity setCreateBy(Long createBy) {
+        this.createBy = createBy;
+        return this;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public BasicEntity setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+        return this;
+    }
+
+    public Date get_minUpdateDate() {
+        return _minUpdateDate;
+    }
+
+    public BasicEntity set_minUpdateDate(Date _minUpdateDate) {
+        this._minUpdateDate = _minUpdateDate;
+        return this;
+    }
+
+    public Date get_maxUpdateDate() {
+        return _maxUpdateDate;
+    }
+
+    public BasicEntity set_maxUpdateDate(Date _maxUpdateDate) {
+        this._maxUpdateDate = _maxUpdateDate;
+        return this;
+    }
+
+    public Long getUpdateBy() {
+        return updateBy;
+    }
+
+    public BasicEntity setUpdateBy(Long updateBy) {
+        this.updateBy = updateBy;
+        return this;
+    }
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public BasicEntity setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+        return this;
+    }
+
+    public Integer get_minDelFlag() {
+        return _minDelFlag;
+    }
+
+    public BasicEntity set_minDelFlag(Integer _minDelFlag) {
+        this._minDelFlag = _minDelFlag;
+        return this;
+    }
+
+    public Integer get_maxDelFlag() {
+        return _maxDelFlag;
+    }
+
+    public BasicEntity set_maxDelFlag(Integer _maxDelFlag) {
+        this._maxDelFlag = _maxDelFlag;
+        return this;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public BasicEntity setRemarks(String remarks) {
+        this.remarks = remarks;
+        return this;
+    }
+
+    public String get_orderBy() {
+        return _orderBy;
+    }
+
+    public BasicEntity set_orderBy(String _orderBy) {
+        this._orderBy = _orderBy;
+        return this;
+    }
+
+    public Integer get_pageNum() {
+        return _pageNum;
+    }
+
+    public BasicEntity set_pageNum(Integer _pageNum) {
+        this._pageNum = _pageNum;
+        return this;
+    }
+
+    public Integer get_pageSize() {
+        return _pageSize;
+    }
+
+    public BasicEntity set_pageSize(Integer _pageSize) {
+        this._pageSize = _pageSize;
+        return this;
+    }
+
+    public Set<String> get_updateProperties() {
+        return _updateProperties;
+    }
+
+    public BasicEntity set_updateProperties(Set<String> _updateProperties) {
+        this._updateProperties = _updateProperties;
+        return this;
     }
 }

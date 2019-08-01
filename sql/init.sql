@@ -177,7 +177,7 @@ create table sacc_frontend.sys_user
     pic_url     varchar(100) default ''                not null comment '头像地址',
     create_date timestamp    default CURRENT_TIMESTAMP not null,
     update_date timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-    update_by   bigint                                 not null,
+    update_by   bigint       default -1                not null,
     del_flag    tinyint      default 0                 not null comment '删除标记'
 )
     comment '用户';
@@ -199,3 +199,13 @@ create table sacc_frontend.sys_user_role
     del_flag    tinyint      default 0                 not null comment '删除标记'
 );
 
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (1, 'administrator', '', '2019-07-29 10:51:59', 2333, '2019-07-29 10:51:59', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (2, 'issuer', '', '2019-07-29 10:54:20', 2333, '2019-07-29 10:54:20', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (3, 'user', '', '2019-07-29 11:05:36', 2333, '2019-07-29 11:05:36', 2233, 0);
+INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (4, 'unvalidation', '', '2019-07-29 11:07:06', 2333, '2019-07-29 11:07:06', 2233, 0);
+
+ALTER TABLE `sacc_frontend`.`assignment_question`
+    ADD COLUMN `question_type` int(11) NOT NULL COMMENT '题目类型（1选择题，2编程题）' AFTER `assignment_id`;
+
+ALTER TABLE `sacc_frontend`.`question_bank`
+    ADD COLUMN `difficulty` int(11) NOT NULL COMMENT '难度（1简单，2中等，3困难）' AFTER `description`;
