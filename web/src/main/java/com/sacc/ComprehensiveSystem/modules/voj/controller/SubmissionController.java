@@ -3,6 +3,7 @@ package com.sacc.ComprehensiveSystem.modules.voj.controller;
 import com.sacc.ComprehensiveSystem.modules.messager.ApplicationEventListener;
 import com.sacc.ComprehensiveSystem.modules.voj.dao.ProblemDao;
 import com.sacc.ComprehensiveSystem.modules.voj.entity.Problem;
+import com.sacc.ComprehensiveSystem.modules.voj.service.SubmissionServicce;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("submission")
@@ -22,6 +24,9 @@ public class SubmissionController {
 
     @Autowired
     private ProblemDao problemDao;
+
+    @Autowired
+    private SubmissionServicce submissionServicce;
 
     /**
      * 获取实时的评测结果
@@ -42,9 +47,15 @@ public class SubmissionController {
         return sseEmitter;
     }
 
-//    @RequestMapping(value = "/createSubmission", method = RequestMethod.POST)
-//    public boolean createSubmission(String postJson) {
-//
-//    }
+    @RequestMapping(value = "/createSubmission", method = RequestMethod.POST)
+    public Map<String, Object> createSubmission(String postJson) {
+        Map<String, Object> result = submissionServicce.createSubmission(postJson);
+        boolean isSuccess = (Boolean) result.get("isSuccess");
+        if (isSuccess) {
+            logger.info("User: {} submitted code  with SubmissionId {}",result.get("user"),
+                    result.get("submissionId"));
+        }
+        return result;
+    }
 
 }

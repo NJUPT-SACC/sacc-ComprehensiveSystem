@@ -1,11 +1,15 @@
 package com.sacc.ComprehensiveSystem.admin.sys.service;
 
+import com.sacc.ComprehensiveSystem.admin.service.RegistService;
 import com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserDao;
+import com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserRoleDao;
 import com.sacc.ComprehensiveSystem.admin.sys.entity.SysMenu;
 import com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser;
+import com.sacc.ComprehensiveSystem.admin.sys.entity.SysUserRole;
 import com.sacc.ComprehensiveSystem.common.service.BasicService;
+import com.sacc.ComprehensiveSystem.common.utils.Base64;
+import com.sacc.ComprehensiveSystem.common.utils.MD5Utils;
 import com.sacc.ComprehensiveSystem.common.utils.PasswordUtils;
-import com.sacc.ComprehensiveSystem.common.utils.RestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,12 @@ public class SysUserService extends BasicService<SysUser> {
     @Autowired
     SysUserDao sysUserDao;
 
+    @Autowired
+    SysUserRoleDao sysUserRoleDao;
+
+
+    @Autowired
+    SysUserRoleService sysUserRoleService;
 
     // TODO
     /**
@@ -43,9 +53,6 @@ public class SysUserService extends BasicService<SysUser> {
      */
     public SysUser findByLoginName(String loginName){
         return sysUserDao.findByLoginName(loginName);
-    }
-    public String findByUserName(String name){
-        return sysUserDao.findByUserName(name);
     }
     /**
      * 用户登录
@@ -81,15 +88,15 @@ public class SysUserService extends BasicService<SysUser> {
         //TODO
     }
 
-    public List<SysMenu> findMenuByUserId(Integer id) {
+    public List<SysMenu> findMenuByUserId(Long id) {
         return sysUserDao.findMenuByUserId(id);
     }
 
-    public List<String> findRoleByUserId(Integer id) {
+    public List<String> findRoleByUserId(Long id) {
         return sysUserDao.findRoleByUserId(id);
     }
 
-    public List<String> findPermissionByUserId(Integer id) {
+    public List<String> findPermissionByUserId(Long id) {
         return  sysUserDao.findPermissionByUserId(id);
     }
 
@@ -109,12 +116,43 @@ public class SysUserService extends BasicService<SysUser> {
             try {
                 insert(sysUser);
                 result = 1;
+                SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
+                Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
+                sysUserRole.setUserId(id);
+                sysUserRole.setCreateBy(id);
+                sysUserRole.setUpdateBy(id);
+                sysUserRoleDao.insert_role(sysUserRole);
             } catch (Exception e) {
                 logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
                 result = 2;
             }
         }
+
         return result;
     }
 
+    public Long CheckBase64(String base64)
+    {
+        Long id= Long.valueOf(Base64.Base64UnDecoder(base64));
+        System.out.println(id);
+        return id;
+    }
+    public int CheckMd5(Long id,String md5)
+    {
+        SysUser sysUser = sysUserDao.get(id);
+
+        String mD5=MD5Utils.MD5Encode(String.valueOf(sysUser.getCreateDate()),"utf8");
+
+        System.out.println(mD5);
+        System.out.println(md5);
+        if(mD5.equals(md5))
+        {
+
+            SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
+            sysUserRoleDao.update_role(sysUserRole);
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }

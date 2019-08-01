@@ -22,7 +22,7 @@ public class BasicEntity {
     // ---------------------------------
     // id的对应属性
     // ---------------------------------
-    private Integer id;
+    private Long id;
 
     // ---------------------------------
     // create_date对应的属性
@@ -37,7 +37,7 @@ public class BasicEntity {
     // ---------------------------------
     // create_by对应的属性
     // ---------------------------------
-    private String createBy;
+    private Long createBy;
 
     // ---------------------------------
     // update_date对应的属性
@@ -52,7 +52,7 @@ public class BasicEntity {
     // ---------------------------------
     // update_by对应的属性
     // ---------------------------------
-    private Integer updateBy;
+    private Long updateBy;
 
     // ---------------------------------
     // del_flag对应的属性
@@ -89,11 +89,15 @@ public class BasicEntity {
         return JSONUtils.toJson(this);
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
+<<<<<<< HEAD
+    public void setId(Long id) {
+=======
     public BasicEntity setId(Integer id) {
+>>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
         this.id = id;
         return this;
     }
@@ -125,11 +129,15 @@ public class BasicEntity {
         return this;
     }
 
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
+<<<<<<< HEAD
+    public void setCreateBy(Long createBy) {
+=======
     public BasicEntity setCreateBy(String createBy) {
+>>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
         this.createBy = createBy;
         return this;
     }
@@ -161,11 +169,15 @@ public class BasicEntity {
         return this;
     }
 
-    public Integer getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
+<<<<<<< HEAD
+    public void setUpdateBy(Long updateBy) {
+=======
     public BasicEntity setUpdateBy(Integer updateBy) {
+>>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
         this.updateBy = updateBy;
         return this;
     }

@@ -70,6 +70,72 @@ public class Submission {
      */
     private static final long serialVersionUID = -1984683070957842963L;
 
+    public Submission() {
+
+    }
+
+    /**
+     * 评测记录类的构造函数.
+     * @param problem - 评测对应的试题对象
+     * @param user - 评测提交者的用户对象
+     * @param language - 提交所使用的语言对象
+     * @param code - 评测所执行的代码
+     */
+    public Submission(Problem problem, SysUser user, Language language, String code) {
+        this.problem = problem;
+        this.user = user;
+        this.language = language;
+        this.code = code;
+    }
+
+    /**
+     * 评测记录类的构造函数.
+     * @param problem - 评测对应的试题对象
+     * @param user - 评测提交者的用户对象
+     * @param language - 提交所使用的语言对象
+     * @param submitTime - 评测提交时间
+     * @param executeTime - 评测开始执行时间
+     * @param usedTime - 评测运行总时间
+     * @param usedMemory - 评测运行占用最大内存
+     * @param judgeResult - 评测结果
+     * @param judgeScore - 评测运行得分
+     * @param judgeLog - 评测运行日志
+     * @param code - 评测所执行的代码
+     */
+    public Submission(Problem problem, SysUser user, Language language, Date submitTime,  Date executeTime,
+                      int usedTime, int usedMemory, JudgeResult judgeResult, int judgeScore,  String judgeLog, String code) {
+        this(problem, user, language, code);
+        this.submitTime = submitTime;
+        this.executeTime = executeTime;
+        this.usedTime = usedTime;
+        this.usedMemory = usedMemory;
+        this.judgeResult = judgeResult;
+        this.judgeScore = judgeScore;
+        this.judgeLog = judgeLog;
+    }
+
+    /**
+     * 评测记录类的构造函数.
+     * @param submissionId - 评测记录的唯一标识符
+     * @param problem - 评测对应的试题对象
+     * @param user - 评测提交者的用户对象
+     * @param language - 提交所使用的语言对象
+     * @param submitTime - 评测提交时间
+     * @param executeTime - 评测开始执行时间
+     * @param usedTime - 评测运行总时间
+     * @param usedMemory - 评测运行占用最大内存
+     * @param judgeResult - 评测结果
+     * @param judgeScore - 评测运行得分
+     * @param judgeLog - 评测运行日志
+     * @param code - 评测所执行的代码
+     */
+    public Submission(long submissionId, Problem problem, SysUser user, Language language, Date submitTime,
+                      Date executeTime, int usedTime, int usedMemory, JudgeResult judgeResult, int judgeScore,
+                      String judgeLog, String code) {
+        this(problem, user, language, submitTime, executeTime, usedTime, usedMemory, judgeResult, judgeScore, judgeLog, code);
+        this.submissionId = submissionId;
+    }
+
     public long getSubmissionId() {
         return submissionId;
     }

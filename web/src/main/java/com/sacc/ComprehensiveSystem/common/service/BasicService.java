@@ -40,7 +40,7 @@ public abstract class BasicService<T extends BasicEntity> {
      * @param id 数据ID
      * @return 单条数据
      */
-    public T get(Integer id) {
+    public T get(Long id) {
         return dao.get(id);
     }
 
