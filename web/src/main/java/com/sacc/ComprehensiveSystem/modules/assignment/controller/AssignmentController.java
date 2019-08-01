@@ -82,12 +82,12 @@ public class AssignmentController {
         return null;
     }
 
-//    /**
-//     *
-//     * @return
-//     */
-//    @PostMapping("/submit")
-//    public boolean submitAnswer(){
-//
-//    }
+    /**
+     * 提交作业
+     * @return
+     */
+    @PostMapping("/submit")
+    public boolean submitAnswer(){
+        return false;
+    }
 }

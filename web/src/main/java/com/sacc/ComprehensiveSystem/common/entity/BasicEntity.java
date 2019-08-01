@@ -94,7 +94,6 @@ public class BasicEntity {
     }
 
     public BasicEntity setId(Long id) {
-
         this.id = id;
         return this;
     }
@@ -129,7 +128,6 @@ public class BasicEntity {
     public Long getCreateBy() {
         return createBy;
     }
-
 
     public BasicEntity setCreateBy(Long createBy) {
         this.createBy = createBy;

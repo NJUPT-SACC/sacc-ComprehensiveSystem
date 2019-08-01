@@ -147,7 +147,13 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
+	<repositories>
+		<repository>
+			<id>repository.jboss.org-public</id>
+			<name>JBoss.org Maven repository</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
