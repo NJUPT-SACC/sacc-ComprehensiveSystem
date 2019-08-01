@@ -18,3 +18,5 @@ create table sacc_frontend.question_bank
     update_by      bigint                                 not null comment '修改人ID',
     del_flag       tinyint      default 0                 not null
 );
+ALTER TABLE `sacc_frontend`.`question_bank`
+    ADD COLUMN `difficulty` int(11) NOT NULL COMMENT '难度（1简单，2中等，3困难）' AFTER `description`;
