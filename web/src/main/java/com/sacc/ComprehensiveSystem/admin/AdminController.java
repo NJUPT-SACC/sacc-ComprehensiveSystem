@@ -3,6 +3,7 @@ package com.sacc.ComprehensiveSystem.admin;
 import com.sacc.ComprehensiveSystem.admin.service.LoginService;
 import com.sacc.ComprehensiveSystem.admin.service.RegistService;
 import com.sacc.ComprehensiveSystem.common.utils.RestResult;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AdminController {
 
     @CrossOrigin
     @RequestMapping("/login")
-    public RestResult<Object> login(@RequestBody String postJson) {
+    public RestResult<Object> login(@RequestBody JSONObject postJson) {
         //验证登录，将登录成功后的数据缓存起来Todo
         logger.debug("/login -> postJson:{}", postJson);
         RestResult<Object> result = null;

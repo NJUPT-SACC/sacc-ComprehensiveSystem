@@ -27,7 +27,7 @@ public class LoginService {
     SysUserService sysUserService;
     @Transactional(readOnly = false)
 
-    public HashMap<String, Object> login(String postJson){
+    public HashMap<String, Object> login(JSONObject postJson){
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");

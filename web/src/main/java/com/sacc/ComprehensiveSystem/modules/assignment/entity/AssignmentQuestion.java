@@ -2,30 +2,31 @@ package com.sacc.ComprehensiveSystem.modules.assignment.entity;
 
 import com.sacc.ComprehensiveSystem.common.entity.BasicEntity;
 import com.sacc.ComprehensiveSystem.common.enums.QuestionType;
+import org.apache.activemq.util.LongSequenceGenerator;
 
 /**
  * 作业里面全部问题实体
  * @author goufaan
  */
 public class AssignmentQuestion extends BasicEntity {
-    private Integer assignmentId;
-    private Integer questionId;
+    private Long assignmentId;
+    private Long questionId;
     private QuestionType questionType;
 
-    public Integer getAssignmentId() {
+    public Long getAssignmentId() {
         return assignmentId;
     }
 
-    public AssignmentQuestion setAssignmentId(Integer assignmentId) {
+    public AssignmentQuestion setAssignmentId(Long assignmentId) {
         this.assignmentId = assignmentId;
         return this;
     }
 
-    public Integer getQuestionId() {
+    public Long getQuestionId() {
         return questionId;
     }
 
-    public AssignmentQuestion setQuestionId(Integer questionId) {
+    public AssignmentQuestion setQuestionId(Long questionId) {
         this.questionId = questionId;
         return this;
     }

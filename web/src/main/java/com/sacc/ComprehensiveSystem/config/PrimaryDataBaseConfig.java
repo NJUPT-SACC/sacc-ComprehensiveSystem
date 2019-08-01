@@ -25,7 +25,7 @@ import java.sql.SQLException;
 @ConfigurationProperties(prefix = "primary.datasource")
 @MapperScan(basePackages = PrimaryDataBaseConfig.PACKAGE, sqlSessionFactoryRef = "primarySqlSessionFactory")
 public class PrimaryDataBaseConfig {
-    static final String PACKAGE = "com.sacc.ComprehensiveSystem.admin.sys.dao";
+    static final String PACKAGE = "com.sacc.ComprehensiveSystem.*";
 
     private static final String MAPPER_LOCATION = "classpath:mapper/com/sacc/ComprehensiveSystem/admin/sys/mapper/*.xml";
 
