@@ -63,16 +63,13 @@ public interface ProblemDao {
      * @param problemCategoryId - 试题分类的唯一标识符
      * @param problemTagId - 试题标签的唯一标识符
      * @param isPublicOnly - 是否只筛选公开试题
-     * @param offset - 试题唯一标识符的起始编号
-     * @param limit - 需要获取的试题的数量
      * @return 某个范围内的符合条件的试题
      */
     List<Problem> getProblemsUsingFilters(
             @Param("keyword") String keyword,
             @Param("problemCategoryId") int problemCategoryId,
             @Param("problemTagId") long problemTagId,
-            @Param("isPublicOnly") boolean isPublicOnly,
-            @Param("problemId") long offset, @Param("limit") int limit);
+            @Param("isPublicOnly") boolean isPublicOnly);
 
     /**
      * 创建一个新的试题对象.

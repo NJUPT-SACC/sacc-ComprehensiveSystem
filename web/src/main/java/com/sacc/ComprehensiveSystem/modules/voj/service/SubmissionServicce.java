@@ -33,6 +33,11 @@ public class SubmissionServicce {
     @Autowired
     private MessageSender messageSender;
 
+    /**
+     * 创建提交
+     * @param postJson
+     * @return
+     */
     public Map<String, Object> createSubmission(String postJson) {
         JSONObject jsonObject = new JSONObject(postJson);
         Problem problem = problemDao.getProblem(jsonObject.getLong("problemId"));
@@ -76,4 +81,6 @@ public class SubmissionServicce {
 
         messageSender.sendMessage(mapMessage);
     }
+
+
 }
