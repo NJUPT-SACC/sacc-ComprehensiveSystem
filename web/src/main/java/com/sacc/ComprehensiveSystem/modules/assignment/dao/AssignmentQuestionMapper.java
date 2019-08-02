@@ -2,7 +2,9 @@ package com.sacc.ComprehensiveSystem.modules.assignment.dao;
 
 import com.sacc.ComprehensiveSystem.common.dao.BasicDao;
 import com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AssignmentQuestionMapper extends BasicDao<AssignmentQuestion> {
 //    int deleteByPrimaryKey(Long id);
 //
