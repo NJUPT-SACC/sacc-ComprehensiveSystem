@@ -97,7 +97,6 @@ public class BasicEntity {
     public void setId(Long id) {
 =======
     public BasicEntity setId(Integer id) {
->>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
         this.id = id;
         return this;
     }
