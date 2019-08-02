@@ -8,8 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 @RestController
@@ -96,6 +99,13 @@ public class AdminController {
        }
        return result;
 
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/test",consumes = MediaType.IMAGE_PNG_VALUE)
+    public RestResult test(@RequestParam byte[] multipartFile) {
+        System.out.println(multipartFile);
+        return new RestResult(200, "成功", multipartFile);
     }
 
 

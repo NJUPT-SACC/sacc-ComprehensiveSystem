@@ -2,6 +2,7 @@ package com.sacc.ComprehensiveSystem.modules.voj.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class Problem {
@@ -18,6 +19,7 @@ public class Problem {
     /**
      * 试题名称.
      */
+    @NotNull
     private String problemName;
 
     /**

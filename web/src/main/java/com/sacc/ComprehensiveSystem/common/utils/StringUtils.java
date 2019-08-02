@@ -3,6 +3,8 @@ package com.sacc.ComprehensiveSystem.common.utils;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.Normalizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +13,11 @@ import java.util.regex.Pattern;
  * @author yu.jinbiao
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils{
+
+    /**
+     * 空格的正则表达式模式.
+     */
+    private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
 
     /**
      * 将输入的字符串的首字母变成大写
@@ -146,5 +153,29 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 获取字符串的Slug.
+     * @param str - 待获取Slug的字符串
+     * @return 字符串对应的Slug
+     */
+    public static String getSlug(String str) {
+        if ( str == null ) {
+            return "";
+        }
+
+        // Rid of White Spaces
+        String noWhiteSpace = WHITESPACE.matcher(str.trim()).replaceAll("-");
+        // Processing Non-ASCII Characters
+        try {
+            noWhiteSpace = URLEncoder.encode(noWhiteSpace, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // Never reach here
+        }
+        // Slugify String
+        String normalized = Normalizer.normalize(noWhiteSpace, Normalizer.Form.NFD);
+
+        return normalized.toLowerCase();
     }
 }

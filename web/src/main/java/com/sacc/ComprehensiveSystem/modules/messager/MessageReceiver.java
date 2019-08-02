@@ -100,7 +100,7 @@ public class MessageReceiver implements MessageListener{
                 new Object[] { checkpointId, runtimeResult, usedTime, usedMemory, score });
         eventPublisher.publishEvent(new SubmissionEvent(this, submissionId, "Running", message, false));
 
-        logger.info("Submission #{}/ CheckPoint#{} returned [{}] (Time = {}ms, Memory = {} KB, Score = {}).",
+        logger.info("Submission #{}/ Checkpoint#{} returned [{}] (Time = {}ms, Memory = {} KB, Score = {}).",
                 submissionId, checkpointId, runtimeResult, usedTime, usedMemory, score);
     }
 
