@@ -103,18 +103,18 @@ public class SysUserService extends BasicService<SysUser> {
         return  sysUserDao.findUserNotAdmin(sysUser);
     }
 
-    @Transactional
     public int signUp(SysUser sysUser){
         int result=0;
 
         String name=sysUser.getLoginName();
         SysUser previousSysUser = sysUserDao.findByLoginName(name);
 
-        if(previousSysUser!=null) {
+        if (previousSysUser!=null) {
             result=3;
         } else {
             try {
                 insert(sysUser);
+                System.out.println(1/0);
                 result = 1;
                 SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
                 Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
@@ -125,6 +125,7 @@ public class SysUserService extends BasicService<SysUser> {
             } catch (Exception e) {
                 logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
                 result = 2;
+                throw new RuntimeException();
             }
         }
 

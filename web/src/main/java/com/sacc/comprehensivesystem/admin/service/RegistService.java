@@ -22,7 +22,7 @@ public class RegistService {
     @Autowired
     SysUserService sysUserService;
 
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public int signUp(String postJson) {
         int resultt = 2;
         JSONObject jsonObject = new JSONObject(postJson);
@@ -38,6 +38,7 @@ public class RegistService {
         } catch (Exception e) {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
             resultt=2;
+            throw e;
         }
         return resultt;
 

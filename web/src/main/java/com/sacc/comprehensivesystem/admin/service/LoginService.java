@@ -15,6 +15,9 @@ import org.json.JSONObject;
 
 import java.util.*;
 
+/**
+ * @author yujinbiao
+ */
 @Service
 @Transactional(readOnly = true)
 public class LoginService {
@@ -25,8 +28,8 @@ public class LoginService {
 
     @Autowired
     SysUserService sysUserService;
-    @Transactional(readOnly = false)
 
+    @Transactional(readOnly = false)
     public HashMap<String, Object> login(String postJson){
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
