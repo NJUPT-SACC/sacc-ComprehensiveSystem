@@ -102,7 +102,8 @@
     ) values  (
     <include refid="notNullColumnsValue" />
     )
-</insert>
+    </insert>
+
 
     <delete id="delete">
         update sys_user set del_flag=1
@@ -168,6 +169,7 @@
 
     </update>
 
+
     <select id="get" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
@@ -176,7 +178,7 @@
         from sys_user a
         <include refid="customJoins"/>
         <where>
-            and a.id=#{id}
+            and a.id = #{id}
         </where>
     </select>
 
@@ -184,7 +186,7 @@
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>
-        </trim>
+    </trim>
         from sys_user a
         <include refid="customJoins"/>
         <where>
@@ -212,15 +214,13 @@
         </where>
     </select>
 
-    <select id="findByEmail" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="findIdByLoginName" resultType="Long">
         select
-        <trim suffixOverrides=",">
-            <include refid="columns"/>
-        </trim>
+        a.id
         from sys_user a
-        <include refid="customJoins"/>
+
         <where>
-            and a.email = #{email}
+            and a.login_name = #{loginName}
         </where>
     </select>
 

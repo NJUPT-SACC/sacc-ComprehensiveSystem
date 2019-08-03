@@ -37,7 +37,7 @@ public class AssignmentController {
      * @return 该作业的所有题目
      */
     @GetMapping("/questionList")
-    public List<QuestionListItem> getQuestionList(Integer assignment){
+    public List<QuestionListItem> getQuestionList(Long assignment){
         List<QuestionListItem> list = new ArrayList<>();
         assignmentQuestionService.getQuestions((Assignment)new Assignment().setId(assignment)).forEach((item) -> {
             if(item.getQuestionType() == QuestionType.MultipleChoice){
@@ -64,7 +64,7 @@ public class AssignmentController {
      * @return
      */
     @GetMapping("/questionDetail")
-    public QuestionDetail getQuestionDetail(QuestionType type, Integer question){
+    public QuestionDetail getQuestionDetail(QuestionType type, Long question){
         if(type == QuestionType.MultipleChoice){
             QuestionBank questionBankEntity = questionBankService.get(question);
             return new QuestionDetail()
@@ -83,11 +83,11 @@ public class AssignmentController {
     }
 
     /**
-     *
+     * 提交作业
      * @return
      */
     @PostMapping("/submit")
     public boolean submitAnswer(){
-
+        return false;
     }
 }

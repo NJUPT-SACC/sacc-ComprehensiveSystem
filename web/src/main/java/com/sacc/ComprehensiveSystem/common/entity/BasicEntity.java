@@ -93,10 +93,8 @@ public class BasicEntity {
         return id;
     }
 
-<<<<<<< HEAD
-    public void setId(Long id) {
-=======
-    public BasicEntity setId(Integer id) {
+
+    public BasicEntity setId(Long id) {
         this.id = id;
         return this;
     }
@@ -132,11 +130,7 @@ public class BasicEntity {
         return createBy;
     }
 
-<<<<<<< HEAD
-    public void setCreateBy(Long createBy) {
-=======
-    public BasicEntity setCreateBy(String createBy) {
->>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
+    public BasicEntity setCreateBy(Long createBy) {
         this.createBy = createBy;
         return this;
     }
@@ -172,11 +166,7 @@ public class BasicEntity {
         return updateBy;
     }
 
-<<<<<<< HEAD
-    public void setUpdateBy(Long updateBy) {
-=======
-    public BasicEntity setUpdateBy(Integer updateBy) {
->>>>>>> 279a905ead9bb4447084a8fb355dc741b212ebd1
+    public BasicEntity setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
         return this;
     }

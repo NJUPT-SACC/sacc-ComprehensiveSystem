@@ -7,17 +7,17 @@ import com.sacc.ComprehensiveSystem.common.enums.*;
  * @author goufaan
  */
 public class QuestionListItem {
-    private Integer id;
+    private Long id;
     private String title;
     private Difficulty difficulty;
     private QuestionType questionType;
     private Boolean finish;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public QuestionListItem setId(Integer id) {
+    public QuestionListItem setId(Long id) {
         this.id = id;
         return this;
     }

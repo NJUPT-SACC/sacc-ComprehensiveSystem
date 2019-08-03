@@ -2,18 +2,22 @@ package com.sacc.ComprehensiveSystem.common.utils;
 
 import com.sacc.ComprehensiveSystem.common.utils.RestResult;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 把不是RestResult的返回结果包装成RestResult
@@ -31,6 +35,17 @@ public class RestResultConverter extends MappingJackson2HttpMessageConverter imp
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         return o;
+    }
+
+    @Override
+    public Object read(Type type, Class<?> contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+        //参照 StringHttpMessageConverter 修复了 String 为参数时，read发生错误的问题
+        if(type == String.class){
+            return StreamUtils.copyToString(inputMessage.getBody(), StandardCharsets.UTF_8);
+        }
+        else{
+            return super.read(type, contextClass, inputMessage);
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ import com.sacc.ComprehensiveSystem.common.enums.Difficulty;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionDetail {
-    private Integer id;
+    private Long id;
     private String title;
     private String disc;
     private Difficulty difficulty;
@@ -28,11 +28,11 @@ public class QuestionDetail {
     private String oStandard;
     private IoSample IOSample;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public QuestionDetail setId(Integer id) {
+    public QuestionDetail setId(Long id) {
         this.id = id;
         return this;
     }

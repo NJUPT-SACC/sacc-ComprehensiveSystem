@@ -108,9 +108,11 @@ public class SysUserService extends BasicService<SysUser> {
         int result=0;
 
         String name=sysUser.getLoginName();
+        String email= sysUser.getEmail();
         SysUser previousSysUser = sysUserDao.findByLoginName(name);
+        SysUser PrevirousSysUser = sysUserDao.findByEmail(email);
 
-        if(previousSysUser!=null) {
+        if(previousSysUser!=null&&PrevirousSysUser!=null) {
             result=3;
         } else {
             try {

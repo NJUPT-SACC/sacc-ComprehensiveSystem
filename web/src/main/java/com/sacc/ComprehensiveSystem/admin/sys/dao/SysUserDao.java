@@ -11,7 +11,10 @@ import java.util.List;
 public interface SysUserDao extends BasicDao<SysUser> {
     SysUser findByLoginName(String loginName);
 
+    SysUser findByEmail(String email);
+
     Long findIdByLoginName(String name);
+
 
     SysUser get(Long id);
 
