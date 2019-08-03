@@ -26,8 +26,11 @@ import java.sql.SQLException;
 @MapperScan(basePackages = PrimaryDataBaseConfig.PACKAGE, sqlSessionFactoryRef = "primarySqlSessionFactory")
 public class PrimaryDataBaseConfig {
     static final String PACKAGE = "com.sacc.ComprehensiveSystem.*";
-
-    private static final String MAPPER_LOCATION = "classpath:mapper/com/sacc/ComprehensiveSystem/admin/sys/mapper/*.xml";
+    /**
+     * 加載子目錄所有的mapper
+     */
+    private static final String MAPPER_LOCATION = "classpath:mapper/com/sacc/ComprehensiveSystem/**/*.xml";
+    private static final String CONFIG_LOCATION = "classpath:mybatis-config.xml";
 
     @Value("${primary.datasource.url}")
     private String url;
@@ -129,6 +132,8 @@ public class PrimaryDataBaseConfig {
             @Qualifier("primaryDataSource")DataSource primaryDataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(primaryDataSource);
+        sessionFactoryBean.setConfigLocation(
+                new PathMatchingResourcePatternResolver().getResource(CONFIG_LOCATION));
         sessionFactoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources(MAPPER_LOCATION));
 

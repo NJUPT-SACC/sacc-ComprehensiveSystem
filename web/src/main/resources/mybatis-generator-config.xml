@@ -52,4 +52,18 @@
                selectByExampleQueryId="false">
         </table>
     </context>
+
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+
+            <property name="dialect" value="mysql"/>
+            <!-- 该参数对使用 RowBounds 作为分页参数时有效。 当该参数设置为 true 时，
+            会将 RowBounds 中的 offset 参数当成 pageNum 使用，可以用页码和页面大小两个参数进行分页。-->
+            <property name="offsetAsPageNum" value="false"/>
+            <property name="rowBoundsWithCount" value="false"/>
+            <property name="offsetAsPageNum" value="false"/>
+            <property name="offsetAsPageNum" value="false"/>
+        </plugin>
+    </plugins>
 </generatorConfiguration>

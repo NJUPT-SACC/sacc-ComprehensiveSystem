@@ -104,6 +104,7 @@ public class SysUserService extends BasicService<SysUser> {
         return  sysUserDao.findUserNotAdmin(sysUser);
     }
 
+    @Transactional
     public int signUp(SysUser sysUser){
         int result=0;
 
