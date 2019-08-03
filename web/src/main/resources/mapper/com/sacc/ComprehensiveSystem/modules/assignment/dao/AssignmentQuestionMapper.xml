@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.assignment.dao.AssignmentQuestionMapper">
-  <resultMap id="BaseResultMap" type="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion">
+<mapper namespace="com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="assignment_id" jdbcType="BIGINT" property="assignmentId" />
     <result column="question_id" jdbcType="BIGINT" property="questionId" />
@@ -26,7 +26,7 @@
     delete from assignment_question
     where id = #{id,jdbcType=BIGINT}
   </delete>
-<!--  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion">-->
+<!--  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">-->
 <!--    insert into assignment_question (id, assignment_id, question_id, -->
 <!--      remarks, create_date, create_by, -->
 <!--      update_date, update_by, del_flag-->
@@ -36,7 +36,7 @@
 <!--      #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{delFlag,jdbcType=TINYINT}-->
 <!--      )-->
 <!--  </insert>-->
-  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion">
+  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
     insert into assignment_question
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="update" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion">
+  <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
     update assignment_question
     <set>
       <if test="assignmentId != null">
@@ -127,7 +127,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentQuestion">
+  <update id="updateByPrimaryKey" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
     update assignment_question
     set assignment_id = #{assignmentId,jdbcType=BIGINT},
       question_id = #{questionId,jdbcType=BIGINT},

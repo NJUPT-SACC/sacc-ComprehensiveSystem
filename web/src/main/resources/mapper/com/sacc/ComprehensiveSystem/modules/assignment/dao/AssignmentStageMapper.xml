@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.assignment.dao.AssignmentStageMapper">
-  <resultMap id="BaseResultMap" type="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentStage">
+<mapper namespace="com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentStageMapper">
+  <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentStage">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="assignment_id" jdbcType="BIGINT" property="assignmentId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -29,7 +29,7 @@
     delete from assignment_stage
     where id = #{id,jdbcType=BIGINT}
   </delete>
-<!--  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentStage">-->
+<!--  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentStage">-->
 <!--    insert into assignment_stage (id, assignment_id, user_id, -->
 <!--      question_id, question_result, remarks, -->
 <!--      create_date, create_by, update_date, -->
@@ -41,7 +41,7 @@
 <!--      #{updateBy,jdbcType=BIGINT}, #{saveTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}-->
 <!--      )-->
 <!--  </insert>-->
-  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentStage">
+  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentStage">
     insert into assignment_stage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <update id="update" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentStage">
+  <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentStage">
     update assignment_stage
     <set>
       <if test="assignmentId != null">
@@ -159,7 +159,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-<!--  <update id="updateByPrimaryKey" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.AssignmentStage">-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentStage">-->
 <!--    update assignment_stage-->
 <!--    set assignment_id = #{assignmentId,jdbcType=BIGINT},-->
 <!--      user_id = #{userId,jdbcType=BIGINT},-->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.assignment.dao.AssignmentMapper">
-  <resultMap id="BaseResultMap" type="com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment">
+<mapper namespace="com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentMapper">
+  <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
@@ -27,7 +27,7 @@
     delete from assignment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-<!--  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment">-->
+<!--  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">-->
 <!--    insert into assignment (id, name, start_time, -->
 <!--      end_time, remarks, create_date, -->
 <!--      create_by, update_date, update_by, -->
@@ -37,7 +37,7 @@
 <!--      #{createBy,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, -->
 <!--      #{delFlag,jdbcType=TINYINT})-->
 <!--  </insert>-->
-  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment">
+  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
     insert into assignment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="update" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment">
+  <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
     update assignment
     <set>
       <if test="name != null">
@@ -137,7 +137,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-<!--  <update id="updateByPrimaryKey" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.Assignment">-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">-->
 <!--    update assignment-->
 <!--    set name = #{name,jdbcType=VARCHAR},-->
 <!--      start_time = #{startTime,jdbcType=TIMESTAMP},-->
