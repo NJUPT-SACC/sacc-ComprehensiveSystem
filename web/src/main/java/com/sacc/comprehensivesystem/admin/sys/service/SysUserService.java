@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -114,7 +115,6 @@ public class SysUserService extends BasicService<SysUser> {
         } else {
             try {
                 insert(sysUser);
-                System.out.println(1/0);
                 result = 1;
                 SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
                 Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
