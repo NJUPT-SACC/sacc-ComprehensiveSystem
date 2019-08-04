@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.voj.dao.ProblemTagDao">
+<mapper namespace="com.sacc.comprehensivesystem.modules.voj.dao.ProblemTagDao">
 
     <!-- ResultMap -->
     <resultMap id="ProblemTagResultMap"
-               type="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemTag">
+               type="com.sacc.comprehensivesystem.modules.voj.entity.ProblemTag">
         <id property="problemTagId" column="problem_tag_id" />
         <result property="problemTagSlug" column="problem_tag_slug" />
         <result property="problemTagName" column="problem_tag_name" />
     </resultMap>
     <resultMap id="ProblemTagRelationshipResultMap"
-               type="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemTagRelationship">
+               type="com.sacc.comprehensivesystem.modules.voj.entity.ProblemTagRelationship">
         <id property="problemId" column="problem_id" />
         <id property="problemTagId" column="problem_tag_id" />
         <result property="problemTagSlug" column="problem_tag_slug" />
@@ -60,7 +60,7 @@
 		WHERE problem_tag_slug = #{problemTagSlug}
 	</select>
     <insert id="createProblemTag"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemTag"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.ProblemTag"
             flushCache="true"
             keyProperty="problemTagId"
             keyColumn="problem_tag_id"
@@ -75,7 +75,7 @@
 		VALUES (#{problemId}, #{problemTag.problemTagId})
 	</insert>
     <update id="updateProblemTag"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemTag"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.ProblemTag"
             flushCache="true">
 		UPDATE voj_problem_tags
 		SET problem_tag_slug = #{problemTagSlug}, problem_tag_name = #{problemTagName}

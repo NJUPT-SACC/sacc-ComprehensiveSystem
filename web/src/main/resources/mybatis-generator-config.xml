@@ -21,16 +21,16 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.sacc.ComprehensiveSystem.modules.assignment.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.sacc.comprehensivesystem.modules.assignment.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.sacc.ComprehensiveSystem.modules.assignment.mapper"  targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="com.sacc.comprehensivesystem.modules.assignment.mapper" targetProject="src/main/resources/mapper">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sacc.ComprehensiveSystem.modules.assignment.dao"  targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sacc.comprehensivesystem.modules.assignment.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 

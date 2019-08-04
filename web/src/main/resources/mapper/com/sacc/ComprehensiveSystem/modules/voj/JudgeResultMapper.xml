@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.voj.dao.JudgeResultDao">
+<mapper namespace="com.sacc.comprehensivesystem.modules.voj.dao.JudgeResultDao">
 
     <!-- ResultMap -->
-    <resultMap id="JudgeResultResultMap" type="com.sacc.ComprehensiveSystem.modules.voj.entity.JudgeResult">
+    <resultMap id="JudgeResultResultMap" type="com.sacc.comprehensivesystem.modules.voj.entity.JudgeResult">
         <id property="judgeResultId" column="judge_result_id" />
         <result property="judgeResultSlug" column="judge_result_slug" />
         <result property="judgeResultName" column="judge_result_name" />

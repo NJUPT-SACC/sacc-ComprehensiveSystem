@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.voj.dao.SubmissionDao">
+<mapper namespace="com.sacc.comprehensivesystem.modules.voj.dao.SubmissionDao">
 
-    <resultMap id="SubmissionResultMap" type="com.sacc.ComprehensiveSystem.modules.voj.entity.Submission">
+    <resultMap id="SubmissionResultMap" type="com.sacc.comprehensivesystem.modules.voj.entity.Submission">
         <result property="submissionId" column="submission_id" />
         <result property="submitTime" column="submission_submit_time" />
         <result property="executeTime" column="submission_execute_time" />
@@ -12,21 +12,21 @@
         <result property="judgeLog" column="submission_judge_log" />
         <result property="code" column="submission_code" />
         <association property="problem"
-                     javaType="com.sacc.ComprehensiveSystem.modules.voj.entity.Problem"
+                     javaType="com.sacc.comprehensivesystem.modules.voj.entity.Problem"
                      column="problem_id"
-                     select="com.sacc.ComprehensiveSystem.modules.voj.dao.ProblemDao.getProblem" />
+                     select="com.sacc.comprehensivesystem.modules.voj.dao.ProblemDao.getProblem" />
         <association property="user"
-                     javaType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser"
+                     javaType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser"
                      column="id"
-                     select="com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserDao.get" />
+                     select="com.sacc.comprehensivesystem.admin.sys.dao.SysUserDao.get" />
         <association property="language"
-                     javaType="com.sacc.ComprehensiveSystem.modules.voj.entity.Language"
+                     javaType="com.sacc.comprehensivesystem.modules.voj.entity.Language"
                      column="language_id"
-                     select="com.sacc.ComprehensiveSystem.modules.voj.dao.LanguageDAo.getLanguageUsingId" />
+                     select="com.sacc.comprehensivesystem.modules.voj.dao.LanguageDAo.getLanguageUsingId" />
         <association property="judgeResult"
-                     javaType="com.sacc.ComprehensiveSystem.modules.voj.entity.JudgeResult"
+                     javaType="com.sacc.comprehensivesystem.modules.voj.entity.JudgeResult"
                      column="submission_judge_result"
-                     select="com.sacc.ComprehensiveSystem.modules.voj.dao.JudgeResultDao.getJudgeResultUsingSlug" />
+                     select="com.sacc.comprehensivesystem.modules.voj.dao.JudgeResultDao.getJudgeResultUsingSlug" />
     </resultMap>
 
     <!-- Methods -->
@@ -93,7 +93,7 @@
         GROUP BY DATE(submission_submit_time)
     </select>
     <select id="getNumberOfSubmissionsUsingLanguage"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.Language"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.Language"
             resultType="long"
             useCache="true">
 		SELECT COUNT(*)
@@ -215,7 +215,7 @@
 		WHERE uid = #{uid} AND submission_judge_result != 'PD' AND submission_judge_result != 'SE'
 	</select>
     <insert id="createSubmission"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.Submission"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.Submission"
             flushCache="true"
             keyProperty="submissionId"
             keyColumn="submission_id"
@@ -224,7 +224,7 @@
 		VALUES (#{problem.problemId}, #{user.uid}, #{language.languageId}, #{code})
 	</insert>
     <update id="updateSubmission"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.Submission"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.Submission"
             flushCache="true">
 		UPDATE voj_submissions
 		SET problem_id = #{problem.problemId}, uid = #{user.uid}, language_id = #{language.languageId}, submission_submit_time = #{submitTime}, submission_execute_time = #{executeTime}, submission_used_time = #{usedTime}, submission_used_memory = #{usedMemory}, submission_judge_result = #{judgeResult.judgeResultSlug}, submission_judge_score = #{judgeScore}, submission_judge_log = #{judgeLog}, submission_code = #{code}

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.voj.dao.ProblemCategoryDao">
+<mapper namespace="com.sacc.comprehensivesystem.modules.voj.dao.ProblemCategoryDao">
 
     <!-- ResultMap -->
     <resultMap id="ProblemCategoryResultMap"
-               type="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemCategory">
+               type="com.sacc.comprehensivesystem.modules.voj.entity.ProblemCategory">
         <id property="problemCategoryId" column="problem_category_id" />
         <result property="problemCategorySlug" column="problem_category_slug" />
         <result property="problemCategoryName" column="problem_category_name" />
         <result property="parentProblemCategoryId" column="problem_category_parent_id" />
     </resultMap>
     <resultMap id="ProblemCategoryRelationshipResultMap"
-               type="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemCategoryRelationship">
+               type="com.sacc.comprehensivesystem.modules.voj.entity.ProblemCategoryRelationship">
         <id property="problemId" column="problem_id" />
         <id property="problemCategoryId" column="problem_category_id" />
         <result property="problemCategorySlug" column="problem_category_slug" />
@@ -61,7 +61,7 @@
 		WHERE problem_category_slug = #{problemCategorySlug}
 	</select>
     <insert id="createProblemCategory"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemCategory"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.ProblemCategory"
             flushCache="true"
             keyProperty="problemCategoryId"
             keyColumn="problem_category_id"
@@ -76,7 +76,7 @@
 		VALUES (#{problemId}, #{problemCategory.problemCategoryId})
 	</insert>
     <update id="updateProblemCategory"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.ProblemCategory"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.ProblemCategory"
             flushCache="true">
 		UPDATE voj_problem_categories
 		SET problem_category_slug = #{problemCategorySlug}, problem_category_name = #{problemCategoryName}, problem_category_parent_id = #{parentProblemCategoryId}

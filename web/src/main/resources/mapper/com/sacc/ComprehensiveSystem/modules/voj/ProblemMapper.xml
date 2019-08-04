@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.voj.dao.ProblemDao">
+<mapper namespace="com.sacc.comprehensivesystem.modules.voj.dao.ProblemDao">
 
-    <resultMap id="ProblemResultMap" type="com.sacc.ComprehensiveSystem.modules.voj.entity.Problem">
+    <resultMap id="ProblemResultMap" type="com.sacc.comprehensivesystem.modules.voj.entity.Problem">
         <id property="problemId" column="problem_id" />
         <result property="isPublic" column="problem_is_public" />
         <result property="problemName" column="problem_name" />
@@ -122,7 +122,7 @@
         LIMIT #{limit}
     </select>
     <insert id="createProblem"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.Problem"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.Problem"
             flushCache="true"
             keyProperty="problemId"
             keyColumn="problem_id"
@@ -131,7 +131,7 @@
 		VALUES (#{isPublic}, #{problemName}, #{timeLimit}, #{memoryLimit}, #{description}, #{inputFormat}, #{outputFormat}, #{sampleInput}, #{sampleOutput}, #{hint})
 	</insert>
     <update id="updateProblem"
-            parameterType="com.sacc.ComprehensiveSystem.modules.voj.entity.Problem"
+            parameterType="com.sacc.comprehensivesystem.modules.voj.entity.Problem"
             flushCache="true">
 		UPDATE voj_problems
 		SET problem_is_public = #{isPublic}, problem_name = #{problemName}, problem_time_limit = #{timeLimit}, problem_memory_limit = #{memoryLimit}, problem_description = #{description}, problem_input_format = #{inputFormat}, problem_output_format = #{outputFormat}, problem_sample_input = #{sampleInput}, problem_sample_output = #{sampleOutput}, problem_hint = #{hint}

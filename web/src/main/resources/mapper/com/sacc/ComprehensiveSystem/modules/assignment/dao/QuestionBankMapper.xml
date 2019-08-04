@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.modules.assignment.dao.QuestionBankMapper">
-  <resultMap id="BaseResultMap" type="com.sacc.ComprehensiveSystem.modules.assignment.entity.QuestionBank">
+<mapper namespace="com.sacc.comprehensivesystem.modules.assignment.dao.QuestionBankMapper">
+  <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -38,7 +38,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.QuestionBank">
+  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
     insert into question_bank
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -147,7 +147,7 @@
       </if>
     </trim>
   </insert>
-  <update id="update" parameterType="com.sacc.ComprehensiveSystem.modules.assignment.entity.QuestionBank">
+  <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
     update assignment
     <set>
       <if test="title != null">
