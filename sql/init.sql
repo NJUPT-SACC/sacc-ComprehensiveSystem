@@ -199,6 +199,73 @@ create table sacc_frontend.sys_user_role
     del_flag    tinyint      default 0                 not null comment '删除标记'
 );
 
+create table sacc_frontend.competition_user
+(
+    id             bigint auto_increment
+        primary key,
+    user_id        bigint                                 not null,
+    competition_id bigint                                 not null,
+    remarks        varchar(255) default ''                not null,
+    create_by      bigint                                 not null,
+    create_date    timestamp    default CURRENT_TIMESTAMP not null,
+    update_by      bigint                                 not null,
+    update_date    timestamp    default CURRENT_TIMESTAMP not null,
+    del_flag       tinyint      default 0                 not null
+);
+
+create table sacc_frontend.competition_stage
+(
+    id          bigint auto_increment
+        primary key,
+    user_id     bigint                               not null,
+    question_id bigint                               not null,
+    result      varchar(6) default ''                not null,
+    submit_time timestamp  default CURRENT_TIMESTAMP not null,
+    del_flag    tinyint    default 0                 not null
+);
+
+create table sacc_frontend.competition_result
+(
+    id             bigint auto_increment
+        primary key,
+    user_id        bigint                              not null,
+    competition_id bigint                              not null,
+    grade          int                                 not null,
+    submit_time    timestamp default CURRENT_TIMESTAMP not null comment '最终提交时间',
+    del_flag       tinyint   default 0                 not null
+)
+    comment '最终成绩表';
+
+create table sacc_frontend.competition_question
+(
+    id             bigint auto_increment
+        primary key,
+    question_id    bigint                                 not null,
+    competition_id bigint                                 not null,
+    remarks        varchar(255) default ''                not null,
+    create_by      bigint                                 not null,
+    create_date    timestamp    default CURRENT_TIMESTAMP not null,
+    update_by      bigint                                 not null,
+    update_date    timestamp    default CURRENT_TIMESTAMP not null,
+    del_flag       tinyint      default 0                 not null
+)
+    comment '比赛选择题表';
+
+create table sacc_frontend.competition
+(
+    id          bigint auto_increment
+        primary key,
+    name        varchar(20)  default ''                not null,
+    remarks     varchar(255) default ''                not null,
+    start_time  timestamp                              not null on update CURRENT_TIMESTAMP,
+    end_time    timestamp                              not null,
+    create_date timestamp    default CURRENT_TIMESTAMP not null,
+    create_by   bigint                                 not null,
+    update_date timestamp    default CURRENT_TIMESTAMP not null,
+    update_by   bigint                                 not null,
+    del_flag    tinyint      default 0                 not null
+);
+
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (1, 'administrator', '', '2019-07-29 10:51:59', 2333, '2019-07-29 10:51:59', 2233, 0);
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (2, 'issuer', '', '2019-07-29 10:54:20', 2333, '2019-07-29 10:54:20', 2233, 0);
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (3, 'user', '', '2019-07-29 11:05:36', 2333, '2019-07-29 11:05:36', 2233, 0);
