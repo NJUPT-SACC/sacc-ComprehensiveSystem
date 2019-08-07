@@ -34,8 +34,9 @@ public class MailService  {
             helper.setSubject(subject);
             Context context = new Context();
             context.setVariable("id", user);
-            String mailContext = templateEngine.process("emailTemplate", context);
+            String mailContext = templateEngine.process("mail", context);
             helper.setText(mailContext, true);
+            System.out.println("Hello?");
             mailSender.send(message);
             logger.info("邮件已经发送");
         } catch (Exception e) {

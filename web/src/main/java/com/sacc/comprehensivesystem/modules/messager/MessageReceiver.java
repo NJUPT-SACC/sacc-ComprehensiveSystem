@@ -26,6 +26,7 @@ public class MessageReceiver implements MessageListener{
     private ApplicationEventPublisher eventPublisher;
 
     @JmsListener(destination = "vojJudgeResultQueue")
+    @Override
     public void onMessage(Message message) {
         if ( message instanceof MapMessage) {
             final MapMessage mapMessage = (MapMessage) message;
