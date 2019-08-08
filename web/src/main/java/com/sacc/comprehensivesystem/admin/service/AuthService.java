@@ -19,9 +19,9 @@ public class AuthService {
     @Autowired
     SysUserService sysUserService;
 
-    public HashMap<String, Object> authtication(String username, String password) {
+    public HashMap<String, Object> authtication(String username, String password,String email) {
         HashMap<String, Object> hashMap = null;
-        SysUser sysUser = sysUserService.login(username, password);
+        SysUser sysUser = sysUserService.login(username, password,email);
         if (sysUser != null) {
             hashMap = new HashMap<>();
             hashMap.put("userInfo", sysUser);

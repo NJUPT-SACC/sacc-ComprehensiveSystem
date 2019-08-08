@@ -98,6 +98,7 @@ public class BasicEntity {
         return id;
     }
 
+
     public BasicEntity setId(Long id) {
         this.id = id;
         return this;

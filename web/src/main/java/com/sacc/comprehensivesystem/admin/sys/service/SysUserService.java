@@ -51,8 +51,11 @@ public class SysUserService extends BasicService<SysUser> {
      * @param loginName
      * @return
      */
-    public SysUser findByLoginName(String loginName){
-        return sysUserDao.findByLoginName(loginName);
+    public List<SysUser> findByLoginName(String loginName, String email){
+        return sysUserDao.findByLoginName(loginName,email);
+    }
+    public SysUser findUserByLoginName(String loginName){
+        return sysUserDao.findUserByLoginName(loginName);
     }
     /**
      * 用户登录
@@ -69,8 +72,8 @@ public class SysUserService extends BasicService<SysUser> {
      * @return
      */
     @Transactional(readOnly = false)
-    public SysUser login(String username, String password) {
-        SysUser user = sysUserDao.findByLoginName(username);
+    public SysUser login(String username, String password,String email) {
+        SysUser user = sysUserDao.findUserByLoginName(username);
 
         //System.out.println(PasswordUtils.generateHash(password));
         if(user != null && PasswordUtils.checkHash(password,user.getPassword())) {
@@ -108,26 +111,35 @@ public class SysUserService extends BasicService<SysUser> {
         int result=0;
 
         String name=sysUser.getLoginName();
-        SysUser previousSysUser = sysUserDao.findByLoginName(name);
-
-        if (previousSysUser!=null) {
+        String email= sysUser.getEmail();
+       List<SysUser> list = sysUserDao.findByLoginName(name,email);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
+        if(list.size()==2) {
             result=3;
-        } else {
-            try {
-                insert(sysUser);
-                result = 1;
-                SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
-                Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
-                sysUserRole.setUserId(id);
-                sysUserRole.setCreateBy(id);
-                sysUserRole.setUpdateBy(id);
-                sysUserRoleDao.insert_role(sysUserRole);
-            } catch (Exception e) {
-                logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
-                result = 2;
-                throw new RuntimeException();
-            }
-        }
+        } else
+            if(list.size()==1) {
+                SysUser user = sysUserDao.findUserByLoginName(name);
+                if (user != null) {
+                    result = 4;
+                } else {
+                    result=5;
+                }
+            }else{
+                    try {
+                        insert(sysUser);
+                        result = 1;
+                        SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
+                        Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
+                        sysUserRole.setUserId(id);
+                        sysUserRole.setCreateBy(id);
+                        sysUserRole.setUpdateBy(id);
+                        sysUserRoleDao.insert_role(sysUserRole);
+                    } catch (Exception e) {
+                        logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
+                        result = 2;
+                        throw new RuntimeException();
+                    }
+                }
 
         return result;
     }

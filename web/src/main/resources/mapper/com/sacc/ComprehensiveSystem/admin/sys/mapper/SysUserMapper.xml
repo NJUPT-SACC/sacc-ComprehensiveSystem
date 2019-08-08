@@ -119,6 +119,8 @@
         </where>
     </delete>
 
+
+
     <update id="update" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         update sys_user
         <set>
@@ -203,6 +205,19 @@
     </select>
 
     <select id="findByLoginName" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.login_name = #{loginName}
+            or a.email = #{email}
+        </where>
+    </select>
+
+    <select id="findUserByLoginName" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>

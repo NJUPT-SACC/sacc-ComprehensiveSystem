@@ -212,7 +212,9 @@
         </where>
     </select>
 
+
     <select id="findMenuByUserId" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
+
         select
         m.id as "id",
         m.name as "name",

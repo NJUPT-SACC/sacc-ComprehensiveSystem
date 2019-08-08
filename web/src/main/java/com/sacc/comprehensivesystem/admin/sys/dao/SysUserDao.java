@@ -9,9 +9,11 @@ import java.util.List;
 
 @Mapper
 public interface SysUserDao extends BasicDao<SysUser> {
-    SysUser findByLoginName(String loginName);
+    List<SysUser> findByLoginName(String loginName,String email);
 
     Long findIdByLoginName(String name);
+
+    SysUser findUserByLoginName(String loginName);
 
     SysUser get(Long id);
 
