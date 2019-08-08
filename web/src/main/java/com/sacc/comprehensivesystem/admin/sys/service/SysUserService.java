@@ -72,7 +72,7 @@ public class SysUserService extends BasicService<SysUser> {
      * @return
      */
     @Transactional(readOnly = false)
-    public SysUser login(String username, String password,String email) {
+    public SysUser login(String username, String password) {
         SysUser user = sysUserDao.findUserByLoginName(username);
 
         //System.out.println(PasswordUtils.generateHash(password));

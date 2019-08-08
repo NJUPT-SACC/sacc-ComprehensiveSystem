@@ -11,6 +11,7 @@ import java.util.Date;
 public class Competition extends BasicEntity {
     private String name;
 
+    private String location;
     // ---------------------------------
     // create_date对应的属性
     // ---------------------------------
@@ -37,6 +38,14 @@ public class Competition extends BasicEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Date getStartTime() {
