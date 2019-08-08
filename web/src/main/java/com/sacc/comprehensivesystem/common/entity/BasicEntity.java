@@ -1,12 +1,16 @@
 package com.sacc.comprehensivesystem.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sacc.comprehensivesystem.common.utils.JSONUtils;
 import com.sacc.comprehensivesystem.common.utils.StringUtils;
 
 import java.util.Date;
 import java.util.Set;
 
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class BasicEntity {
     public static final String COLUMN_ID_ = "id";
     public static final String COLUMN_ID_DESC_ = "id desc";
@@ -57,6 +61,7 @@ public class BasicEntity {
     // ---------------------------------
     // del_flag对应的属性
     // ---------------------------------
+    @JsonIgnore
     private Integer delFlag;
     private Integer _minDelFlag;
     private Integer _maxDelFlag;

@@ -2,6 +2,9 @@ package com.sacc.comprehensivesystem.modules.competition.entity;
 
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 
+/**
+ * @author yujinbiao
+ */
 public class CompetitionUser extends BasicEntity {
     private Long userId;
 

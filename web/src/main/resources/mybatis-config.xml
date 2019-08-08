@@ -13,6 +13,7 @@
         This setting forces generated keys to be used if set to true,
          as some drivers deny compatibility but still work -->
         <setting name="useGeneratedKeys" value="true"/>
+        <setting name="callSettersOnNulls" value="true"/>
     </settings>
 
     <!-- Continue editing here -->

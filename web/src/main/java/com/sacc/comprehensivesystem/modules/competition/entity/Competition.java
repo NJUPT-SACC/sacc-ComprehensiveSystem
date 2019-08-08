@@ -5,6 +5,9 @@ import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 
 import java.util.Date;
 
+/**
+ * @author yujinbiao
+ */
 public class Competition extends BasicEntity {
     private String name;
 

@@ -209,7 +209,7 @@ create table sacc_frontend.competition_user
     create_by      bigint                                 not null,
     create_date    timestamp    default CURRENT_TIMESTAMP not null,
     update_by      bigint                                 not null,
-    update_date    timestamp    default CURRENT_TIMESTAMP not null,
+    update_date    timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     del_flag       tinyint      default 0                 not null
 );
 
@@ -246,7 +246,7 @@ create table sacc_frontend.competition_question
     create_by      bigint                                 not null,
     create_date    timestamp    default CURRENT_TIMESTAMP not null,
     update_by      bigint                                 not null,
-    update_date    timestamp    default CURRENT_TIMESTAMP not null,
+    update_date    timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     del_flag       tinyint      default 0                 not null
 )
     comment '比赛选择题表';
@@ -257,11 +257,12 @@ create table sacc_frontend.competition
         primary key,
     name        varchar(20)  default ''                not null,
     remarks     varchar(255) default ''                not null,
-    start_time  timestamp                              not null on update CURRENT_TIMESTAMP,
+    location    varchar(50)  default ''                not null,
+    start_time  timestamp                              not null,
     end_time    timestamp                              not null,
     create_date timestamp    default CURRENT_TIMESTAMP not null,
     create_by   bigint                                 not null,
-    update_date timestamp    default CURRENT_TIMESTAMP not null,
+    update_date timestamp    default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     update_by   bigint                                 not null,
     del_flag    tinyint      default 0                 not null
 );
