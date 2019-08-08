@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.assignment.dao.QuestionBankMapper">
+  <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+    <result column="choice_a" jdbcType="VARCHAR" property="choiceA" />
+    <result column="choice_b" jdbcType="VARCHAR" property="choiceB" />
+    <result column="choice_c" jdbcType="VARCHAR" property="choiceC" />
+    <result column="choice_d" jdbcType="VARCHAR" property="choiceD" />
+    <result column="choice_e" jdbcType="VARCHAR" property="choiceE" />
+    <result column="choice_f" jdbcType="VARCHAR" property="choiceF" />
+    <result column="correct_answer" jdbcType="CHAR" property="correctAnswer" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+    <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, title, description, difficulty,choice_a,choice_b,choice_c,choice_d,choice_e,choice_f,correct_answer,
+    remarks, create_date, create_by, update_date, update_by, del_flag
+  </sql>
+
+  <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_bank
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from question_bank
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+    insert into question_bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="choiceA != null">
+        choice_a,
+      </if>
+      <if test="choiceB != null">
+        choice_b,
+      </if>
+      <if test="choiceC != null">
+        choice_c,
+      </if>
+      <if test="choiceD != null">
+        choice_d,
+      </if>
+      <if test="choiceE != null">
+        choice_e,
+      </if>
+      <if test="choiceF != null">
+        choice_f,
+      </if>
+      <if test="correctAnswer != null">
+        correct_answer,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=CHAR},
+      </if>
+      <if test="choiceA != null">
+        #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null">
+        #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null">
+        #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null">
+        #{choiceD,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceE != null">
+        #{choiceE,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceF != null">
+        #{choiceF,jdbcType=VARCHAR},
+      </if>
+      <if test="correctAnswer != null">
+        #{correctAnswer,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+    update assignment
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=INTEGER},
+      </if>
+      <if test="choiceA != null">
+        choice_a = #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null">
+        choice_b = #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null">
+        choice_c = #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null">
+        choice_d = #{choiceD,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceE != null">
+        choice_e = #{choiceE,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceF != null">
+        choice_f = #{choiceF,jdbcType=VARCHAR},
+      </if>
+      <if test="correctAnswer != null">
+        correct_answer = #{correctAnswer,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

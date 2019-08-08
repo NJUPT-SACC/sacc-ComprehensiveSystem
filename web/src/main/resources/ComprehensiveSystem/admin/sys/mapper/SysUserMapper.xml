@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sacc.ComprehensiveSystem.admin.sys.dao.SysUserDao">
+<mapper namespace="com.sacc.comprehensivesystem.admin.sys.dao.SysUserDao">
 
     <sql id="notNullColumns">
         <trim prefix="" suffixOverrides="," >
@@ -96,7 +96,7 @@
     <sql id="customJoins">
     </sql>
 
-    <insert id="insert" parameterType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <insert id="insert" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
     insert into sys_user(
     <include refid="notNullColumns" />
     ) values  (
@@ -118,7 +118,7 @@
         </where>
     </delete>
 
-    <update id="update" parameterType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <update id="update" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         update sys_user
         <set>
             <if test="id !=null">
@@ -168,7 +168,7 @@
 
     </update>
 
-    <select id="get" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="get" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>
@@ -180,7 +180,7 @@
         </where>
     </select>
 
-    <select id="listAll" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="listAll" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>
@@ -200,7 +200,7 @@
         </choose>
     </select>
 
-    <select id="findByLoginName" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="findByLoginName" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>
@@ -212,7 +212,9 @@
         </where>
     </select>
 
-    <select id="findMenuByUserId" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+
+    <select id="findMenuByUserId" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
+
         select
         m.id as "id",
         m.name as "name",
@@ -255,7 +257,7 @@
         where a.id = #{id}
     </select>
 
-    <select id="findUserNotAdmin" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="findUserNotAdmin" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
         <trim suffixOverrides=",">
             <include refid="columns"/>
