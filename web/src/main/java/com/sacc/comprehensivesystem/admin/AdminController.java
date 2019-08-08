@@ -67,6 +67,12 @@ public class AdminController {
             case 3:
                 result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"重复注册",null);
                 break;
+            case 4:
+                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"用户名重复注册",null);
+                break;
+            case 5:
+                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"邮箱重复注册",null);
+                break;
             default:
                 break;
         }

@@ -34,10 +34,11 @@ public class LoginService {
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+        String email=jsonObject.getString("email");
         HashMap<String,Object> data = null;
         UserSimpleAuthorizationInfo userSimpleAuthorizationInfo =
                 new UserSimpleAuthorizationInfo();
-        HashMap<String, Object> hashMap = authService.authtication(username, password);
+        HashMap<String, Object> hashMap = authService.authtication(username, password,email);
         if (hashMap != null) {
             String userInfoStr = JSONUtils.toJson(hashMap.get("userInfo"));
             SysUser sysUser = JSONUtils.readValue(userInfoStr, SysUser.class);

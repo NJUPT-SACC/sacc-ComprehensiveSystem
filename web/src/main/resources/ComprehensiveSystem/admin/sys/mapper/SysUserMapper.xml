@@ -213,7 +213,7 @@
     </select>
 
 
-    <select id="findMenuByUserId" resultType="com.sacc.ComprehensiveSystem.admin.sys.entity.SysUser">
+    <select id="findMenuByUserId" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
 
         select
         m.id as "id",
