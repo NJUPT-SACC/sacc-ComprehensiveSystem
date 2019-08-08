@@ -51,6 +51,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+
     </context>
 
     <plugins>

@@ -38,7 +38,6 @@ public class RegistService {
         } catch (Exception e) {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
             resultt=2;
-            throw e;
         }
         return resultt;
 
