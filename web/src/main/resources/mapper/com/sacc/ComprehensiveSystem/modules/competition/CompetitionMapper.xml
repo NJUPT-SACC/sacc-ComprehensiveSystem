@@ -12,4 +12,31 @@
         left join sacc_frontend.question_bank b on b.id = a.question_id
         where a.competition_id = #{id}
     </select>
+
+    <update id="deleteOldResult">
+        update sacc_frontend.competition_stage
+        set del_flag = 1
+        where user_id = #{id}
+    </update>
+
+    <insert id="save" parameterType="java.util.HashMap">
+        insert into sacc_frontend.competition_stage (id, user_id, question_id,
+        result, submit_time, del_flag) values
+        <foreach collection="params" index="params.keys" item="item" separator=",">
+            (#{item.id}, #{item.userId}, #{item.questionId}, #{item.result},
+            #{item.submitTime}, #{item.delFlag})
+        </foreach>
+    </insert>
+    
+    <select id="checRepeat" resultType="com.sacc.comprehensivesystem.modules.competition.entity.CompetitionResult">
+        select * from sacc_frontend.competition_result a
+        where a.user_id = #{userId} and a.competition_id = #{competitionId}
+        and a.del_flag = 0
+    </select>
+
+    <select id="getRightAnswer" resultType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+        select * from sacc_frontend.question_bank a left join
+        sacc_frontend.competition_question b on a.id = b.question_id
+        where b.competition_id = #{competitionId}
+    </select>
 </mapper>

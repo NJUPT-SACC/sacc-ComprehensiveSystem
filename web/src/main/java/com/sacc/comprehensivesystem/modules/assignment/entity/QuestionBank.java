@@ -1,5 +1,6 @@
 package com.sacc.comprehensivesystem.modules.assignment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 import com.sacc.comprehensivesystem.common.enums.Difficulty;
 
@@ -16,6 +17,7 @@ public class QuestionBank extends BasicEntity {
     private String choiceD;
     private String choiceE;
     private String choiceF;
+    @JsonIgnore
     private String correctAnswer;
     private Difficulty difficulty;
 
