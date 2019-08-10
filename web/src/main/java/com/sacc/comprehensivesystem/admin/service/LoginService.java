@@ -34,7 +34,7 @@ public class LoginService {
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
-        
+
         HashMap<String,Object> data = null;
         UserSimpleAuthorizationInfo userSimpleAuthorizationInfo =
                 new UserSimpleAuthorizationInfo();
