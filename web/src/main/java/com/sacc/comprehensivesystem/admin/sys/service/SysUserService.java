@@ -112,7 +112,7 @@ public class SysUserService extends BasicService<SysUser> {
 
         String name=sysUser.getLoginName();
         String email= sysUser.getEmail();
-        sysUser.setPassword(PasswordUtils.generateHash(sysUser.getPassword()));
+        // sysUser.setPassword(PasswordUtils.generateHash(sysUser.getPassword()));
        List<SysUser> list = sysUserDao.findByLoginName(name,email);
 
         if(list.size()==2) {
