@@ -25,7 +25,9 @@ public class MailService  {
     @Value("${spring.mail.username}")
     private String from;
 
-    public void sendSimpleMail(String to, String subject, String user) {
+    private final String preUrl = "localhost:8080/admin/check?signature=";
+
+    public void sendSimpleMail(String to, String subject, String signature) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -33,10 +35,11 @@ public class MailService  {
             helper.setTo(to);
             helper.setSubject(subject);
             Context context = new Context();
-            context.setVariable("id", user);
+            String url = preUrl + signature;
+            context.setVariable("url", url);
             String mailContext = templateEngine.process("mail", context);
             helper.setText(mailContext, true);
-            System.out.println("Hello?");
+            System.out.println(url);
             mailSender.send(message);
             logger.info("邮件已经发送");
         } catch (Exception e) {

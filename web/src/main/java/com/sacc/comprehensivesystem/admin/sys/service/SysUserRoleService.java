@@ -7,9 +7,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserRoleService {
 
-    public SysUserRole userRoleService(SysUser sysUser) {
-        SysUserRole sysUserRole = new SysUserRole();
-        sysUserRole.setRoleId(4L);
-        return sysUserRole;
-    }
 }

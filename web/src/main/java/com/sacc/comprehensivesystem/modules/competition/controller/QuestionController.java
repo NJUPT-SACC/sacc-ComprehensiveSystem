@@ -1,6 +1,9 @@
 package com.sacc.comprehensivesystem.modules.competition.controller;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.sacc.comprehensivesystem.admin.Utils.CacheUtils;
+import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
+import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.utils.JSONUtils;
 import com.sacc.comprehensivesystem.common.utils.RestResult;
 import com.sacc.comprehensivesystem.modules.competition.service.QuestionService;
@@ -51,8 +54,6 @@ public class QuestionController {
      */
     @RequestMapping(value = "/query/{id}", method = RequestMethod.GET)
     public RestResult listQuestionById(@PathVariable long id) {
-        Subject subject = SecurityUtils.getSubject();
-        subject.getPrincipal();
         List result = questionService.listQuestion(id);
         if (result != null) {
             /**JSONArray jsonArray = new JSONArray(result);

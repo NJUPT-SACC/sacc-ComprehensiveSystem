@@ -55,7 +55,7 @@
             </if>
         </trim>
     </sql>
-    <insert id="insert_role" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUserRole">
+    <insert id="insertRole" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUserRole">
         insert into sys_user_role(
         <include refid="notNullColumns" />
         ) values  (
@@ -63,16 +63,9 @@
         )
     </insert>
 
-    <update id="update_role" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUserRole">
-        update sys_user_role
-        <set>
-            <if test="role_id !=null">
-                role_id=3
-            </if>
-        </set>
-        <where>
-            and id=#{id}
-        </where>
-
+    <update id="updateRole" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUserRole">
+        update sacc_frontend.sys_user_role
+              set role_id = 3
+        where user_id=#{userId}
     </update>
 </mapper>

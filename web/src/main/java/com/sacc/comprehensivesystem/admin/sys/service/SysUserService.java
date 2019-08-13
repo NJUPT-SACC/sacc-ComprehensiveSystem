@@ -75,7 +75,7 @@ public class SysUserService extends BasicService<SysUser> {
     public SysUser login(String username, String password) {
         SysUser user = sysUserDao.findUserByLoginName(username);
 
-        //System.out.println(PasswordUtils.generateHash(password));
+        System.out.println(PasswordUtils.generateHash(password));
         if(user != null && PasswordUtils.checkHash(password,user.getPassword())) {
             Date d = new Date();
             user.setUpdateDate(d);
@@ -112,8 +112,8 @@ public class SysUserService extends BasicService<SysUser> {
 
         String name=sysUser.getLoginName();
         String email= sysUser.getEmail();
-       List<SysUser> list = sysUserDao.findByLoginName(name,email);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
+        List<SysUser> list = sysUserDao.findByLoginName(name,email);
+
         if(list.size()==2) {
             result=3;
         } else
@@ -128,12 +128,13 @@ public class SysUserService extends BasicService<SysUser> {
                     try {
                         insert(sysUser);
                         result = 1;
-                        SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
+                        SysUserRole sysUserRole = new SysUserRole();
+                        sysUserRole.setRoleId(4L);
                         Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
                         sysUserRole.setUserId(id);
                         sysUserRole.setCreateBy(id);
                         sysUserRole.setUpdateBy(id);
-                        sysUserRoleDao.insert_role(sysUserRole);
+                        sysUserRoleDao.insertRole(sysUserRole);
                     } catch (Exception e) {
                         logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
                         result = 2;
@@ -147,7 +148,7 @@ public class SysUserService extends BasicService<SysUser> {
     public Long checkBase64(String base64)
     {
         Long id= Long.valueOf(Base64.Base64UnDecoder(base64));
-        System.out.println(id);
+
         return id;
     }
     public int checkMd5(Long id,String md5)
@@ -156,15 +157,13 @@ public class SysUserService extends BasicService<SysUser> {
 
         String mD5=MD5Utils.MD5Encode(String.valueOf(sysUser.getCreateDate()),"utf8");
 
-        System.out.println(mD5);
-        System.out.println(md5);
-        if(mD5.equals(md5))
-        {
-
-            SysUserRole sysUserRole = sysUserRoleService.userRoleService(sysUser);
-            sysUserRoleDao.update_role(sysUserRole);
+        if (mD5.equals(md5)) {
+            SysUserRole sysUserRole = new SysUserRole();
+            sysUserRole.setRoleId(4L);
+            sysUserRole.setUserId(sysUser.getId());
+            sysUserRoleDao.updateRole(sysUserRole);
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }

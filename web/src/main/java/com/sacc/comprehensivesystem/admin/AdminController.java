@@ -94,7 +94,6 @@ public class AdminController {
     @RequestMapping("/admin/check")
     public  RestResult getSignature(@RequestParam String signature) {
         int resultt=1;
-
         RestResult<Object> result = null;
        try {
            resultt=registService.signatureCheck(signature);
@@ -116,13 +115,13 @@ public class AdminController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
     public void sendMail(@RequestHeader("authKey") String token) {
         UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
         SysUser sysUser =info.getSysUser();
-        String url = registService.userEmailPost(sysUser);
+        String signature = registService.userEmailPost(sysUser);
         String to = sysUser.getEmail();
-        mailService.sendSimpleMail(to,"test","随便");
+        mailService.sendSimpleMail(to,"test", signature);
     }
 
 
