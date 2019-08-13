@@ -42,19 +42,19 @@ public class RegistService {
         return resultt;
 
     }
-    public String UserEmailPost(SysUser sysUser) {
+    public String userEmailPost(SysUser sysUser) {
         String md5Encode =  MD5Utils.MD5Encode(String.valueOf(sysUser.getCreateDate()),"utf8");
         String base64Code = Base64.Base64Decoder(String.valueOf(sysUser.getId()));
         return md5Encode+base64Code;
     }
 
-    public int SignatureCheck(String url) {
+    public int signatureCheck(String url) {
         String base64=url.substring(32);
         System.out.println(base64);
         String md5=url.substring(0,32);
         System.out.println(md5);
-        Long ID=sysUserService.CheckBase64(base64);
-        return sysUserService.CheckMd5(ID,md5);
+        Long ID=sysUserService.checkBase64(base64);
+        return sysUserService.checkMd5(ID,md5);
     }
 
 }

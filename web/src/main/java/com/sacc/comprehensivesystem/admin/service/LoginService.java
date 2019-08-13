@@ -46,7 +46,7 @@ public class LoginService {
             sysUser.setPassword(null);
             logger.debug("sysUser from auth: {}", sysUser);
 
-                       List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
+            List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
             logger.debug("menuList from auth:{}", menuList);
 
             List<String> roleList = (List<String>) hashMap.get("roleList");

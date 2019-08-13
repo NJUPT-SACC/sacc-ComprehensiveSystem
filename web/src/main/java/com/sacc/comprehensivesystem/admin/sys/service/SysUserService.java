@@ -144,13 +144,13 @@ public class SysUserService extends BasicService<SysUser> {
         return result;
     }
 
-    public Long CheckBase64(String base64)
+    public Long checkBase64(String base64)
     {
         Long id= Long.valueOf(Base64.Base64UnDecoder(base64));
         System.out.println(id);
         return id;
     }
-    public int CheckMd5(Long id,String md5)
+    public int checkMd5(Long id,String md5)
     {
         SysUser sysUser = sysUserDao.get(id);
 
