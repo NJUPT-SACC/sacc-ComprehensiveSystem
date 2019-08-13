@@ -1,10 +1,14 @@
 package com.sacc.comprehensivesystem.common.service;
 
+import com.sacc.comprehensivesystem.admin.Utils.CacheUtils;
+import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
+import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.dao.BasicDao;
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,5 +201,11 @@ public abstract class BasicService<T extends BasicEntity> {
             throw new RuntimeException(e);
         }
         return t;
+    }
+
+    protected SysUser getCurrentUser(){
+        String token = SecurityUtils.getSubject().getPrincipal().toString();
+        UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
+        return info.getSysUser();
     }
 }
