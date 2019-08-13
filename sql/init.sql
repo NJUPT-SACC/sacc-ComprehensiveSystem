@@ -277,3 +277,8 @@ ALTER TABLE `sacc_frontend`.`assignment_question`
 
 ALTER TABLE `sacc_frontend`.`question_bank`
     ADD COLUMN `difficulty` int(11) NOT NULL COMMENT '难度（1简单，2中等，3困难）' AFTER `description`;
+
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `create_by` bigint(20) NULL COMMENT '创建者' AFTER `create_date`;
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `update_by` bigint(20) NULL AFTER `update_date`;

@@ -3,11 +3,15 @@ package com.sacc.comprehensivesystem.modules.assignment.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 import com.sacc.comprehensivesystem.common.enums.Difficulty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 单个问题实体
  * @author goufaan
  */
+
 public class QuestionBank extends BasicEntity {
     private String title;
     private String description;
@@ -20,6 +24,10 @@ public class QuestionBank extends BasicEntity {
     @JsonIgnore
     private String correctAnswer;
     private Difficulty difficulty;
+
+    public String[] getChoices(){
+        return new String[]{choiceA,choiceB,choiceC,choiceD,choiceE,choiceF};
+    }
 
     public String getTitle() {
         return title;

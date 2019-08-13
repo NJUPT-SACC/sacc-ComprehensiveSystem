@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="assignment_id" jdbcType="BIGINT" property="assignmentId" />
     <result column="question_id" jdbcType="BIGINT" property="questionId" />
+    <result column="question_type" jdbcType="INTEGER" property="questionType" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_by" jdbcType="BIGINT" property="createBy" />
@@ -13,7 +14,7 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, assignment_id, question_id, remarks, create_date, create_by, update_date, update_by, 
+    id, assignment_id, question_id, question_type, remarks, create_date, create_by, update_date, update_by,
     del_flag
   </sql>
   <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -22,20 +23,16 @@
     from assignment_question
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="delete" parameterType="java.lang.Long">
-    delete from assignment_question
+  <select id="selectQuestionsByAssignmentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from assignment_question
+    where assignment_id = #{assignmentId,jdbcType=BIGINT}
+  </select>
+  <update id="delete" parameterType="java.lang.Long">
+    update assignment_question set del_flag=1
     where id = #{id,jdbcType=BIGINT}
-  </delete>
-<!--  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">-->
-<!--    insert into assignment_question (id, assignment_id, question_id, -->
-<!--      remarks, create_date, create_by, -->
-<!--      update_date, update_by, del_flag-->
-<!--      )-->
-<!--    values (#{id,jdbcType=BIGINT}, #{assignmentId,jdbcType=BIGINT}, #{questionId,jdbcType=BIGINT}, -->
-<!--      #{remarks,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, -->
-<!--      #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{delFlag,jdbcType=TINYINT}-->
-<!--      )-->
-<!--  </insert>-->
+  </update>
   <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
     insert into assignment_question
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -127,16 +124,5 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
-    update assignment_question
-    set assignment_id = #{assignmentId,jdbcType=BIGINT},
-      question_id = #{questionId,jdbcType=BIGINT},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=BIGINT},
-      del_flag = #{delFlag,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
 </mapper>
