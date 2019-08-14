@@ -14,4 +14,7 @@ public interface CompetitionDao {
 
     public List<QuestionBank> queryQuestion(@Param("id")Long id);
 
+    public void insertCompetition(Competition competition);
+    public Long findIdByName(String name);
+
 }

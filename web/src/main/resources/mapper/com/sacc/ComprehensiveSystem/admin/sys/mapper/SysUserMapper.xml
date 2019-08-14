@@ -174,7 +174,7 @@
 
     <select id="get" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         select
-        <trim suffixOverrides=",">
+        <trim suffixOverrides="0,">
             <include refid="columns"/>
         </trim>
         from sys_user a
