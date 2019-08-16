@@ -21,7 +21,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         //Todo
-        //converters.add(restResultConverter);
+        converters.add(restResultConverter);
         super.configureMessageConverters(converters);
     }
 }

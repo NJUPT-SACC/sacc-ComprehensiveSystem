@@ -8,17 +8,21 @@
                 question_id,
             </if>
             <if test="competitionId !=null" >
-                competition_if,
+                competition_id,
             </if>
             <if test="createDate !=null" >
                 create_date,
             </if>
-            <if test="createBy !=null" >
-                create_by,
-            </if>
             <if test="updateDate !=null" >
                 update_date,
             </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+
             <if test="remarks !=null" >
                 remarks,
             </if>
@@ -31,7 +35,7 @@
     <sql id="notNullColumnsValue">
         <trim prefix="" suffixOverrides="," >
             <if test="questionId !=null" >
-                #{qusetionId},
+                #{questionId},
             </if>
             <if test="competitionId !=null" >
                 #{competitionId},
@@ -41,6 +45,9 @@
             </if>
             <if test="updateDate !=null" >
                 #{updateDate},
+            </if>
+            <if test="createBy !=null" >
+                #{createBy},
             </if>
             <if test="updateBy !=null" >
                 #{updateBy},

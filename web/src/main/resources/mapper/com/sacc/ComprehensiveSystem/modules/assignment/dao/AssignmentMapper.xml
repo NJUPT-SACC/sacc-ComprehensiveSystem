@@ -17,26 +17,19 @@
     id, name, start_time, end_time, remarks, create_date, create_by, update_date, update_by, 
     del_flag
   </sql>
+
   <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from assignment
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="delete" parameterType="java.lang.Long">
-    delete from assignment
+
+  <update id="delete" parameterType="java.lang.Long">
+    update assignment set del_flag=1
     where id = #{id,jdbcType=BIGINT}
-  </delete>
-<!--  <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">-->
-<!--    insert into assignment (id, name, start_time, -->
-<!--      end_time, remarks, create_date, -->
-<!--      create_by, update_date, update_by, -->
-<!--      del_flag)-->
-<!--    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, -->
-<!--      #{endTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, -->
-<!--      #{createBy,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, -->
-<!--      #{delFlag,jdbcType=TINYINT})-->
-<!--  </insert>-->
+  </update>
+
   <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
     insert into assignment
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -104,6 +97,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
     update assignment
     <set>
@@ -137,18 +131,6 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-<!--  <update id="updateByPrimaryKey" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">-->
-<!--    update assignment-->
-<!--    set name = #{name,jdbcType=VARCHAR},-->
-<!--      start_time = #{startTime,jdbcType=TIMESTAMP},-->
-<!--      end_time = #{endTime,jdbcType=TIMESTAMP},-->
-<!--      remarks = #{remarks,jdbcType=VARCHAR},-->
-<!--      create_date = #{createDate,jdbcType=TIMESTAMP},-->
-<!--      create_by = #{createBy,jdbcType=BIGINT},-->
-<!--      update_date = #{updateDate,jdbcType=TIMESTAMP},-->
-<!--      update_by = #{updateBy,jdbcType=BIGINT},-->
-<!--      del_flag = #{delFlag,jdbcType=TINYINT}-->
-<!--    where id = #{id,jdbcType=BIGINT}-->
-<!--  </update>-->
+
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.sacc.comprehensivesystem.modules.assignment.entity;
 
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
+import com.sacc.comprehensivesystem.common.enums.JudgeResult;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -12,7 +15,7 @@ public class AssignmentStage extends BasicEntity {
     private Long assignmentId;
     private Long userId;
     private Long questionId;
-    private String questionResult;
+    private JudgeResult questionResult;
     private Date saveTime;
 
     public Long getAssignmentId() {
@@ -42,11 +45,11 @@ public class AssignmentStage extends BasicEntity {
         return this;
     }
 
-    public String getQuestionResult() {
+    public JudgeResult getQuestionResult() {
         return questionResult;
     }
 
-    public AssignmentStage setQuestionResult(String questionResult) {
+    public AssignmentStage setQuestionResult(JudgeResult questionResult) {
         this.questionResult = questionResult;
         return this;
     }

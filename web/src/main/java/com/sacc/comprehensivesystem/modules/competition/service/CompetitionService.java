@@ -1,18 +1,24 @@
 package com.sacc.comprehensivesystem.modules.competition.service;
 
+import com.sacc.comprehensivesystem.admin.Utils.CacheUtils;
 import com.sacc.comprehensivesystem.admin.service.LoginService;
-import com.sacc.comprehensivesystem.common.utils.RestResult;
+import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
+import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
+import com.sacc.comprehensivesystem.common.service.BasicService;
 import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionDao;
 import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionQuestionDao;
 import com.sacc.comprehensivesystem.modules.competition.entity.Competition;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionQuestion;
+import org.apache.shiro.SecurityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,10 +32,11 @@ public class CompetitionService {
     CompetitionDao competitionDao;
     @Autowired
     CompetitionQuestionDao competitionQuestionDao;
+
     static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
 
-    public int addCompetition(String postJosn)
+    public int addCompetition (String postJosn)
     {
         JSONObject jsonObject = new JSONObject(postJosn);
 
@@ -51,11 +58,7 @@ public class CompetitionService {
         /**
          * 将JSONArray转成List类型
          */
-        JSONArray jsonArray=jsonObject.getJSONArray("questionId");
-        List list=(List)jsonArray.toList();
-        Long [] questionId=new Long[list.size()];
-        questionId[1]=(Long)list.get(1);
-
+        JSONArray jsonArray = jsonObject.getJSONArray("questionId");
         /**
          * 给competition赋值
          */
@@ -64,33 +67,46 @@ public class CompetitionService {
         competition.setName(jsonObject.getString("name"));
         competition.setStartTime(startTime);
         competition.setEndTime(endTime);
-        competition.setUpdateBy(-1l);
+        //competition.setUpdateBy(-1l);
 
         CompetitionQuestion competitionQuestion=new CompetitionQuestion();
         int result=0;
-        try{
+        try {
             System.out.println(competition);
+            String token = SecurityUtils.getSubject().getPrincipal().toString();
+            UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
+            SysUser sysUser=info.getSysUser();
+            competition.setUpdateBy(sysUser.getUpdateBy());
+            competition.setCreateBy(sysUser.getCreateBy());
+            competitionQuestion.setUpdateBy(sysUser.getUpdateBy());
+            competitionQuestion.setCreateBy(sysUser.getCreateBy());
             competitionDao.insertCompetition(competition);
+        }catch (Exception e) {
+            e.getStackTrace();
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            result = 0;
+        }
+        try{
             competitionQuestion.setCompetitionId(competitionDao.findIdByName(competition.getName()));
-            for(int i=0;i<list.size();i++){
-                questionId[i]=(Long)list.get(i);
-                competitionQuestion.setQuestionId(questionId[i]);
+                for(int i=0;i<jsonArray.length();i++){
                 try {
+                    JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                    competitionQuestion.setQuestionId((long)(int)jsonObject1.get("qid"));
                     competitionQuestionDao.insertCompetitionQuestion(competitionQuestion);
+                    result=1;
                 }catch(Exception e){
                     e.getStackTrace();
                     logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+                    result=0;
                 }
             }
 
-            result=1;
-        }catch (Exception e)
-        {
+
+        }catch (Exception e) {
             e.getStackTrace();
             logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
-            result=0;
+            result = 0;
         }
-        System.out.println(result);
         return result;
     }
 
@@ -98,22 +114,23 @@ public class CompetitionService {
         int result=1;
         JSONObject jsonObject = new JSONObject(postJosn);
         JSONArray jsonArray = jsonObject.getJSONArray("questionId");
-        List<Long> list = (List) jsonArray.toList();
-        //Long[] questionId = new Long[list.size()];
 
         Long competitionId = jsonObject.getLong("competitionId");
         CompetitionQuestion competitionQuestion = new CompetitionQuestion();
         competitionQuestion.setCompetitionId(competitionId);
         System.out.println(competitionQuestion);
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                competitionQuestion.setQuestionId(list.get(i));
+                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                competitionQuestion.setQuestionId((long)(int)jsonObject1.get("qid"));
+                competitionQuestionDao.insertCompetitionQuestion(competitionQuestion);
+                result=1;
             }catch (Exception e)
             {
                 logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+                result=0;
             }
-                competitionQuestionDao.insertCompetitionQuestion(competitionQuestion);
-                System.out.println(list.get(i));
+
             }
         return result;
     }

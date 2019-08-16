@@ -34,7 +34,7 @@ public class LoginService {
         JSONObject jsonObject = new JSONObject(postJson);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
-        
+
         HashMap<String,Object> data = null;
         UserSimpleAuthorizationInfo userSimpleAuthorizationInfo =
                 new UserSimpleAuthorizationInfo();
@@ -46,7 +46,7 @@ public class LoginService {
             sysUser.setPassword(null);
             logger.debug("sysUser from auth: {}", sysUser);
 
-                       List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
+            List<SysMenu> menuList = (List<SysMenu>) hashMap.get("menuList");
             logger.debug("menuList from auth:{}", menuList);
 
             List<String> roleList = (List<String>) hashMap.get("roleList");

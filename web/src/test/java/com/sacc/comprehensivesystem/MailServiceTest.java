@@ -16,5 +16,6 @@ public class MailServiceTest {
     @Test
     public void testSendMail() throws Exception {
         mailService.sendSimpleMail("1095755891@qq.com", "test邮件", "HelloMEIgeren");
+        mailService.sendSimpleMail("389746410@qq.com", "test邮件", "HelloMEIgeren");
     }
 }

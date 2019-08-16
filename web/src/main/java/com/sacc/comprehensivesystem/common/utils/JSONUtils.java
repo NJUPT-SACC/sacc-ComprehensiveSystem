@@ -72,4 +72,9 @@ public class JSONUtils {
         }
         return null;
     }
+
+//    public static <T> T read( jsonObject) {
+////        ObjectMapper objectMapper = new ObjectMapper();
+////
+////    }
 }
