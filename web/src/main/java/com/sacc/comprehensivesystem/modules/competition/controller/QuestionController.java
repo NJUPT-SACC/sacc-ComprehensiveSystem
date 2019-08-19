@@ -125,7 +125,7 @@ public class QuestionController {
         return resultt;
     }
 
-    @RequestMapping("/update/add")
+    @RequestMapping("/update/competition")
     public RestResult updateData(@RequestBody String postJson)
     {
 
@@ -133,7 +133,7 @@ public class QuestionController {
 
         RestResult<Object> resultt = null;
         try{
-            result=competitionService.addQuestion(postJson);
+            result=competitionService.updateCompetition(postJson);
 
         }catch (Exception e){
             e.getStackTrace();
@@ -142,10 +142,10 @@ public class QuestionController {
         }
         switch(result) {
             case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目添加成功",null);
+                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "比赛更新成功",null);
                 break;
             case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目比赛失败", null);
+                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "比赛更新失败", null);
                 break;
         }
         return resultt;

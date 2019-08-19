@@ -7,6 +7,7 @@ import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionStage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,16 +16,19 @@ public interface CompetitionDao {
 
     public List<Competition> listCompetition();
 
-    public List<QuestionBank> queryQuestion(@Param("id")Long id);
+    public List<QuestionBank> queryQuestion(@Param("id") Long id);
 
     public void insertCompetition(Competition competition);
+
     public Long findIdByName(String name);
 
     public void deleteOldResult(@Param("id") Long id);
 
-    public void save(@Param("params") Map<Long,CompetitionStage> list);
+    public void save(@Param("params") Map<Long, CompetitionStage> list);
 
-    public CompetitionResult checRepeat(@Param("userId")Long userId, @Param("competitionId") Long competitionId);
+    public CompetitionResult checRepeat(@Param("userId") Long userId, @Param("competitionId") Long competitionId);
 
-    public List<QuestionBank> getRightAnswer(@Param("competitionId")Long competitionId);
+    public List<QuestionBank> getRightAnswer(@Param("competitionId") Long competitionId);
+
+    public void competitionUpdate(Competition competition);
 }

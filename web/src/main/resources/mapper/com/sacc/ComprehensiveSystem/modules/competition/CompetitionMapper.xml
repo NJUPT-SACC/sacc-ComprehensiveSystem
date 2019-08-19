@@ -43,7 +43,7 @@
         <trim prefix="" suffixOverrides="," >
             <if test="name !=null" >
                 #{name},
-        </if>
+            </if>
             <if test="startTime !=null" >
                 #{startTime},
             </if>
@@ -120,6 +120,39 @@
             and a.name = #{name}
         </where>
     </select>
+
+    <update id="competitionUpdate"  parameterType="com.sacc.comprehensivesystem.modules.competition.entity.Competition">
+        update sacc_frontend.competition
+        <set>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="startTime !=null">
+                start_time=#{startTime},
+            </if>
+            <if test="location  !=null">
+                location=#{location},
+            </if>
+            <if test="endTime !=null">
+                end_time=#{endTime},
+            </if>
+            <if test="updateDate !=null">
+                update_date=#{updateDate},
+            </if>
+            <if test="updateBy !=null">
+                update_by=#{updateBy},
+            </if>
+            <if test="remarks !=null">
+                remarks=#{remarks},
+            </if>
+            <if test="delFlag !=null">
+                del_flag=#{delFlag},
+            </if>
+        </set>
+        <where>
+            and id=#{id}
+        </where>
+    </update>
 
 
 
