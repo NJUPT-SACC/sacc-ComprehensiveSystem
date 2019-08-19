@@ -79,6 +79,8 @@ public class QuestionController {
             case 0:
                 resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "添加比赛失败", null);
                 break;
+            default:
+                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
         }
         return resultt;
     }
@@ -105,6 +107,8 @@ public class QuestionController {
             case 0:
                 resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "比赛更新失败", null);
                 break;
+            default:
+                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
         }
         return resultt;
     }
@@ -131,6 +135,8 @@ public class QuestionController {
             case 0:
                 resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目添加失败失败", null);
                 break;
+            default:
+                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
         }
         return resultt;
     }
@@ -157,6 +163,8 @@ public class QuestionController {
             case 0:
                 resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目删除失败", null);
                 break;
+            default:
+                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
         }
         return resultt;
     }
