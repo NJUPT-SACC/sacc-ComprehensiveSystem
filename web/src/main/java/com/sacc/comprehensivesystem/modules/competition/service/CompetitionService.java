@@ -153,6 +153,7 @@ public class CompetitionService {
         }
         competition.setLocation(jsonObject.getString("location"));
         competition.setName(jsonObject.getString("name"));
+        String rname=jsonObject.getString("rname");
         competition.setStartTime(startTime);
         competition.setEndTime(endTime);
         String token = SecurityUtils.getSubject().getPrincipal().toString();
@@ -160,7 +161,7 @@ public class CompetitionService {
         SysUser sysUser = info.getSysUser();
         competition.setUpdateBy(sysUser.getUpdateBy());
         competition.setCreateBy(sysUser.getCreateBy());
-        Long id=competitionDao.findIdByName(competition.getName());
+        Long id=competitionDao.findIdByName(rname);
         competition.setId(id);
 
         try{
