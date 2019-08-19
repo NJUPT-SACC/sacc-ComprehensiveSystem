@@ -84,6 +84,23 @@
         )
     </insert>
 
+    <select id="findIdByCompetitionIdAndQuestionId" resultType="Long">
+        select
+        a.id
+        from sacc_frontend.competition_question a
+        <where>
+            and a.question_id=#{questionId}
+            and a.competition_id=#{competitionId}
+        </where>
+    </select>
+
+
+    <update id="deleteQuestion">
+        update sacc_frontend.competition_question
+        set del_flag = 1
+        where id = #{id}
+    </update>
+
 
 
 </mapper>

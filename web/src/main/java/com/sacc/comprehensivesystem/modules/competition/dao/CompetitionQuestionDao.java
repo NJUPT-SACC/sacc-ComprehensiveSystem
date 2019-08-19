@@ -4,4 +4,6 @@ import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionQuesti
 
 public interface CompetitionQuestionDao {
     public void insertCompetitionQuestion(CompetitionQuestion competitionQuestion);
+    public Long findIdByCompetitionIdAndQuestionId(Long questionId,Long competitionId);
+    public void deleteQuestion(Long id);
 }

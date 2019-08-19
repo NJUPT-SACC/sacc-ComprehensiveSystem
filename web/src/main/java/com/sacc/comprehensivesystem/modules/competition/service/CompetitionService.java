@@ -109,29 +109,7 @@ public class CompetitionService {
         return result;
     }
 
-    public int addQuestion(String postJosn) {
-        int result = 1;
-        JSONObject jsonObject = new JSONObject(postJosn);
-        JSONArray jsonArray = jsonObject.getJSONArray("questionId");
 
-        Long competitionId = jsonObject.getLong("competitionId");
-        CompetitionQuestion competitionQuestion = new CompetitionQuestion();
-        competitionQuestion.setCompetitionId(competitionId);
-        System.out.println(competitionQuestion);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                competitionQuestion.setQuestionId((long) (int) jsonObject1.get("qid"));
-                competitionQuestionDao.insertCompetitionQuestion(competitionQuestion);
-                result = 1;
-            } catch (Exception e) {
-                logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
-                result = 0;
-            }
-
-        }
-        return result;
-    }
 
     public int updateCompetition(String postJosn) {
         int result = 0;
@@ -153,7 +131,7 @@ public class CompetitionService {
         }
         competition.setLocation(jsonObject.getString("location"));
         competition.setName(jsonObject.getString("name"));
-        String rname=jsonObject.getString("rname");
+        String rname = jsonObject.getString("rname");
         competition.setStartTime(startTime);
         competition.setEndTime(endTime);
         String token = SecurityUtils.getSubject().getPrincipal().toString();
@@ -161,17 +139,64 @@ public class CompetitionService {
         SysUser sysUser = info.getSysUser();
         competition.setUpdateBy(sysUser.getUpdateBy());
         competition.setCreateBy(sysUser.getCreateBy());
-        Long id=competitionDao.findIdByName(rname);
+        Long id = competitionDao.findIdByName(rname);
         competition.setId(id);
 
-        try{
+        try {
             competitionDao.competitionUpdate(competition);
-            result=1;
-        }catch (Exception e){
+            result = 1;
+        } catch (Exception e) {
             logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
             result = 0;
         }
 
-    return result;
+        return result;
+    }
+
+    public int addCompetitionQuestion(String postJosn) {
+        int result = 0;
+        JSONObject jsonObject = new JSONObject(postJosn);
+        JSONArray jsonArray = jsonObject.getJSONArray("questionId");
+
+        Long competitionId = jsonObject.getLong("competitionId");
+        CompetitionQuestion competitionQuestion = new CompetitionQuestion();
+        competitionQuestion.setCompetitionId(competitionId);
+        //System.out.println(competitionQuestion);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                competitionQuestion.setQuestionId((long) (int) jsonObject1.get("qid"));
+                competitionQuestionDao.insertCompetitionQuestion(competitionQuestion);
+                result = 1;
+            } catch (Exception e) {
+                logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+                result = 0;
+            }
+
+        }
+        return result;
+
+    }
+
+    public int delCompetitionQuestion(String postJosn) {
+        int result = 0;
+        JSONObject jsonObject = new JSONObject(postJosn);
+        JSONArray jsonArray = jsonObject.getJSONArray("questionId");
+
+        Long competitionId = jsonObject.getLong("competitionId");
+        CompetitionQuestion competitionQuestion = new CompetitionQuestion();
+        competitionQuestion.setCompetitionId(competitionId);
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                Long id = competitionQuestionDao.findIdByCompetitionIdAndQuestionId(competitionId, (long) (int) jsonObject1.get("qid"));
+                competitionQuestionDao.deleteQuestion(id);
+                result = 1;
+            }
+        } catch (Exception e) {
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            result = 0;
+        }
+        return result;
     }
 }

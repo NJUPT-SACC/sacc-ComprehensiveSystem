@@ -150,6 +150,59 @@ public class QuestionController {
         }
         return resultt;
     }
+
+    @RequestMapping("/update/question/add")
+    public RestResult updateAddQuestion(@RequestBody String postJson)
+    {
+
+        int result=0;
+
+        RestResult<Object> resultt = null;
+        try{
+            result=competitionService.addCompetitionQuestion(postJson);
+
+        }catch (Exception e){
+            e.getStackTrace();
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            result=0;
+        }
+        switch(result) {
+            case 1:
+                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目添加成功",null);
+                break;
+            case 0:
+                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目添加失败失败", null);
+                break;
+        }
+        return resultt;
+    }
+
+    @RequestMapping("/update/question/del")
+    public RestResult updateDelQuestion(@RequestBody String postJson)
+    {
+
+        int result=0;
+
+        RestResult<Object> resultt = null;
+        try{
+            result=competitionService.delCompetitionQuestion(postJson);
+
+        }catch (Exception e){
+            e.getStackTrace();
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            result=0;
+        }
+        switch(result) {
+            case 1:
+                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目删除成功",null);
+                break;
+            case 0:
+                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目删除失败", null);
+                break;
+        }
+        return resultt;
+    }
+
     /**
      * 提交题目和暂存
      * @param postJson
