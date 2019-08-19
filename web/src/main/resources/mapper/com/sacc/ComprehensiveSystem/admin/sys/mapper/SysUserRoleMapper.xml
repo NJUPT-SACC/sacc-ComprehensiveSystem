@@ -20,6 +20,9 @@
             <if test="updateDate !=null" >
                 update_date,
             </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
             <if test="remarks !=null" >
                 remarks,
             </if>

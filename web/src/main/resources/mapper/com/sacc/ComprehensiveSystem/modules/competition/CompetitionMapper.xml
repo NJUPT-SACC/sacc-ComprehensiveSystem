@@ -10,7 +10,7 @@
     <select id="queryQuestion" resultType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
         select * from sacc_frontend.competition_question a
         left join sacc_frontend.question_bank b on b.id = a.question_id
-        where a.competition_id = #{id}
+        where a.competition_id = #{id} and a.del_flag = 0 and b.del_flag = 0
     </select>
 
     <update id="deleteOldResult">
