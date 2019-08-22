@@ -8,7 +8,6 @@ import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.utils.RestResult;
 import com.sacc.comprehensivesystem.modules.mail.MailService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,23 +92,24 @@ public class AdminController {
     @CrossOrigin
     @RequestMapping("/admin/check")
     public  RestResult getSignature(@RequestParam String signature) {
-        int resultt=1;
+        String authKey = SecurityUtils.getSubject().getPrincipal().toString();
+        int resultt = 1;
         RestResult<Object> result = null;
        try {
-           resultt=registService.signatureCheck(signature);
+           resultt = registService.signatureCheck(signature);
        }
        catch (Exception e) {
            logger.error("Error: {}\n{}",e.getMessage(), e.getStackTrace());
            result = new RestResult<>(RestResult.STATUS_OTHERS, "验证失败", null);
+           return result;
        }
-       switch (resultt) {
-           case 1:
-               result = new RestResult<Object>(RestResult.STATUS_SUCCESS, "验证成功",null);
-               break;
-           case 0:
-               result = new RestResult<>(RestResult.STATUS_OTHERS, "验证失败", null);
-               break;
+       if (resultt == 1) {
+           registService.activate(authKey);
+           result = new RestResult<>(RestResult.STATUS_SUCCESS, "验证成功",null);
+       } else {
+           result = new RestResult<>(RestResult.STATUS_OTHERS, "验证失败", null);
        }
+
        return result;
 
     }
@@ -120,16 +120,9 @@ public class AdminController {
         UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
         SysUser sysUser =info.getSysUser();
         String signature = registService.userEmailPost(sysUser);
+        System.out.println(signature);
         String to = sysUser.getEmail();
         mailService.sendSimpleMail(to,"test", signature);
-    }
-
-
-    @CrossOrigin
-    @RequestMapping(value = "/admin/test",consumes = MediaType.IMAGE_PNG_VALUE)
-    public RestResult test(@RequestParam byte[] multipartFile) {
-        System.out.println(multipartFile);
-        return new RestResult(200, "成功", multipartFile);
     }
 
 

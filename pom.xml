@@ -99,11 +99,13 @@
 		</dependency>
 
 		<!-- for ehcache -->
+		<!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 			<version>2.10.4</version>
 		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
 		<dependency>
@@ -165,6 +167,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.sacc.comprehensivesystem.ComprehensiveSystemApplication</mainClass>
+					<layout>JAR</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
@@ -185,5 +198,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

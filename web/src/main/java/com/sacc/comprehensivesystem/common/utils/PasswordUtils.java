@@ -13,7 +13,6 @@ public class PasswordUtils {
      */
     public static String generateHash(String password) {
         String randomStr = RandomUtils.getRandomStr(16, 2);
-        System.out.println("ra"+randomStr);
         return randomStr + EncryptionUtils.md5Hex(randomStr + password);
     }
 

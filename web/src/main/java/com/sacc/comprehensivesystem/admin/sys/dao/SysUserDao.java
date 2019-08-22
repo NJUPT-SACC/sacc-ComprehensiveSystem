@@ -15,6 +15,7 @@ public interface SysUserDao extends BasicDao<SysUser> {
 
     SysUser findUserByLoginName(String loginName);
 
+    @Override
     SysUser get(Long id);
 
     List<SysMenu> findMenuByUserId(Long id);

@@ -173,10 +173,7 @@
 
 
     <select id="get" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
-        select
-        <trim suffixOverrides="0,">
-            <include refid="columns"/>
-        </trim>
+        select *
         from sys_user a
         <include refid="customJoins"/>
         <where>

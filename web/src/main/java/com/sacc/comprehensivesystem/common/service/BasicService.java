@@ -203,7 +203,7 @@ public abstract class BasicService<T extends BasicEntity> {
         return t;
     }
 
-    protected SysUser getCurrentUser(){
+    public static SysUser getCurrentUser(){
         String token = SecurityUtils.getSubject().getPrincipal().toString();
         UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
         return info.getSysUser();

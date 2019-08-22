@@ -74,7 +74,7 @@ public class CacheUtils {
      * @param key
      * @return
      */
-    public static void put(String key, Object value) {
+    public static void putUserCache(String key, Object value) {
         put(SYS_CACHE, key, value);
     }
 
@@ -181,9 +181,9 @@ public class CacheUtils {
      * @return
      */
     private static Cache getCache(String cacheName){
-        //logger.debug("cacheName:{}", cacheName);
+        logger.debug("cacheName:{}", cacheName);
         Cache cache = cacheManager.getCache(cacheName);
-        //logger.debug("cache:{}", cache);
+        logger.debug("cache:{}", cache);
         if (cache == null){
             throw new RuntimeException("当前系统中没有定义“"+cacheName+"”这个缓存。");
         }

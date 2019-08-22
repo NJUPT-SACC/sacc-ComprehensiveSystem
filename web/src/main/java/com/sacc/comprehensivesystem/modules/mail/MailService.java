@@ -37,7 +37,7 @@ public class MailService  {
             Context context = new Context();
             String url = preUrl + signature;
             context.setVariable("url", url);
-            String mailContext = templateEngine.process("mail", context);
+            String mailContext = templateEngine.process("email", context);
             helper.setText(mailContext, true);
             System.out.println(url);
             mailSender.send(message);

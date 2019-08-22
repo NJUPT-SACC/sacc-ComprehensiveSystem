@@ -44,6 +44,9 @@
             <if test="createDate !=null" >
                 #{createDate},
             </if>
+            <if test="createBy !=null" >
+                #{createBy},
+            </if>
             <if test="updateDate !=null" >
                 #{updateDate},
             </if>
