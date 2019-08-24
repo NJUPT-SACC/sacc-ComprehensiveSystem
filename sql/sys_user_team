@@ -1,0 +1,15 @@
+create table sys_user_team
+(
+	id bigint auto_increment,
+	leader bigint null comment '队长',
+	member_b bigint null comment '队员b',
+	member_c bigint null comment '队员c',
+	create_by bigint not null,
+	create_date timestamp default current_timestamp not null,
+	update_by bigint not null,
+	update_date timestamp default current_timestamp not null,
+	del_flag tinyint default 0 not null,
+	constraint sys_user_team_pk
+		primary key (id)
+)
+comment '团队用户信息表';
