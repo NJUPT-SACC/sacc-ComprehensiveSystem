@@ -18,3 +18,8 @@ create table sacc_frontend.sys_user
 
 create index sys_user_id_index
     on sacc_frontend.sys_user (id);
+
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `create_by` bigint(20) NULL COMMENT '创建者' AFTER `create_date`;
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `update_by` bigint(20) NULL AFTER `update_date`;

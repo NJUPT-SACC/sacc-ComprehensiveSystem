@@ -13,4 +13,4 @@ create table sacc_frontend.assignment_question
   );
 
 ALTER TABLE `sacc_frontend`.`assignment_question`
-ADD COLUMN `question_type` int(11) NOT NULL COMMENT '题目类型（1选择题，2编程题）' AFTER `assignment_id`;
+ADD COLUMN `question_type` int(11) NOT NULL COMME '题目类型（1选择题，2编程题）' AFTER `assignment_id`;

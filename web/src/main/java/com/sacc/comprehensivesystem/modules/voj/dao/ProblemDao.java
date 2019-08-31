@@ -1,5 +1,6 @@
 package com.sacc.comprehensivesystem.modules.voj.dao;
 
+import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
 import com.sacc.comprehensivesystem.modules.voj.entity.Problem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -83,6 +84,15 @@ public interface ProblemDao {
      * @param problem - 试题对象
      * @return 操作是否成功完成
      */
+
+    void insert(@Param("questionBank") QuestionBank questionBank, @Param("difficulty") int difficulty);
+
+    /**
+     * 向题库中添加选择题
+     * @param problem
+     * @return
+     */
+
     int updateProblem(Problem problem);
 
     /**

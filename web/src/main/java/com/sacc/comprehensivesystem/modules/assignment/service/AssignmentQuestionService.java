@@ -1,8 +1,10 @@
 package com.sacc.comprehensivesystem.modules.assignment.service;
 
 import com.sacc.comprehensivesystem.common.service.BasicService;
+import com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentQuestionMapper;
 import com.sacc.comprehensivesystem.modules.assignment.entity.Assignment;
 import com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,7 +24,10 @@ public class AssignmentQuestionService extends BasicService<AssignmentQuestion> 
 
     }
 
+    @Autowired
+    private AssignmentQuestionMapper assignmentQuestionMapper;
+
     public List<AssignmentQuestion> getQuestions(Assignment assignmentEntity){
-        return dao.listBy(new AssignmentQuestion().setAssignmentId(assignmentEntity.getId()));
+        return assignmentQuestionMapper.selectQuestionsByAssignmentId(assignmentEntity.getId());
     }
 }

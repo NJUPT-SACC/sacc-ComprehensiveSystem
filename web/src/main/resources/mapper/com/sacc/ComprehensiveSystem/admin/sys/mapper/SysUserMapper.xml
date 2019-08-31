@@ -173,10 +173,7 @@
 
 
     <select id="get" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
-        select
-        <trim suffixOverrides=",">
-            <include refid="columns"/>
-        </trim>
+        select *
         from sys_user a
         <include refid="customJoins"/>
         <where>
@@ -212,9 +209,9 @@
         from sys_user a
         <include refid="customJoins"/>
         <where>
-            and a.login_name = #{loginName}
-            or a.email = #{email}
-        </where>
+        and a.login_name = #{loginName}
+        or a.email = #{email}
+    </where>
     </select>
 
     <select id="findUserByLoginName" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
@@ -226,6 +223,18 @@
         <include refid="customJoins"/>
         <where>
             and a.login_name = #{loginName}
+        </where>
+    </select>
+
+    <select id="findUserByEmail" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.email = #{email}
         </where>
     </select>
 

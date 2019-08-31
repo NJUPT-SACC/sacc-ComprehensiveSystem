@@ -20,6 +20,10 @@
     <typeHandlers>
         <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
                      javaType="com.sacc.comprehensivesystem.common.enums.Difficulty"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+                     javaType="com.sacc.comprehensivesystem.common.enums.QuestionType"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+                     javaType="com.sacc.comprehensivesystem.common.enums.JudgeResult"/>
     </typeHandlers>
 
 </configuration>

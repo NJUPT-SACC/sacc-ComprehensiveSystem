@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.competition.dao.CompetitionQuestionDao">
+    <sql id="notNullColumns">
+        <trim prefix="" suffixOverrides="," >
+            <if test="questionId !=null" >
+                question_id,
+            </if>
+            <if test="competitionId !=null" >
+                competition_id,
+            </if>
+            <if test="createDate !=null" >
+                create_date,
+            </if>
+            <if test="updateDate !=null" >
+                update_date,
+            </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+
+            <if test="remarks !=null" >
+                remarks,
+            </if>
+            <if test="delFlag !=null" >
+                del_flag,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="notNullColumnsValue">
+        <trim prefix="" suffixOverrides="," >
+            <if test="questionId !=null" >
+                #{questionId},
+            </if>
+            <if test="competitionId !=null" >
+                #{competitionId},
+            </if>
+            <if test="createDate !=null" >
+                #{createDate},
+            </if>
+            <if test="updateDate !=null" >
+                #{updateDate},
+            </if>
+            <if test="createBy !=null" >
+                #{createBy},
+            </if>
+            <if test="updateBy !=null" >
+                #{updateBy},
+            </if>
+            <if test="remarks !=null" >
+                #{remarks},
+            </if>
+            <if test="delFlag !=null" >
+                #{delFlag},
+            </if>
+        </trim>
+    </sql>
+
+
+
+    <sql id="columns">
+        a.id as "id",
+        a.question_id as "question_id",
+        a.competition_id as "competition_id",
+        a.create_date as "createDate",
+        a.update_date as "updateDate",
+        a.update_by as "updateBy",
+        a.del_flag as "delFlag",
+        a.remarks as "remarks",
+    </sql>
+    <sql id="customJoins">
+    </sql>
+
+    <insert id="insertCompetitionQuestion" parameterType="com.sacc.comprehensivesystem.modules.competition.entity.CompetitionQuestion">
+        insert into sacc_frontend.competition_question(
+        <include refid="notNullColumns" />
+        ) values  (
+        <include refid="notNullColumnsValue" />
+        )
+    </insert>
+
+    <select id="findIdByCompetitionIdAndQuestionId" resultType="Long">
+        select
+        a.id
+        from sacc_frontend.competition_question a
+        <where>
+            and a.question_id=#{questionId}
+            and a.competition_id=#{competitionId}
+        </where>
+    </select>
+
+
+    <update id="deleteQuestion">
+        update sacc_frontend.competition_question
+        set del_flag = 1
+        where id = #{id}
+    </update>
+
+
+
+</mapper>

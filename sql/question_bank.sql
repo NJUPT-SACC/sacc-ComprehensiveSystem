@@ -4,7 +4,7 @@ create table sacc_frontend.question_bank
         primary key,
     title          varchar(20)  default ''                not null comment '题目简称',
     description    varchar(255) default ''                not null comment '题干描述',
-    choice_a       varchar(255) default ''                not null comment 'A选项',
+    choice_a       varchar(255) de-fault ''                not null comment 'A选项',
     choice_b       varchar(255) default ''                not null comment 'B选项',
     choice_c       varchar(255) default ''                not null comment 'C选项',
     choice_d       varchar(255) default ''                not null comment 'D选项',

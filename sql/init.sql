@@ -1,7 +1,6 @@
 create database sacc_frontend
     default character set utf8
     default collate utf8_general_ci;
-
 use sacc_frontend;
 
 create table sacc_frontend.assignment
@@ -267,6 +266,22 @@ create table sacc_frontend.competition
     del_flag    tinyint      default 0                 not null
 );
 
+create table sys_user_team
+(
+    id bigint auto_increment,
+    leader bigint null comment '队长',
+    member_b bigint null comment '队员b',
+    member_c bigint null comment '队员c',
+    create_by bigint not null,
+    create_date timestamp default current_timestamp not null,
+    update_by bigint not null,
+    update_date timestamp default current_timestamp not null,
+    del_flag tinyint default 0 not null,
+    constraint sys_user_team_pk
+        primary key (id)
+)
+    comment '团队用户信息表';
+
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (1, 'administrator', '', '2019-07-29 10:51:59', 2333, '2019-07-29 10:51:59', 2233, 0);
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (2, 'issuer', '', '2019-07-29 10:54:20', 2333, '2019-07-29 10:54:20', 2233, 0);
 INSERT INTO sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES (3, 'user', '', '2019-07-29 11:05:36', 2333, '2019-07-29 11:05:36', 2233, 0);
@@ -277,3 +292,28 @@ ALTER TABLE `sacc_frontend`.`assignment_question`
 
 ALTER TABLE `sacc_frontend`.`question_bank`
     ADD COLUMN `difficulty` int(11) NOT NULL COMMENT '难度（1简单，2中等，3困难）' AFTER `description`;
+
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `create_by` bigint(20) NULL COMMENT '创建者' AFTER `create_date`;
+ALTER TABLE `sacc_frontend`.`sys_user`
+    MODIFY COLUMN `update_by` bigint(20) NULL AFTER `update_date`;
+
+alter table sys_user modify name varchar(20) default '' not null comment '姓名';
+
+alter table sys_user
+  add student_number varchar(20) default '' not null comment '学号' after password;
+
+alter table sys_user
+  add grade tinyint default 0 not null comment '年级' after pic_url;
+
+alter table sys_user
+  add institution varchar(50) default '' not null comment '学院' after grade;
+
+alter table sys_user
+  add major varchar(20) default '' not null comment '专业' after institution;
+
+alter table sys_user
+  add gender tinyint default 0 not null comment '1是男生，2是女生' after major;
+
+insert into sacc_frontend.sys_role (id, name, remarks, create_date, create_by, update_date, update_by, del_flag) VALUES
+(5,'team','',current_timestamp,2233,current_timestamp,2333,0);

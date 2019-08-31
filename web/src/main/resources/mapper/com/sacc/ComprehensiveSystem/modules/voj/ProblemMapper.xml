@@ -18,7 +18,68 @@
         <result property="hint" column="problem_hint" />
     </resultMap>
 
+    <sql id="notNullColumns">
+        <trim prefix="" suffixOverrides="," >
+            <if test="title !=null" >
+               title,
+            </if>
+            <if test="description !=null" >
+                description,
+            </if>
+            <if test="choiceA !=null" >
+                choice_a,
+            </if>
+            <if test="choiceB !=null" >
+                choice_b,
+            </if>
+            <if test="choiceC !=null" >
+                choice_c,
+            </if>
+            <if test="choiceD !=null" >
+                choice_d,
+            </if>
+            <if test="choiceE !=null" >
+                choice_e,
+            </if>
+            <if test="choiceF !=null" >
+                choice_f,
+            </if>
+            <if test="correctAnswer !=null" >
+                correct_answer,
+            </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+            <if test="createDate !=null" >
+                create_date,
+            </if>
+            <if test="updateDate !=null" >
+                update_date,
+            </if>
+            <if test="remarks !=null" >
+                remarks,
+            </if>
+            <if test="delFlag !=null" >
+                del_flag,
+            </if>
+            <if test="difficulty !=null" >
+                difficulty,
+            </if>
+        </trim>
+    </sql>
     <!-- Methods -->
+
+    <insert id="insert" >
+        insert into sacc_frontend.question_bank(
+        title, description, difficulty, choice_a, choice_b, choice_c, choice_d,  choice_f,choice_e, correct_answer, create_by,  update_by
+        ) values  (
+        #{questionBank.title }, #{questionBank.description},#{difficulty}, #{questionBank.choiceA},#{questionBank.choiceB},#{questionBank.choiceC},#{questionBank.choiceD},#{questionBank.choiceF},#{questionBank.choiceE},#{questionBank.correctAnswer},#{questionBank.createBy},#{questionBank.updateBy}
+        )
+    </insert>
+
     <select id="getNumberOfProblems"
             resultType="long"
             useCache="true">

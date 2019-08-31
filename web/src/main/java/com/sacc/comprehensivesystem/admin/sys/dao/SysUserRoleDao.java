@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 public interface SysUserRoleDao extends BasicDao<SysUserRole> {
     public List<SysRole> listRoleByUserId(@Param("userId") String userId);
-    void insert_role(SysUserRole sysUserRole);
-    void update_role(SysUserRole sysUserRole);
+    void insertRole(SysUserRole sysUserRole);
+    void updateRole(SysUserRole sysUserRole);
 }
