@@ -15,6 +15,8 @@ public interface SysUserDao extends BasicDao<SysUser> {
 
     SysUser findUserByLoginName(String loginName);
 
+    SysUser findUserByEmail(String loginName);
+
     @Override
     SysUser get(Long id);
 
@@ -25,5 +27,7 @@ public interface SysUserDao extends BasicDao<SysUser> {
     List<String> findPermissionByUserId(Long id);
 
     List<SysUser> findUserNotAdmin(SysUser sysUser);
+
+
 
 }

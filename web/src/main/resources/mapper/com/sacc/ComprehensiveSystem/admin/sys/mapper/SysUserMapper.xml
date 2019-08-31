@@ -226,6 +226,18 @@
         </where>
     </select>
 
+    <select id="findUserByEmail" resultType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columns"/>
+        </trim>
+        from sys_user a
+        <include refid="customJoins"/>
+        <where>
+            and a.email = #{email}
+        </where>
+    </select>
+
     <select id="findIdByLoginName" resultType="Long">
         select
         a.id
