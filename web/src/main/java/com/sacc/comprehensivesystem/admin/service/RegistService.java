@@ -56,8 +56,8 @@ public class RegistService {
     }
 
     public int signatureCheck(String url) {
-        String base64=url.substring(32);
-        String md5=url.substring(0,32);
+        String base64 = url.substring(32);
+        String md5 = url.substring(0,32);
         Long ID = sysUserService.checkBase64(base64);
         return sysUserService.checkMd5(ID,md5);
     }
