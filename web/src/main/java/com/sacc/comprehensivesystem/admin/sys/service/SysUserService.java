@@ -126,7 +126,7 @@ public class SysUserService extends BasicService<SysUser> {
                 } else {
                     result=5;
                 }
-            }else{
+            } else {
                     try {
                         insert(sysUser);
                         result = 1;
@@ -157,7 +157,7 @@ public class SysUserService extends BasicService<SysUser> {
     {
         SysUser sysUser = sysUserDao.get(id);
 
-        String mD5=MD5Utils.MD5Encode(String.valueOf(sysUser.getCreateDate()),"utf8");
+        String mD5 = MD5Utils.MD5Encode(String.valueOf(sysUser.getCreateDate()),"utf8");
 
         if (mD5.equals(md5)) {
             SysUserRole sysUserRole = new SysUserRole();
