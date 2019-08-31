@@ -72,7 +72,7 @@ public class AdminController {
                 result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
                 break;
             case 3:
-                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"重复注册",null);
+                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"用户重复注册",null);
                 break;
             case 4:
                 result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"用户名重复注册",null);
