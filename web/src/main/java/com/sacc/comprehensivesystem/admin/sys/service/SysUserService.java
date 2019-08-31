@@ -110,7 +110,7 @@ public class SysUserService extends BasicService<SysUser> {
     }
 
     public int signUp(SysUser sysUser) {
-        int result = 0;
+        int result = 2;
 
         String name = sysUser.getLoginName();
         String email = sysUser.getEmail();
@@ -120,38 +120,32 @@ public class SysUserService extends BasicService<SysUser> {
         if (list.size() == 2) {
             result = 3;
         } else if (list.size() == 1) {
-            SysUser user = sysUserDao.findUserByLoginName(name);
-            System.out.println(sysUser.getEmail());
-            if (user != null) {
-                SysUser user1 = sysUserDao.findUserByEmail(sysUser.getEmail());
-                if (user1 != null) {
-                    if (name.equals(user1.getLoginName())) {
-                        result = 3;
-                    }
-                } else {
-                    result = 4;
-                }
-            } else {
+            SysUser user = list.get(0);
+            if (name.equals(user.getLoginName()) && email.equals(user.getEmail())) {
+                result = 3;
+            } else if (name.equals(user.getLoginName())) {
+                result = 4;
+            } else if (email.equals(user.getEmail())) {
                 result = 5;
             }
-        } else {
-            try {
-                insert(sysUser);
-                result = 1;
-                SysUserRole sysUserRole = new SysUserRole();
-                sysUserRole.setRoleId(4L);
-                Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
-                sysUserRole.setUserId(id);
-                sysUserRole.setCreateBy(id);
-                sysUserRole.setUpdateBy(id);
-                sysUserRoleDao.insertRole(sysUserRole);
-            } catch (Exception e) {
-                logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
-                result = 2;
-                throw new RuntimeException();
-            }
+        } else try {
+            insert(sysUser);
+            result = 1;
+            SysUserRole sysUserRole = new SysUserRole();
+            sysUserRole.setRoleId(4L);
+            Long id = sysUserDao.findIdByLoginName(sysUser.getLoginName());
+            sysUserRole.setUserId(id);
+            sysUserRole.setCreateBy(id);
+            sysUserRole.setUpdateBy(id);
+            sysUserRoleDao.insertRole(sysUserRole);
+        } catch (Exception e) {
+            logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
+            result = 2;
+            throw new RuntimeException();
         }
 
+
+        System.out.println(result + "aaaaaaaaaaaaaaaaaaa");
         return result;
     }
 
