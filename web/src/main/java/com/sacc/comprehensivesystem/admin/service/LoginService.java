@@ -16,12 +16,12 @@ import org.json.JSONObject;
 import java.util.*;
 
 /**
- * @author yujinbiao
+ * @author yuyim
  */
 @Service
 @Transactional(readOnly = true)
 public class LoginService {
-    static Logger logger = LoggerFactory.getLogger(LoginService.class);
+    private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     @Autowired
     AuthService authService;
@@ -52,7 +52,7 @@ public class LoginService {
             List<String> roleList = (List<String>) hashMap.get("roleList");
             logger.debug("roleList from auth:{}", roleList);
 
-            Set set = (Set) hashMap.get("permission");
+            Set<String> set = (Set<String>) hashMap.get("permission");
             List<String> permission = new ArrayList<>(set);
             logger.debug("permission from auth:{}", permission);
 
@@ -61,7 +61,7 @@ public class LoginService {
             userSimpleAuthorizationInfo.addRoles(roleList);
             userSimpleAuthorizationInfo.addStringPermissions(permission);
             logger.debug("userSimpleAuthorizationInfo:{}", userSimpleAuthorizationInfo);
-            data = new HashMap<>();
+            data = new HashMap<>(2);
             data.put("user",userSimpleAuthorizationInfo);
             String authKey = UUID.randomUUID().toString();
             data.put("authKey", authKey);
