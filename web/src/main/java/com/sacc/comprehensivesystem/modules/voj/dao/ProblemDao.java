@@ -1,6 +1,7 @@
 package com.sacc.comprehensivesystem.modules.voj.dao;
 
 import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBankResult;
 import com.sacc.comprehensivesystem.modules.voj.entity.Problem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -101,4 +102,6 @@ public interface ProblemDao {
      * @return 操作是否成功完成
      */
     int deleteProblem(@Param("problemId") long problemId);
+
+    public List<QuestionBankResult> getQuestion(@Param("difficulty") int difficulty);
 }

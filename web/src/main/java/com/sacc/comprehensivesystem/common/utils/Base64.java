@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class Base64 {
     // BASE64加密
-    static Logger logger = LoggerFactory.getLogger(LoginService.class);
+    static Logger logger = LoggerFactory.getLogger(Base64.class);
 
 
     public static String Base64Decoder(String unDecoderData) {

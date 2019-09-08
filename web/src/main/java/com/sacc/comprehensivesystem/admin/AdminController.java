@@ -108,7 +108,6 @@ public class AdminController {
        }
 
        return result;
-
     }
 
     @CrossOrigin
@@ -117,11 +116,9 @@ public class AdminController {
         UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
         SysUser sysUser =info.getSysUser();
         String signature = registService.userEmailPost(sysUser);
-        System.out.println(signature);
         String to = sysUser.getEmail();
         mailService.sendSimpleMail(to,"test", signature);
     }
-
 
     @RequestMapping("/ComprehensiveSystem/401")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
