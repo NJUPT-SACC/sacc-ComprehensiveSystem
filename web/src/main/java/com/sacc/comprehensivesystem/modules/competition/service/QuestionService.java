@@ -1,27 +1,25 @@
 package com.sacc.comprehensivesystem.modules.competition.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sacc.comprehensivesystem.common.utils.JSONUtils;
 import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
 import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionDao;
 import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionResultDao;
 import com.sacc.comprehensivesystem.modules.competition.entity.Competition;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionResult;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionStage;
-import org.apache.commons.collections.map.HashedMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author yuyim
+ */
 @Service
 @Transactional(readOnly = true)
 public class QuestionService {
@@ -33,14 +31,13 @@ public class QuestionService {
     CompetitionResultDao competitionResultDao;
 
     public List<Competition> listCompetition() {
-        List<Competition> result = new ArrayList<>();
+        List<Competition> result;
         result = competitionDao.listCompetition();
         return result;
     }
 
     public List<QuestionBank> listQuestion(long id) {
-        List<QuestionBank> result = competitionDao.queryQuestion(id);
-        return result;
+        return competitionDao.queryQuestion(id);
     }
 
     @Transactional(readOnly = false)
@@ -59,7 +56,7 @@ public class QuestionService {
 //
 //        }
 
-        Map<Long, CompetitionStage> list = new HashedMap();
+        Map<Long, CompetitionStage> list = new HashMap<>();
         for (int i = 0; i < resultList.length(); i++) {
             JSONObject json = resultList.getJSONObject(i);
 
@@ -74,7 +71,7 @@ public class QuestionService {
             competitionDao.deleteOldResult(userId);
 
             competitionDao.save(list);
-            return new HashedMap();
+            return new HashMap<>();
         }
 
         //检查是否重复提交
@@ -93,7 +90,7 @@ public class QuestionService {
         //开始判题
         competitionDao.deleteOldResult(userId);
         for (QuestionBank item : rightAnswer) {
-            CompetitionStage result = list.get(item.getId().longValue());
+            CompetitionStage result = list.get(item.getId());
             char[] re = result.getResult().toCharArray();
             char[] an = item.getCorrectAnswer().toCharArray();
             int total = an.length, right = 0;
@@ -114,9 +111,9 @@ public class QuestionService {
         competitionResult.setCompetitionId(competitionId);
         competitionResultDao.saveResult(competitionResult);
 
-        Map<String ,Long> map = new HashedMap();
+        Map<String ,Long> map = new HashMap<>();
         map.put("uid", userId);
-        map.put("score", Long.valueOf(totalScore));
+        map.put("score", (long)totalScore);
         return map;
     }
 

@@ -2,6 +2,8 @@ package com.sacc.comprehensivesystem.admin.sys.entity.auto;
 
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * 对应的实体类父类，请勿做任何修改
  */
@@ -33,34 +35,22 @@ public class _SysUser extends BasicEntity {
 
 
 
-    // ---------------------------------
-    // name的属性
-    // ---------------------------------
+
     private String name;
 
-    // ---------------------------------
-    // login_name的属性
-    // ---------------------------------
+
     private String loginName;
 
-    // ---------------------------------
-    // email的属性
-    // ---------------------------------
+
     private String email;
 
-    // ---------------------------------
-    // tel的属性
-    // ---------------------------------
+
     private String tel;
 
-    // ---------------------------------
-    // password的属性
-    // ---------------------------------
+    @NotNull
     private String password;
 
-    // ---------------------------------
-    // pic_url的属性
-    // ---------------------------------
+
     private String picUrl;
 
 

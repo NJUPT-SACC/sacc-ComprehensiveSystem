@@ -41,30 +41,29 @@ public class Controller {
                     requestParam.getInputSample(), requestParam.getOutputSample(), requestParam.getTestCases(), requestParam.getProblemCategories(),
                     requestParam.getProblemTags(), requestParam.isPublic(), requestParam.isExactlyMatch());
             if (result) {
-                return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", null);
+                return new RestResult<>(RestResult.STATUS_SUCCESS, "调用成功", null);
             } else {
-                return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);
+                return new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
             }
         } catch (Exception e) {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
-            return new RestResult(RestResult.STATUS_OTHERS, "异常，调用失败", null);
+            return new RestResult<>(RestResult.STATUS_OTHERS, "异常，调用失败", null);
         }
 
     }
 
     @RequestMapping(value = "/problem/add")
     public RestResult addProblem(@RequestBody String postjson){
-
         try{
             boolean result = problemService.addProblem(postjson);
             if (result) {
-                return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", null);
+                return new RestResult<>(RestResult.STATUS_SUCCESS, "调用成功", null);
             } else {
-                return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);
+                return new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
             }
         }catch (Exception e) {
             logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
-            return new RestResult(RestResult.STATUS_OTHERS, "异常，调用失败", null);
+            return new RestResult<>(RestResult.STATUS_OTHERS, "异常，调用失败", null);
         }
     }
 
