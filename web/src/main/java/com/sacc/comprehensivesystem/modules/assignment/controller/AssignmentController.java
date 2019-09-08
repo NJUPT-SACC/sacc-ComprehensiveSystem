@@ -108,11 +108,11 @@ public class AssignmentController {
                     // TODO
                     .setSpaceLimit(problem.getMemoryLimit())
                     .setTimeLimit(problem.getTimeLimit())
-                    .setiStandard(problem.getInputFormat())
-                    .setoStandard(problem.getOutputFormat())
+                    .setIStandard(problem.getInputFormat())
+                    .setOStandard(problem.getOutputFormat())
                     .setIOSample(new IoSample()
-                            .setiSample(problem.getSampleInput())
-                            .setoSample(problem.getSampleOutput()));
+                            .setISample(problem.getSampleInput())
+                            .setOSample(problem.getSampleOutput()));
         }
         return null;
     }
