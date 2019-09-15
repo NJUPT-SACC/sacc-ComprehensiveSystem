@@ -13,6 +13,71 @@
     <result column="update_by" jdbcType="BIGINT" property="updateBy" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
+
+  <sql id="notNullColumns">
+    <trim prefix="" suffixOverrides="," >
+      <if test="name !=null" >
+        name,
+      </if>
+
+      <if test="startTime !=null" >
+        start_time,
+      </if>
+      <if test="endTime !=null" >
+        end_time,
+      </if>
+      <if test="createDate !=null" >
+        create_date,
+      </if>
+      <if test="updateDate !=null" >
+        update_date,
+      </if>
+      <if test="updateBy !=null" >
+        update_by,
+      </if>
+      <if test="createBy !=null" >
+        create_by,
+      </if>
+      <if test="remarks !=null" >
+        remarks,
+      </if>
+      <if test="delFlag !=null" >
+        del_flag,
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="notNullColumnsValue">
+    <trim prefix="" suffixOverrides="," >
+      <if test="name !=null" >
+        #{name},
+      </if>
+      <if test="startTime !=null" >
+        #{startTime},
+      </if>
+      <if test="endTime !=null" >
+        #{endTime},
+      </if>
+      <if test="createDate !=null" >
+        #{createDate},
+      </if>
+      <if test="updateDate !=null" >
+        #{updateDate},
+      </if>
+      <if test="updateBy !=null" >
+        #{updateBy},
+      </if>
+      <if test="createBy !=null" >
+        #{createBy},
+      </if>
+      <if test="remarks !=null" >
+        #{remarks},
+      </if>
+      <if test="delFlag !=null" >
+        #{delFlag},
+      </if>
+    </trim>
+  </sql>
   <sql id="Base_Column_List">
     id, name, start_time, end_time, remarks, create_date, create_by, update_date, update_by, 
     del_flag
@@ -132,5 +197,21 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <insert id="insertAssignment" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
+    insert into sacc_frontend.assignment(
+    <include refid="notNullColumns" />
+    ) values  (
+    <include refid="notNullColumnsValue" />
+    )
+  </insert>
+
+  <select id="findIdByName" resultType="Long">
+    select
+    a.id
+    from sacc_frontend.assignment a
+    <where>
+      and a.name = #{name}
+    </where>
+  </select>
 
 </mapper>
