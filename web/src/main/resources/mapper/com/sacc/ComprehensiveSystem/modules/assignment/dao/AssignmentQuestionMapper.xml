@@ -204,14 +204,14 @@
     a.id
     from sacc_frontend.assignment_question a
     <where>
-      and a.question_id=#{questionId}
+      a.question_id=#{questionId}
       and a.assignment_id=#{assignmentId}
     </where>
   </select>
 
   <update id="deleteQuestion">
         update sacc_frontend.assignment_question a
-        set del_flag = 1
+        set delgit add _flag = 1
         where id = #{id}
     </update>
 </mapper>

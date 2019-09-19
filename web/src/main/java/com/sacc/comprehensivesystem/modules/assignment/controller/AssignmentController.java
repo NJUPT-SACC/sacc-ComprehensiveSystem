@@ -199,10 +199,10 @@ public class AssignmentController {
         }
         switch(result) {
             case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目添加新成功",null);
+                resultt = new RestResult<>(RestResult.STATUS_SUCCESS, "题目添加新成功",null);
                 break;
             case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目添加失败", null);
+                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "题目添加失败", null);
                 break;
             default:
                 resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
@@ -227,7 +227,7 @@ public class AssignmentController {
         }
         switch(result) {
             case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目删除新成功",null);
+                resultt = new RestResult<>(RestResult.STATUS_SUCCESS, "题目删除新成功",null);
                 break;
             case 0:
                 resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目删除失败", null);

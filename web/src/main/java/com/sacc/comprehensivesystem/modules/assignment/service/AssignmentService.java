@@ -239,12 +239,15 @@ public class AssignmentService extends BasicService<Assignment> {
 
         Long assignmentId = jsonObject.getLong("assignmentId");
         AssignmentQuestion assignmentQuestion = new AssignmentQuestion();
+        String token = SecurityUtils.getSubject().getPrincipal().toString();
+        UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
+        SysUser sysUser = info.getSysUser();
+        assignmentQuestion.setUpdateBy(sysUser.getUpdateBy());
         assignmentQuestion.setAssignmentId(assignmentId);
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                Long id = assignmentQuestionMapper.findIdByAssignmentIdAndQuestionId(assignmentId, (long) (int) jsonObject1.get("qid"));
-                System.out.println(id+"     666666");
+                Long id = assignmentQuestionMapper.findIdByAssignmentIdAndQuestionId((long) (int) jsonObject1.get("qid"),assignmentId );
                 assignmentQuestionMapper.deleteQuestion(id);
                 result = 1;
             }
