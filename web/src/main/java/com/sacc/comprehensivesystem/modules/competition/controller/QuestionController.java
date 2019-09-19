@@ -48,8 +48,8 @@ public class QuestionController {
     @RequiresRoles("user")
     @RequestMapping(value = "/query/{id}", method = RequestMethod.GET)
     public RestResult listQuestionById(@PathVariable long id) {
-        List<QuestionBank> result = questionService.listQuestion(id);
-        if (result != null) {
+                List<QuestionBank> result = questionService.listQuestion(id);
+                if (result != null) {
             return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", result);
         } else {
             return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);

@@ -9,5 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AssignmentMapper extends BasicDao<Assignment> {
+    public void insertAssignment(Assignment assignment);
+    public Long findIdByName(String name);
 
+    public int update(Assignment assignment);
 }

@@ -2,14 +2,15 @@ package com.sacc.comprehensivesystem.modules.management.controller;
 
 import com.sacc.comprehensivesystem.common.entity.RequestParam;
 import com.sacc.comprehensivesystem.common.utils.RestResult;
+import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBankResult;
 import com.sacc.comprehensivesystem.modules.voj.service.ProblemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("management")
@@ -19,6 +20,17 @@ public class Controller {
 
     @Autowired
     ProblemService problemService;
+
+    @RequestMapping(value = "/problem/get")
+    public RestResult getQuestion(/**@PathVariable int page,@PathVariable int row,@PathVariable int difficulty**/@RequestBody String postjson)
+    {
+        List<QuestionBankResult> result = problemService.getQuestion(postjson);
+        if (result != null) {
+            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", result);
+        } else {
+            return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);
+        }
+    }
 
     @RequestMapping(value = "/problem/create", method = RequestMethod.POST)
     public RestResult createProblem( @RequestBody RequestParam requestParam) {
@@ -54,5 +66,7 @@ public class Controller {
             return new RestResult<>(RestResult.STATUS_OTHERS, "异常，调用失败", null);
         }
     }
+
+
 
 }
