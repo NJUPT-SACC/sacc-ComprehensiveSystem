@@ -1,8 +1,5 @@
 package com.sacc.comprehensivesystem.modules.assignment.controller;
 
-import com.sacc.comprehensivesystem.admin.Utils.CacheUtils;
-import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
-import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.enums.Difficulty;
 import com.sacc.comprehensivesystem.common.enums.QuestionType;
 import com.sacc.comprehensivesystem.modules.assignment.dto.Answer;
@@ -16,7 +13,6 @@ import com.sacc.comprehensivesystem.modules.assignment.service.AssignmentStageSe
 import com.sacc.comprehensivesystem.modules.assignment.service.QuestionBankService;
 import com.sacc.comprehensivesystem.modules.assignment.service.VojService;
 import com.sacc.comprehensivesystem.modules.voj.entity.Problem;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,8 +51,8 @@ public class AssignmentController {
     @GetMapping("/questionList")
     public List<QuestionListItem> getQuestionList(Long assignment){
         List<QuestionListItem> list = new ArrayList<>();
-        assignmentQuestionService.getQuestions((Assignment)new Assignment().setId(assignment)).forEach((item) -> {
-            if(item.getQuestionType() == QuestionType.MultipleChoice){
+        assignmentQuestionService.getQuestions((Assignment) new Assignment().setId(assignment)).forEach((item) -> {
+            if (item.getQuestionType() == QuestionType.MultipleChoice) {
                 QuestionBank question = questionBankService.get(item.getQuestionId());
                 list.add(new QuestionListItem()
                         .setId(question.getId())
@@ -65,7 +61,7 @@ public class AssignmentController {
                         .setDifficulty(question.getDifficulty())
                         .setFinish(false)
                 );
-            }else if (item.getQuestionType() == QuestionType.Programming){
+            } else if (item.getQuestionType() == QuestionType.Programming){
                 Problem problem = vojService.getProblem(item.getId());
                 list.add(new QuestionListItem()
                         .setId(problem.getProblemId())
@@ -83,13 +79,13 @@ public class AssignmentController {
 
     /**
      * 获取题目详情
-     * @param type
-     * @param question
-     * @return
+     * @param type 题目类型，选择题或编程题
+     * @param question 题目Id
+     * @return QuestionDetail
      */
     @GetMapping("/questionDetail")
     public QuestionDetail getQuestionDetail(String type, Long question){
-        if(QuestionType.MultipleChoice.name().equals(type)){
+        if (QuestionType.MultipleChoice.name().equals(type)) {
             QuestionBank questionBankEntity = questionBankService.get(question);
             return new QuestionDetail()
                     .setId(question)
@@ -98,7 +94,7 @@ public class AssignmentController {
                     .setDifficulty(questionBankEntity.getDifficulty())
                     .setChoices(questionBankEntity.getChoices());
 
-        }else if (QuestionType.Programming.name().equals(type)){
+        } else if (QuestionType.Programming.name().equals(type)){
             Problem problem = vojService.getProblem(question);
             return new QuestionDetail()
                     .setId(question)

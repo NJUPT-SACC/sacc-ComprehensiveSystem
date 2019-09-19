@@ -72,7 +72,6 @@ public class ProblemService {
         problemDao.createProblem(problem);
         long problemId = problem.getProblemId();
 
-        System.out.println(problemId);
         createTestCases(problemId, testCases, isExactlyMatch);
         createProblemCategoryRelationships(problemId, problemCategory);
         createProblemTags(problemId, problemTag);
