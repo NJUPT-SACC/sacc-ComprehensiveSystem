@@ -5,9 +5,9 @@ import com.sacc.comprehensivesystem.common.enums.Difficulty;
 import com.sacc.comprehensivesystem.common.enums.QuestionType;
 import com.sacc.comprehensivesystem.common.utils.JSONUtils;
 import com.sacc.comprehensivesystem.modules.assignment.dto.*;
-import com.sacc.comprehensivesystem.modules.assignment.entity.Assignment;
-import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.assignment.entity.*;
 import com.sacc.comprehensivesystem.modules.assignment.exception.AssignmentException;
+import com.sacc.comprehensivesystem.modules.assignment.exception.AssignmentExceptionCode;
 import com.sacc.comprehensivesystem.modules.assignment.service.AssignmentQuestionService;
 import com.sacc.comprehensivesystem.modules.assignment.service.AssignmentStageService;
 import com.sacc.comprehensivesystem.modules.assignment.service.QuestionBankService;
@@ -40,7 +40,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/assignment")
 public class AssignmentController {
-    static Logger logger = LoggerFactory.getLogger(LoginService.class);
+    private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     @Autowired
     private AssignmentQuestionService assignmentQuestionService;
@@ -48,7 +48,8 @@ public class AssignmentController {
     @Autowired
     private QuestionBankService questionBankService;
 
-    @Autowired private AssignmentService assignmentService;
+    @Autowired
+    private AssignmentService assignmentService;
 
     @Autowired
     private AssignmentStageService assignmentStageService;
@@ -66,31 +67,16 @@ public class AssignmentController {
      * @param assignment 作业id
      * @return 该作业的所有题目
      */
+    @RequiresAuthentication
     @GetMapping("/questionList")
     public List<QuestionListItem> getQuestionList(Long assignment){
         List<QuestionListItem> list = new ArrayList<>();
-        assignmentQuestionService.getQuestions((Assignment) new Assignment().setId(assignment)).forEach((item) -> {
+        assignmentQuestionService.getAssignmentQuestions(assignment).forEach((item) -> {
             if (item.getQuestionType() == QuestionType.MultipleChoice) {
-                QuestionBank question = questionBankService.get(item.getQuestionId());
-                list.add(new QuestionListItem()
-                        .setId(question.getId())
-                        .setTitle(question.getTitle())
-                        .setQuestionType(item.getQuestionType())
-                        .setDifficulty(question.getDifficulty())
-                        .setFinish(assignmentStageService.isProblemFinish(assignment, item.getId()))
-                );
+                list.add(questionBankService.getQuestion(item.getId(),assignment));
             } else if (item.getQuestionType() == QuestionType.Programming){
-                Problem problem = vojService.getProblem(item.getId());
-                list.add(new QuestionListItem()
-                        .setId(problem.getProblemId())
-                        .setTitle(problem.getProblemName())
-                        .setQuestionType(item.getQuestionType())
-                        .setDifficulty(Difficulty.Middle) //TODO 给Voj的问题设置难度
-                        .setFinish(false) //TODO 编程题完成度
-                );
-
+                list.add(vojService.getProblem(item.getId(),assignment));
             }
-
         });
         return list;
     }
@@ -101,34 +87,16 @@ public class AssignmentController {
      * @param question 题目Id
      * @return QuestionDetail
      */
+    @RequiresAuthentication
     @GetMapping("/questionDetail")
     public QuestionDetail getQuestionDetail(String type, Long question){
         if (QuestionType.MultipleChoice.name().equals(type)) {
-            QuestionBank questionBankEntity = questionBankService.get(question);
-            return new QuestionDetail()
-                    .setId(question)
-                    .setTitle(questionBankEntity.getTitle())
-                    .setDisc(questionBankEntity.getDescription())
-                    .setDifficulty(questionBankEntity.getDifficulty())
-                    .setChoices(questionBankEntity.getChoices());
-
+            return questionBankService.getQuestionDetail(question);
         } else if (QuestionType.Programming.name().equals(type)){
-            Problem problem = vojService.getProblem(question);
-            return new QuestionDetail()
-                    .setId(question)
-                    .setTitle(problem.getProblemName())
-                    .setDisc(problem.getDescription())
-                    .setDifficulty(Difficulty.Middle)
-                    // TODO
-                    .setSpaceLimit(problem.getMemoryLimit())
-                    .setTimeLimit(problem.getTimeLimit())
-                    .setIStandard(problem.getInputFormat())
-                    .setOStandard(problem.getOutputFormat())
-                    .setIOSample(new IoSample()
-                            .setISample(problem.getSampleInput())
-                            .setOSample(problem.getSampleOutput()));
+            return vojService.getProblemDetail(question);
+        }else{
+            throw new AssignmentException(AssignmentExceptionCode.QUESTION_TYPE_WRONG);
         }
-        return null;
     }
 
     /**
