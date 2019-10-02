@@ -11,6 +11,7 @@ public class AssignmentQuestion extends BasicEntity {
     private Long assignmentId;
     private Long questionId;
     private QuestionType questionType;
+    private int QuestionTypeId ;
 
     public Long getAssignmentId() {
         return assignmentId;
@@ -37,5 +38,13 @@ public class AssignmentQuestion extends BasicEntity {
     public AssignmentQuestion setQuestionType(QuestionType questionType) {
         this.questionType = questionType;
         return this;
+    }
+
+    public int getQuestionTypeId() {
+        return QuestionTypeId;
+    }
+
+    public void setQuestionTypeId(int questionTypeId) {
+        QuestionTypeId = questionTypeId;
     }
 }

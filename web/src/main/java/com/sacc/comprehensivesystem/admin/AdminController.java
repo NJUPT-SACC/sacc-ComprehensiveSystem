@@ -93,7 +93,7 @@ public class AdminController {
 
     @CrossOrigin
     @RequestMapping("/admin/check")
-    public  RestResult getSignature(@RequestParam String signature) {
+    public RestResult getSignature(@RequestParam String signature) {
         String authKey = SecurityUtils.getSubject().getPrincipal().toString();
         int resultt = 1;
         RestResult<Object> result = null;

@@ -8,6 +8,7 @@ import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.enums.Difficulty;
 import com.sacc.comprehensivesystem.common.utils.StringUtils;
 import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBankResult;
 import com.sacc.comprehensivesystem.modules.voj.dao.CheckpointDao;
 import com.sacc.comprehensivesystem.modules.voj.dao.ProblemCategoryDao;
 import com.sacc.comprehensivesystem.modules.voj.dao.ProblemDao;
@@ -72,7 +73,6 @@ public class ProblemService {
         problemDao.createProblem(problem);
         long problemId = problem.getProblemId();
 
-        System.out.println(problemId);
         createTestCases(problemId, testCases, isExactlyMatch);
         createProblemCategoryRelationships(problemId, problemCategory);
         createProblemTags(problemId, problemTag);
@@ -167,5 +167,15 @@ public class ProblemService {
             return false;
         }
         return true;
+    }
+    public List<QuestionBankResult> getQuestion(String postJosn) {
+
+        JSONObject jsonObject = new JSONObject(postJosn);
+        int page=jsonObject.getInt("page");
+        int row=jsonObject.getInt("row");
+        int difficulty=jsonObject.getInt("difficulty");
+        PageHelper.startPage(page, row);
+        List<QuestionBankResult> result = problemDao.getQuestion(difficulty);
+        return result;
     }
 }
