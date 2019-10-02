@@ -4,6 +4,8 @@ import com.sacc.comprehensivesystem.common.service.BasicService;
 import com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentQuestionMapper;
 import com.sacc.comprehensivesystem.modules.assignment.entity.Assignment;
 import com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion;
+import com.sacc.comprehensivesystem.modules.assignment.exception.AssignmentException;
+import com.sacc.comprehensivesystem.modules.assignment.exception.AssignmentExceptionCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,10 @@ public class AssignmentQuestionService extends BasicService<AssignmentQuestion> 
     private AssignmentQuestionMapper assignmentQuestionMapper;
 
     public List<AssignmentQuestion> getQuestions(Assignment assignmentEntity){
-        return assignmentQuestionMapper.selectQuestionsByAssignmentId(assignmentEntity.getId());
+        List<AssignmentQuestion> assignmentQuestion = assignmentQuestionMapper.selectQuestionsByAssignmentId(assignmentEntity.getId());
+        if(assignmentQuestion.size() == 0){
+            throw new AssignmentException().setAssignmentExceptionCode(AssignmentExceptionCode.ASSIGNMENT_NOT_EXIST);
+        }
+        return assignmentQuestion;
     }
 }

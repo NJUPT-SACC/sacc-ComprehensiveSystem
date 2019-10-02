@@ -5,21 +5,23 @@ import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationIn
 import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.common.enums.Difficulty;
 import com.sacc.comprehensivesystem.common.enums.QuestionType;
-import com.sacc.comprehensivesystem.modules.assignment.dto.Answer;
-import com.sacc.comprehensivesystem.modules.assignment.dto.IoSample;
-import com.sacc.comprehensivesystem.modules.assignment.dto.QuestionDetail;
-import com.sacc.comprehensivesystem.modules.assignment.dto.QuestionListItem;
+import com.sacc.comprehensivesystem.common.utils.JSONUtils;
+import com.sacc.comprehensivesystem.modules.assignment.dto.*;
 import com.sacc.comprehensivesystem.modules.assignment.entity.Assignment;
 import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.assignment.exception.AssignmentException;
 import com.sacc.comprehensivesystem.modules.assignment.service.AssignmentQuestionService;
 import com.sacc.comprehensivesystem.modules.assignment.service.AssignmentStageService;
 import com.sacc.comprehensivesystem.modules.assignment.service.QuestionBankService;
 import com.sacc.comprehensivesystem.modules.assignment.service.VojService;
 import com.sacc.comprehensivesystem.modules.voj.entity.Problem;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +65,7 @@ public class AssignmentController {
                         .setTitle(question.getTitle())
                         .setQuestionType(item.getQuestionType())
                         .setDifficulty(question.getDifficulty())
-                        .setFinish(false)
+                        .setFinish(assignmentStageService.isProblemFinish(assignment, item.getId()))
                 );
             }else if (item.getQuestionType() == QuestionType.Programming){
                 Problem problem = vojService.getProblem(item.getId());
@@ -72,7 +74,7 @@ public class AssignmentController {
                         .setTitle(problem.getProblemName())
                         .setQuestionType(item.getQuestionType())
                         .setDifficulty(Difficulty.Middle) //TODO 给Voj的问题设置难度
-                        .setFinish(false)
+                        .setFinish(false) //TODO 编程题完成度
                 );
 
             }
@@ -121,9 +123,11 @@ public class AssignmentController {
      * 提交作业(仅选择题)
      * @return
      */
+    @RequiresAuthentication
     @PostMapping("/submit")
-    public boolean submitAnswer(Long assignment, @RequestBody Answer[] answers){
-        for (Answer answer: answers) {
+    public boolean submitAnswer(Long assignment, @RequestBody AnswersModel answers){
+        //List<Answer> answerList = new JSONObject(answers).get;
+        for (Answer answer: answers.getAnswers()){
             assignmentStageService.judgeAnswer(assignment, answer.getId(), answer.getAnswer());
         }
         return true;
