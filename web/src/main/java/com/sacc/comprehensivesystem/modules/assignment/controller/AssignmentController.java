@@ -73,7 +73,8 @@ public class AssignmentController {
         List<QuestionListItem> list = new ArrayList<>();
         assignmentQuestionService.getAssignmentQuestions(assignment).forEach((item) -> {
             if (item.getQuestionType() == QuestionType.MultipleChoice) {
-                list.add(questionBankService.getQuestion(item.getId(),assignment));
+                list.add(questionBankService.getQuestion(item.getId())
+                        .setFinish(assignmentStageService.isProblemFinish(item.getId(), assignment)));
             } else if (item.getQuestionType() == QuestionType.Programming){
                 list.add(vojService.getProblem(item.getId(),assignment));
             }

@@ -14,9 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuestionBankService extends BasicService<QuestionBank> {
 
-    @Autowired
-    private AssignmentStageService assignmentStageService;
-
     @Override
     public String[] getNatureKeys() {
         return new String[]{"title","description","choice_a","choice_b","choice_c","choice_d","choice_e","choice_f","correct_answer"};
@@ -30,17 +27,15 @@ public class QuestionBankService extends BasicService<QuestionBank> {
     /**
      * 获取单个问题
      * @param questionId
-     * @param assignmentId
      * @return
      */
-    public QuestionListItem getQuestion(Long questionId, Long assignmentId){
+    public QuestionListItem getQuestion(Long questionId){
         QuestionBank question = get(questionId);
         return new QuestionListItem()
                 .setId(question.getId())
                 .setTitle(question.getTitle())
                 .setQuestionType(QuestionType.MultipleChoice)
-                .setDifficulty(question.getDifficulty())
-                .setFinish(assignmentStageService.isProblemFinish(assignmentId, questionId));
+                .setDifficulty(question.getDifficulty());
     }
     /**
      * 获取单个问题详情
