@@ -96,7 +96,7 @@
 
 
     <update id="deleteQuestion">
-        update sacc_frontend.competition_question
+        update sacc_frontend.assignment_question
         set del_flag = 1
         where id = #{id}
     </update>

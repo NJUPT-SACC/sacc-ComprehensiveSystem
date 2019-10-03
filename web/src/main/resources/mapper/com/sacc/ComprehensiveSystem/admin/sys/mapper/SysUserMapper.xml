@@ -119,8 +119,6 @@
         </where>
     </delete>
 
-
-
     <update id="update" parameterType="com.sacc.comprehensivesystem.admin.sys.entity.SysUser">
         update sys_user
         <set>

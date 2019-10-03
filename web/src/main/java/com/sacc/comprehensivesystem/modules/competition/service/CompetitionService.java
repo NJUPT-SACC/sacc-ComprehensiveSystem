@@ -46,7 +46,6 @@ public class CompetitionService {
         try {
             startTime = df.parse(strStartTime);
             endTime = df.parse(strEndTime);
-            System.out.println(startTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }

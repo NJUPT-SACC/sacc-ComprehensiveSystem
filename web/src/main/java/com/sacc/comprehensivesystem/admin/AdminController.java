@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
+/**
+ * @author yuyim
+ */
 @RestController
 public class AdminController {
     static Logger logger = LoggerFactory.getLogger(AdminController.class);
@@ -56,39 +59,41 @@ public class AdminController {
         logger.debug("/signUp -> postJson:{}", postJson);
         int resultt=2;
 
-        RestResult<Object> result = null;
+        RestResult<Object> result;
         try {
             resultt =registService.signUp(postJson);
         } catch (Exception e) {
             logger.error("Error: {}\n{}",e.getMessage(), e.getStackTrace());
             result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
         }
-        logger.debug("/signup -> result {}",result);
+
         switch(resultt) {
             case 1:
-                result= new RestResult<Object>(RestResult.STATUS_SUCCESS, "注册成功",null);
+                result = new RestResult<>(RestResult.STATUS_SUCCESS, "注册成功",null);
                 break;
             case 2:
                 result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
                 break;
             case 3:
-                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"用户重复注册",null);
+                result = new RestResult<>(RestResult.STATUS_DUPLICATION,"用户重复注册",null);
                 break;
             case 4:
-                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"用户名重复注册",null);
+                result = new RestResult<>(RestResult.STATUS_DUPLICATION,"用户名重复注册",null);
                 break;
             case 5:
-                result=new RestResult<Object>(RestResult.STATUS_DUPLICATION,"邮箱重复注册",null);
+                result = new RestResult<>(RestResult.STATUS_DUPLICATION,"邮箱重复注册",null);
                 break;
             default:
+                result = null;
                 break;
         }
+
         return result;
     }
 
     @CrossOrigin
     @RequestMapping("/admin/check")
-    public  RestResult getSignature(@RequestParam String signature) {
+    public RestResult getSignature(@RequestParam String signature) {
         String authKey = SecurityUtils.getSubject().getPrincipal().toString();
         int resultt = 1;
         RestResult<Object> result = null;
@@ -114,7 +119,7 @@ public class AdminController {
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
     public void sendMail(@RequestHeader("authKey") String token) {
         UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
-        SysUser sysUser =info.getSysUser();
+        SysUser sysUser = info.getSysUser();
         String signature = registService.userEmailPost(sysUser);
         String to = sysUser.getEmail();
         mailService.sendSimpleMail(to,"test", signature);

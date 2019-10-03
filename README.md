@@ -1,7 +1,13 @@
 # sacc-ComprehensiveSystem
 
 ## 1.建库
-运行sql文件夹下的init.sql
+项目使用flywaydb进行数据库迁移，配置好application.properties里面关于flyway的字段后启动即可自动完成建库操作。
+
+关于Voj：运行sql文件夹下的voj.sql，导入voj有关的数据库文件。
+
+### 数据库调整
+
+在resource/migration下建立 V[版本]__XX.sql 后将修改数据库的语句写入，启动后自动迁移。
 
 ## 2.目录结构
 <details>

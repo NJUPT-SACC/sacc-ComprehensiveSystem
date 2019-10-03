@@ -204,4 +204,17 @@
 		DELETE FROM voj_problems
 		WHERE problem_id = #{problemId}
 	</delete>
+    <select id="getQuestion" resultType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBankResult">
+        SELECT title as title ,
+         description AS description ,
+         choice_a AS choiceA ,
+         choice_b AS choiceB ,
+         choice_c AS choiceC ,
+         choice_d AS choiceD ,
+         choice_f AS choiceF ,
+         choice_e AS choiceE ,
+         difficulty AS difficulty,
+         remarks as remarks      from sacc_frontend.question_bank a
+        where del_flag = 0 and a.difficulty=#{difficulty}
+    </select>
 </mapper>

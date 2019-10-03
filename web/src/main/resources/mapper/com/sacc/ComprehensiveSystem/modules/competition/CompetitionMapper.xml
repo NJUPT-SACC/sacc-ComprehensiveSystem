@@ -113,13 +113,13 @@
     </select>
 
     <select id="findIdByName" resultType="Long">
-        select
-        a.id
-        from sacc_frontend.competition a
-        <where>
-            and a.name = #{name}
-        </where>
-    </select>
+    select
+    a.id
+    from sacc_frontend.competition a
+    <where>
+        and a.name = #{name}
+    </where>
+</select>
 
     <update id="competitionUpdate"  parameterType="com.sacc.comprehensivesystem.modules.competition.entity.Competition">
         update sacc_frontend.competition
