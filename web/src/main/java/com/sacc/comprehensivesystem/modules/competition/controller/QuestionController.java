@@ -27,6 +27,9 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    CompetitionService competitionService;
+
     /**
      * 获取比赛列表
      * @return
@@ -59,23 +62,6 @@ public class QuestionController {
     }
 
     /**
-     * 提交题目和暂存
-     * @param postJson
-     * @return
-     */
-    @RequiresRoles("user")
-    @RequestMapping(value = "/push", method = RequestMethod.POST)
-    public RestResult push(@RequestBody String postJson) {
-        Map<String, Long> map = null;
-        map = questionService.saveOrSubmit(postJson);
-        if (map != null) {
-            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", map);
-        } else {
-            return new RestResult(RestResult.STATUS_OTHERS, "重复提交或非法输入", null);
-        }
-    }
-
-    /**
      * 获取排行榜
      * @param cid
      * @return
@@ -90,119 +76,22 @@ public class QuestionController {
         }
     }
 
-    @Autowired
-    CompetitionService competitionService;
-
-    @RequestMapping("/addcompetition")
-    public RestResult AddCompetition(@RequestBody String postJson){
-        int result=0;
-
-        RestResult<Object> resultt = null;
-        try{
-            result=competitionService.addCompetition(postJson);
-
-        }catch (Exception e){
-            e.getStackTrace();
-            result=0;
+    /**
+     * 提交题目和暂存
+     * @param postJson
+     * @return
+     */
+    @RequiresRoles("user")
+    @RequestMapping(value = "/push" ,method = RequestMethod.POST)
+    public RestResult push(@RequestBody String postJson) {
+        Map<String, Long> map = null;
+        map = questionService.saveOrSubmit(postJson);
+        if (map != null) {
+            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", map);
+        } else {
+            return new RestResult(RestResult.STATUS_OTHERS, "重复提交或非法输入", null);
         }
-
-        switch(result) {
-            case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "比赛添加成功",null);
-                break;
-            case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "添加比赛失败", null);
-                break;
-            default:
-                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
-        }
-        return resultt;
     }
-
-    @RequestMapping("/update/competition")
-    public RestResult updateData(@RequestBody String postJson)
-    {
-
-        int result=0;
-
-        RestResult<Object> resultt = null;
-        try{
-            result=competitionService.updateCompetition(postJson);
-
-        }catch (Exception e){
-            e.getStackTrace();
-            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
-            result=0;
-        }
-        switch(result) {
-            case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "比赛更新成功",null);
-                break;
-            case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "比赛更新失败", null);
-                break;
-            default:
-                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
-        }
-        return resultt;
-    }
-
-    @RequestMapping("/update/question/add")
-    public RestResult updateAddQuestion(@RequestBody String postJson)
-    {
-
-        int result=0;
-
-        RestResult<Object> resultt = null;
-        try{
-            result=competitionService.addCompetitionQuestion(postJson);
-
-        }catch (Exception e){
-            e.getStackTrace();
-            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
-            result=0;
-        }
-        switch(result) {
-            case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目添加成功",null);
-                break;
-            case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目添加失败失败", null);
-                break;
-            default:
-                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
-        }
-        return resultt;
-    }
-
-    @RequestMapping("/update/question/del")
-    public RestResult updateDelQuestion(@RequestBody String postJson)
-    {
-
-        int result=0;
-
-        RestResult<Object> resultt = null;
-        try{
-            result=competitionService.delCompetitionQuestion(postJson);
-
-        }catch (Exception e){
-            e.getStackTrace();
-            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
-            result=0;
-        }
-        switch(result) {
-            case 1:
-                resultt = new RestResult<Object>(RestResult.STATUS_SUCCESS, "题目删除成功",null);
-                break;
-            case 0:
-                resultt = new RestResult<Object>(RestResult.STATUS_OTHERS, "题目删除失败", null);
-                break;
-            default:
-                resultt = new RestResult<>(RestResult.STATUS_OTHERS, "调用失败", null);
-        }
-        return resultt;
-    }
-
 
 }
 
