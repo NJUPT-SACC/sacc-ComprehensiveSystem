@@ -26,6 +26,11 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectByAssignmentIdAndProblemId" resultType="java.lang.Long">
+    select count(id)
+    from assignment_stage
+    where assignment_id = #{assignment_id,jdbcType=BIGINT} AND question_id = #{question_id,jdbcType=BIGINT}
+  </select>
   <update id="delete" parameterType="java.lang.Long">
     update assignment_stage set del_flag=1
     where id = #{id,jdbcType=BIGINT}

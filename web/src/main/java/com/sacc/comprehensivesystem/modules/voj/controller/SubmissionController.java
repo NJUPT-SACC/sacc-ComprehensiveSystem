@@ -2,6 +2,7 @@ package com.sacc.comprehensivesystem.modules.voj.controller;
 
 import com.sacc.comprehensivesystem.modules.messager.ApplicationEventListener;
 import com.sacc.comprehensivesystem.modules.voj.dao.ProblemDao;
+import com.sacc.comprehensivesystem.modules.voj.service.ProblemService;
 import com.sacc.comprehensivesystem.modules.voj.service.SubmissionServicce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,8 @@ public class SubmissionController {
     @Autowired
     private SubmissionServicce submissionServicce;
 
+    @Autowired
+    private ProblemService problemService;
     /**
      * 获取实时的评测结果
      * @param submissionId
