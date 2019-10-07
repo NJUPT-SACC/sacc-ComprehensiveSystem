@@ -8,6 +8,8 @@ import com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentMapper;
 import com.sacc.comprehensivesystem.modules.assignment.dao.AssignmentQuestionMapper;
 import com.sacc.comprehensivesystem.modules.assignment.entity.Assignment;
 import com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion;
+import com.sacc.comprehensivesystem.modules.management.dao.AssignmentDao;
+import com.sacc.comprehensivesystem.modules.management.dao.AssignmentQuestionDao;
 import org.apache.shiro.SecurityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,8 +25,8 @@ import java.util.Date;
 @Component
 public class AssignmentService1 {
     @Autowired
-    AssignmentMapper assignmentMapper;
-    AssignmentQuestionMapper assignmentQuestionMapper;
+    AssignmentDao assignmentMapper;
+    AssignmentQuestionDao assignmentQuestionMapper;
 
     static Logger logger = LoggerFactory.getLogger(LoginService.class);
     public int addASsignments(String postJosn) {

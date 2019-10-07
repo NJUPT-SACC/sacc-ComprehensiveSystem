@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.management.dao.AssignmentDao">
+    <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_by" jdbcType="BIGINT" property="createBy" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    </resultMap>
+
+    <sql id="notNullColumns">
+        <trim prefix="" suffixOverrides="," >
+            <if test="name !=null" >
+                name,
+            </if>
+
+            <if test="startTime !=null" >
+                start_time,
+            </if>
+            <if test="endTime !=null" >
+                end_time,
+            </if>
+            <if test="createDate !=null" >
+                create_date,
+            </if>
+            <if test="updateDate !=null" >
+                update_date,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="remarks !=null" >
+                remarks,
+            </if>
+            <if test="delFlag !=null" >
+                del_flag,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="notNullColumnsValue">
+        <trim prefix="" suffixOverrides="," >
+            <if test="name !=null" >
+                #{name},
+            </if>
+            <if test="startTime !=null" >
+                #{startTime},
+            </if>
+            <if test="endTime !=null" >
+                #{endTime},
+            </if>
+            <if test="createDate !=null" >
+                #{createDate},
+            </if>
+            <if test="updateDate !=null" >
+                #{updateDate},
+            </if>
+            <if test="updateBy !=null" >
+                #{updateBy},
+            </if>
+            <if test="createBy !=null" >
+                #{createBy},
+            </if>
+            <if test="remarks !=null" >
+                #{remarks},
+            </if>
+            <if test="delFlag !=null" >
+                #{delFlag},
+            </if>
+        </trim>
+    </sql>
+    <sql id="Base_Column_List">
+    id, name, start_time, end_time, remarks, create_date, create_by, update_date, update_by,
+    del_flag
+  </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from assignment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <update id="delete" parameterType="java.lang.Long">
+    update assignment set del_flag=1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
+        insert into assignment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
+        update assignment
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <insert id="insertAssignment" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.Assignment">
+        insert into sacc_frontend.assignment(
+        <include refid="notNullColumns" />
+        ) values  (
+        <include refid="notNullColumnsValue" />
+        )
+    </insert>
+
+    <select id="findIdByName" resultType="Long">
+        select
+        a.id
+        from sacc_frontend.assignment a
+        <where>
+            and a.name = #{name}
+        </where>
+    </select>
+</mapper>

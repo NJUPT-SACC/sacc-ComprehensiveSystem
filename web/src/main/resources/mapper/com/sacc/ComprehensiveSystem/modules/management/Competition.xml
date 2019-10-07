@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.management.dao.CompetitionMapper">
+
+
+    <sql id="notNullColumns">
+        <trim prefix="" suffixOverrides="," >
+            <if test="name !=null" >
+                name,
+            </if>
+
+            <if test="startTime !=null" >
+                start_time,
+            </if>
+            <if test="location !=null" >
+                location,
+            </if>
+            <if test="endTime !=null" >
+                end_time,
+            </if>
+            <if test="createDate !=null" >
+                create_date,
+            </if>
+            <if test="updateDate !=null" >
+                update_date,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="remarks !=null" >
+                remarks,
+            </if>
+            <if test="delFlag !=null" >
+                del_flag,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="notNullColumnsValue">
+        <trim prefix="" suffixOverrides="," >
+            <if test="name !=null" >
+                #{name},
+            </if>
+            <if test="startTime !=null" >
+                #{startTime},
+            </if>
+            <if test="location  !=null" >
+                #{location},
+            </if>
+            <if test="endTime !=null" >
+                #{endTime},
+            </if>
+            <if test="createDate !=null" >
+                #{createDate},
+            </if>
+            <if test="updateDate !=null" >
+                #{updateDate},
+            </if>
+            <if test="updateBy !=null" >
+                #{updateBy},
+            </if>
+            <if test="createBy !=null" >
+                #{createBy},
+            </if>
+            <if test="remarks !=null" >
+                #{remarks},
+            </if>
+            <if test="delFlag !=null" >
+                #{delFlag},
+            </if>
+        </trim>
+    </sql>
+
+
+
+    <sql id="columns">
+        a.id as "id",
+        a.name as "name",
+        a.start_time as "startTime",
+        a.end_time as "endTime",
+        a.location as "location",
+        a.create_date as "createDate",
+        a.update_date as "updateDate",
+        a.update_by as "updateBy",
+        a.del_flag as "delFlag",
+        a.remarks as "remarks",
+    </sql>
+    <sql id="customJoins">
+    </sql>
+
+    <insert id="insertCompetition" parameterType="com.sacc.comprehensivesystem.modules.competition.entity.Competition">
+        insert into sacc_frontend.competition(
+        <include refid="notNullColumns" />
+        ) values  (
+        <include refid="notNullColumnsValue" />
+        )
+    </insert>
+
+
+
+    <select id="listCompetition" resultType="com.sacc.comprehensivesystem.modules.competition.entity.Competition">
+        select * from sacc_frontend.competition
+        where del_flag = 0
+    </select>
+
+    <select id="queryQuestion" resultType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+        select * from sacc_frontend.competition_question a
+        left join sacc_frontend.question_bank b on b.id = a.question_id
+        where a.competition_id = #{id} and a.del_flag = 0 and b.del_flag = 0
+    </select>
+
+    <select id="findIdByName" resultType="Long">
+        select
+        a.id
+        from sacc_frontend.competition a
+        <where>
+            and a.name = #{name}
+        </where>
+    </select>
+
+    <update id="competitionUpdate"  parameterType="com.sacc.comprehensivesystem.modules.competition.entity.Competition">
+        update sacc_frontend.competition
+        <set>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="startTime !=null">
+                start_time=#{startTime},
+            </if>
+            <if test="location  !=null">
+                location=#{location},
+            </if>
+            <if test="endTime !=null">
+                end_time=#{endTime},
+            </if>
+            <if test="updateDate !=null">
+                update_date=#{updateDate},
+            </if>
+            <if test="updateBy !=null">
+                update_by=#{updateBy},
+            </if>
+            <if test="remarks !=null">
+                remarks=#{remarks},
+            </if>
+            <if test="delFlag !=null">
+                del_flag=#{delFlag},
+            </if>
+        </set>
+        <where>
+            and id=#{id}
+        </where>
+    </update>
+
+
+
+    <update id="deleteOldResult">
+        update sacc_frontend.competition_stage
+        set del_flag = 1
+        where user_id = #{id}
+    </update>
+
+    <insert id="save" parameterType="java.util.HashMap">
+        insert into sacc_frontend.competition_stage (id, user_id, question_id,
+        result, submit_time, del_flag) values
+        <foreach collection="params" index="params.keys" item="item" separator=",">
+            (#{item.id}, #{item.userId}, #{item.questionId}, #{item.result},
+            #{item.submitTime}, #{item.delFlag})
+        </foreach>
+    </insert>
+
+    <select id="checRepeat" resultType="com.sacc.comprehensivesystem.modules.competition.entity.CompetitionResult">
+        select * from sacc_frontend.competition_result a
+        where a.user_id = #{userId} and a.competition_id = #{competitionId}
+        and a.del_flag = 0
+    </select>
+
+    <select id="getRightAnswer" resultType="com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank">
+        select * from sacc_frontend.question_bank a left join
+        sacc_frontend.competition_question b on a.id = b.question_id
+        where b.competition_id = #{competitionId}
+    </select>
+</mapper>

@@ -69,7 +69,7 @@ public class AssignmentController {
      */
     @RequiresAuthentication
     @GetMapping("/questionList")
-    public List<QuestionListItem> getQuestionList(Long assignment){
+   public List<QuestionListItem> getQuestionList(Long assignment){
         List<QuestionListItem> list = new ArrayList<>();
         assignmentQuestionService.getAssignmentQuestions(assignment).forEach((item) -> {
             if (item.getQuestionType() == QuestionType.MultipleChoice) {
@@ -108,7 +108,7 @@ public class AssignmentController {
     @PostMapping("/submit")
     public boolean submitAnswer(Long assignment, @RequestBody AnswersModel answers){
         //List<Answer> answerList = new JSONObject(answers).get;
-        for (Answer answer: answers.getAnswers()){
+       for (Answer answer: answers.getAnswers()){
             assignmentStageService.judgeAnswer(assignment, answer.getId(), answer.getAnswer());
         }
         return true;

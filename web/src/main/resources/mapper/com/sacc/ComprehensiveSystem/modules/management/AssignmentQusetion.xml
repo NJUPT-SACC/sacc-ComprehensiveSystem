@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.management.dao.AssignmentQuestionDao">
+    <resultMap id="BaseResultMap" type="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="assignment_id" jdbcType="BIGINT" property="assignmentId" />
+        <result column="question_id" jdbcType="BIGINT" property="questionId" />
+        <result column="question_type" jdbcType="INTEGER" property="questionType" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_by" jdbcType="BIGINT" property="createBy" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    </resultMap>
+
+    <sql id="notNullColumns">
+        <trim prefix="" suffixOverrides="," >
+            <if test="questionId !=null" >
+                question_id,
+            </if>
+            <if test="assignmentId !=null" >
+                assignment_id,
+            </if>
+            <if test="questionTypeId !=null" >
+                question_type,
+            </if>
+            <if test="createDate !=null" >
+                create_date,
+            </if>
+            <if test="updateDate !=null" >
+                update_date,
+            </if>
+            <if test="createBy !=null" >
+                create_by,
+            </if>
+            <if test="updateBy !=null" >
+                update_by,
+            </if>
+
+            <if test="remarks !=null" >
+                remarks,
+            </if>
+            <if test="delFlag !=null" >
+                del_flag,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="notNullColumnsValue">
+        <trim prefix="" suffixOverrides="," >
+            <if test="questionId !=null" >
+                #{questionId},
+            </if>
+            <if test="assignmentId !=null" >
+                #{assignmentId},
+            </if>
+            <if test="questionTypeId !=null" >
+                #{questionTypeId},
+            </if>
+            <if test="createDate !=null" >
+                #{createDate},
+            </if>
+            <if test="updateDate !=null" >
+                #{updateDate},
+            </if>
+            <if test="createBy !=null" >
+                #{createBy},
+            </if>
+            <if test="updateBy !=null" >
+                #{updateBy},
+            </if>
+            <if test="remarks !=null" >
+                #{remarks},
+            </if>
+            <if test="delFlag !=null" >
+                #{delFlag},
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, assignment_id, question_id, question_type, remarks, create_date, create_by, update_date, update_by,
+    del_flag
+  </sql>
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from assignment_question
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectQuestionsByAssignmentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from assignment_question
+        where assignment_id = #{assignmentId,jdbcType=BIGINT}
+    </select>
+    <update id="delete" parameterType="java.lang.Long">
+    update assignment_question set del_flag=1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <insert id="insert" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
+        insert into assignment_question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="assignmentId != null">
+                assignment_id,
+            </if>
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="assignmentId != null">
+                #{assignmentId,jdbcType=BIGINT},
+            </if>
+            <if test="questionId != null">
+                #{questionId,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
+        update assignment_question
+        <set>
+            <if test="assignmentId != null">
+                assignment_id = #{assignmentId,jdbcType=BIGINT},
+            </if>
+            <if test="questionId != null">
+                question_id = #{questionId,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <insert id="insertAssignmentQuestion" parameterType="com.sacc.comprehensivesystem.modules.assignment.entity.AssignmentQuestion">
+        insert into sacc_frontend.assignment_question(
+        <include refid="notNullColumns" />
+        ) values  (
+        <include refid="notNullColumnsValue" />
+        )
+    </insert>
+
+    <select id="findIdByAssignmentIdAndQuestionId" resultType="Long">
+        select
+        a.id
+        from sacc_frontend.assignment_question a
+        <where>
+            a.question_id=#{questionId}
+            and a.assignment_id=#{assignmentId}
+        </where>
+    </select>
+
+    <update id="deleteQuestion">
+        update sacc_frontend.assignment_question a
+        set delgit add _flag = 1
+        where id = #{id}
+    </update>
+</mapper>

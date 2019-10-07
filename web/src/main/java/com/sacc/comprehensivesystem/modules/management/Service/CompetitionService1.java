@@ -8,6 +8,8 @@ import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionDao;
 import com.sacc.comprehensivesystem.modules.competition.dao.CompetitionQuestionDao;
 import com.sacc.comprehensivesystem.modules.competition.entity.Competition;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionQuestion;
+import com.sacc.comprehensivesystem.modules.management.dao.CompetitionMapper;
+import com.sacc.comprehensivesystem.modules.management.dao.CompetitionQuestionMapper;
 import org.apache.shiro.SecurityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,9 +25,9 @@ import java.util.Date;
 @Component
 public class CompetitionService1 {
     @Autowired
-    CompetitionDao competitionDao;
+    CompetitionMapper competitionDao;
     @Autowired
-    CompetitionQuestionDao competitionQuestionDao;
+    CompetitionQuestionMapper competitionQuestionDao;
 
     static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
