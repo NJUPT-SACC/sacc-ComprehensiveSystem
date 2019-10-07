@@ -4,6 +4,7 @@ import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
 import com.sacc.comprehensivesystem.modules.competition.entity.Competition;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionResult;
 import com.sacc.comprehensivesystem.modules.competition.entity.CompetitionStage;
+import com.sacc.comprehensivesystem.modules.competition.entity.RankingItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +14,7 @@ import java.util.Map;
 
 @Mapper
 public interface CompetitionDao {
+    public List<RankingItem> queryRanking(@Param("id")Long id);
 
     public List<Competition> listCompetition();
 

@@ -2,6 +2,7 @@ package com.sacc.comprehensivesystem.modules.competition.controller;
 import com.sacc.comprehensivesystem.admin.service.LoginService;
 import com.sacc.comprehensivesystem.common.utils.RestResult;
 import com.sacc.comprehensivesystem.modules.assignment.entity.QuestionBank;
+import com.sacc.comprehensivesystem.modules.competition.entity.RankingItem;
 import com.sacc.comprehensivesystem.modules.competition.service.CompetitionService;
 import com.sacc.comprehensivesystem.modules.competition.service.QuestionService;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -48,8 +50,40 @@ public class QuestionController {
     @RequiresRoles("user")
     @RequestMapping(value = "/query/{id}", method = RequestMethod.GET)
     public RestResult listQuestionById(@PathVariable long id) {
-                List<QuestionBank> result = questionService.listQuestion(id);
-                if (result != null) {
+        List<QuestionBank> result = questionService.listQuestion(id);
+        if (result != null) {
+            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", result);
+        } else {
+            return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);
+        }
+    }
+
+    /**
+     * 提交题目和暂存
+     * @param postJson
+     * @return
+     */
+    @RequiresRoles("user")
+    @RequestMapping(value = "/push", method = RequestMethod.POST)
+    public RestResult push(@RequestBody String postJson) {
+        Map<String, Long> map = null;
+        map = questionService.saveOrSubmit(postJson);
+        if (map != null) {
+            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", map);
+        } else {
+            return new RestResult(RestResult.STATUS_OTHERS, "重复提交或非法输入", null);
+        }
+    }
+
+    /**
+     * 获取排行榜
+     * @param cid
+     * @return
+     */
+    @RequestMapping(value = "value", method = RequestMethod.GET)
+    public RestResult getRank(@RequestParam()Long cid) {
+        List<RankingItem> result = competitionService.queryRank(cid);
+        if (result != null) {
             return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", result);
         } else {
             return new RestResult(RestResult.STATUS_OTHERS, "调用失败", null);
@@ -169,22 +203,6 @@ public class QuestionController {
         return resultt;
     }
 
-    /**
-     * 提交题目和暂存
-     * @param postJson
-     * @return
-     */
-    @RequiresRoles("user")
-    @RequestMapping(value = "/push" ,method = RequestMethod.POST)
-    public RestResult push(@RequestBody String postJson) {
-        Map<String, Long> map = null;
-        map = questionService.saveOrSubmit(postJson);
-        if (map != null) {
-            return new RestResult(RestResult.STATUS_SUCCESS, "调用成功", map);
-        } else {
-            return new RestResult(RestResult.STATUS_OTHERS, "重复提交或非法输入", null);
-        }
-    }
 
 }
 
