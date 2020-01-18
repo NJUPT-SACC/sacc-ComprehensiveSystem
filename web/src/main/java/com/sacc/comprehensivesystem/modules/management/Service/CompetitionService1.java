@@ -24,6 +24,7 @@ import java.util.Date;
 
 @Component
 public class CompetitionService1 {
+
     @Autowired
     CompetitionMapper competitionDao;
     @Autowired
@@ -32,11 +33,16 @@ public class CompetitionService1 {
     static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
 
+    /**
+     * 添加比赛
+     * @param postJosn
+     * @return
+     */
     public int addCompetition(String postJosn) {
         JSONObject jsonObject = new JSONObject(postJosn);
 
-        String strStartTime = jsonObject.getString("startTime");
-        String strEndTime = jsonObject.getString("endTime");
+        String strStartTime = jsonObject.getString("competitionStartTime");
+        String strEndTime = jsonObject.getString("competitionEndTime");
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -57,8 +63,8 @@ public class CompetitionService1 {
          * 给competition赋值
          */
         Competition competition = new Competition();
-        competition.setLocation(jsonObject.getString("location"));
-        competition.setName(jsonObject.getString("name"));
+        competition.setLocation(jsonObject.getString("competitionLocation"));
+        competition.setName(jsonObject.getString("competitionName"));
         competition.setStartTime(startTime);
         competition.setEndTime(endTime);
         //competition.setUpdateBy(-1l);
@@ -105,13 +111,17 @@ public class CompetitionService1 {
     }
 
 
-
+    /**
+     * 更新比赛信息
+     * @param postJosn
+     * @return
+     */
     public int updateCompetition(String postJosn) {
         int result = 0;
         JSONObject jsonObject = new JSONObject(postJosn);
         Competition competition = new Competition();
-        String strStartTime = jsonObject.getString("startTime");
-        String strEndTime = jsonObject.getString("endTime");
+        String strStartTime = jsonObject.getString("competitionStartTime");
+        String strEndTime = jsonObject.getString("competitionEndTime");
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -124,9 +134,9 @@ public class CompetitionService1 {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        competition.setLocation(jsonObject.getString("location"));
-        competition.setName(jsonObject.getString("name"));
-        String rname = jsonObject.getString("rname");
+        competition.setLocation(jsonObject.getString("competitionLocation"));
+        competition.setName(jsonObject.getString("competitionNewName"));
+        String rname = jsonObject.getString("competitionOldName");
         competition.setStartTime(startTime);
         competition.setEndTime(endTime);
         String token = SecurityUtils.getSubject().getPrincipal().toString();
@@ -167,12 +177,16 @@ public class CompetitionService1 {
                 logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
                 result = 0;
             }
-
         }
         return result;
-
     }
 
+
+    /**
+     * 删除比赛中的问题
+     * @param postJosn
+     * @return
+     */
     public int delCompetitionQuestion(String postJosn) {
         int result = 0;
         JSONObject jsonObject = new JSONObject(postJosn);

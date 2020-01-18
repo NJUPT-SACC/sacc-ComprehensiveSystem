@@ -29,6 +29,13 @@ public class AssignmentService1 {
     AssignmentQuestionDao assignmentQuestionMapper;
 
     static Logger logger = LoggerFactory.getLogger(LoginService.class);
+
+    /**
+     * 添加练习
+     *
+     * @param postJosn
+     * @return
+     */
     public int addASsignments(String postJosn) {
 
         JSONObject jsonObject = new JSONObject(postJosn);
@@ -74,9 +81,9 @@ public class AssignmentService1 {
             assignmentQuestion.setCreateBy(sysUser.getCreateBy());
             /**assignment.setUpdateBy(1l);
              assignment.setCreateBy(1l);*/
-             assignmentQuestion.setUpdateBy(1l);
-             assignmentQuestion.setCreateBy(1l);
-             assignmentMapper.insertAssignment(assignment);
+            assignmentQuestion.setUpdateBy(1l);
+            assignmentQuestion.setCreateBy(1l);
+            assignmentMapper.insertAssignment(assignment);
             System.out.println(assignment);
         } catch (Exception e) {
             e.getStackTrace();
@@ -126,6 +133,12 @@ public class AssignmentService1 {
         return result;
     }
 
+    /**
+     * 更新练习
+     *
+     * @param postJosn
+     * @return
+     */
     public int updateAssignment(String postJosn) {
         int result = 0;
         JSONObject jsonObject = new JSONObject(postJosn);
@@ -168,6 +181,13 @@ public class AssignmentService1 {
 
         return result;
     }
+
+    /**
+     * 向练习中添加问题
+     *
+     * @param postJosn
+     * @return
+     */
     public int addQuestion(String postJosn) {
         int result = 0;
         JSONObject jsonObject = new JSONObject(postJosn);
@@ -215,6 +235,13 @@ public class AssignmentService1 {
         }
         return result;
     }
+
+    /**
+     * 删除练习中的问题
+     *
+     * @param postJosn
+     * @return
+     */
     public int delAssignmentQuestion(String postJosn) {
         int result = 0;
         JSONObject jsonObject = new JSONObject(postJosn);
@@ -227,7 +254,7 @@ public class AssignmentService1 {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 Long id = assignmentQuestionMapper.findIdByAssignmentIdAndQuestionId(assignmentId, (long) (int) jsonObject1.get("qid"));
-                System.out.println(id+"     666666");
+                System.out.println(id + "     666666");
                 assignmentQuestionMapper.deleteQuestion(id);
                 result = 1;
             }

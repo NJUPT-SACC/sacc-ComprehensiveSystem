@@ -61,11 +61,11 @@ public class AdminController {
 
         RestResult<Object> result;
         try {
-            resultt =registService.signUp(postJson);
+                resultt =registService.signUp(postJson);
         } catch (Exception e) {
             logger.error("Error: {}\n{}",e.getMessage(), e.getStackTrace());
             result = new RestResult<>(RestResult.STATUS_OTHERS, "注册失败", null);
-        }
+    }
 
         switch(resultt) {
             case 1:

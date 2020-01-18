@@ -3,7 +3,7 @@ package com.sacc.comprehensivesystem.modules.assignment.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sacc.comprehensivesystem.common.entity.BasicEntity;
 
-public class QuestionBankResult  extends BasicEntity {
+public class QuestionBankResult extends BasicEntity {
     private String title;
     private String description;
     private String choiceA;

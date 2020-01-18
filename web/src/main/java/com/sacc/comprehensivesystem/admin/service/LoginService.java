@@ -62,7 +62,7 @@ public class LoginService {
             userSimpleAuthorizationInfo.addStringPermissions(permission);
             logger.debug("userSimpleAuthorizationInfo:{}", userSimpleAuthorizationInfo);
             data = new HashMap<>(2);
-            data.put("user",userSimpleAuthorizationInfo);
+            data.put("umyser",userSimpleAuthorizationInfo);
             String authKey = UUID.randomUUID().toString();
             data.put("authKey", authKey);
             //cacheService.cacheUser(authKey, userSimpleAuthorizationInfo);
