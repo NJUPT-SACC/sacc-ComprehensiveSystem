@@ -27,6 +27,8 @@ public class PasswordUtils {
             return false;
         }
         String randomStr = hashCode.substring(0, 16);
+        String a = EncryptionUtils.md5Hex(randomStr + password);
+        String b = hashCode.substring(16);
         return hashCode.substring(16).equals(EncryptionUtils.md5Hex(randomStr + password));
     }
 }

@@ -19,3 +19,7 @@ alter table sys_user
 
 alter table sys_user
     add gender tinyint default 0 not null comment '1是男生，2是女生' after major;
+ALTER TABLE `sacc_frontend`.sys_user
+    ADD COLUMN `teamleader_flag` tinyint      default 0   not null comment '队长标记';
+ALTER TABLE `sacc_frontend`.sys_user
+    ADD COLUMN `team_id` bigint(20)  default 0   not null comment '团队id';

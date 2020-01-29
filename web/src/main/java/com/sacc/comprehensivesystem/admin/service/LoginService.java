@@ -37,8 +37,7 @@ public class LoginService {
 
         HashMap<String,Object> data = null;
         UserSimpleAuthorizationInfo userSimpleAuthorizationInfo =
-                new UserSimpleAuthorizationInfo();
-        HashMap<String, Object> hashMap = authService.authtication(username, password);
+                new UserSimpleAuthorizationInfo();HashMap<String, Object> hashMap = authService.authtication(username, password);
         if (hashMap != null) {
             String userInfoStr = JSONUtils.toJson(hashMap.get("userInfo"));
             SysUser sysUser = JSONUtils.readValue(userInfoStr, SysUser.class);

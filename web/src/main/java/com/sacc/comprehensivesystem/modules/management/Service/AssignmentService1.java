@@ -81,8 +81,8 @@ public class AssignmentService1 {
             assignmentQuestion.setCreateBy(sysUser.getCreateBy());
             /**assignment.setUpdateBy(1l);
              assignment.setCreateBy(1l);*/
-            assignmentQuestion.setUpdateBy(1l);
-            assignmentQuestion.setCreateBy(1l);
+           /** assignmentQuestion.setUpdateBy(1l);
+            assignmentQuestion.setCreateBy(1l);**/
             assignmentMapper.insertAssignment(assignment);
             System.out.println(assignment);
         } catch (Exception e) {

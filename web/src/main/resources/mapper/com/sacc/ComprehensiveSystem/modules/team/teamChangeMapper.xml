@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.team.dao.TeamChangeDao">
+
+
+    <insert id="createTeam" parameterType="com.sacc.comprehensivesystem.modules.team.entity.Team">
+        INSERT INTO sys_user_team (leader,create_by,update_by,competition_id,team_name)
+        VALUES (#{leaderId},#{createBy},#{updateBy},#{competitionId},#{name})
+    </insert>
+
+    <select id="foudByName" resultType="String">
+        SELECT team_name
+        FROM sys_user_team
+        WHERE team_name = #{name};
+    </select>
+</mapper>
