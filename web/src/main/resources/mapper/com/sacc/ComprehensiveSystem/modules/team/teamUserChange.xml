@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sacc.comprehensivesystem.modules.team.dao.Team_userDao">
+
+    <update id="updateLeader" parameterType="com.sacc.comprehensivesystem.modules.team.entity.Team">
+        UPDATE sys_user
+        SET teamleader_flag = 1,team_id = #{id}
+        WHERE id = #{leaderId}
+    </update>
+</mapper>

@@ -5,6 +5,7 @@ import com.sacc.comprehensivesystem.admin.service.LoginService;
 import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
 import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
 import com.sacc.comprehensivesystem.modules.team.dao.TeamChangeDao;
+import com.sacc.comprehensivesystem.modules.team.dao.Team_userDao;
 import com.sacc.comprehensivesystem.modules.team.entity.Team;
 import org.apache.shiro.SecurityUtils;
 import org.json.JSONObject;
@@ -20,6 +21,8 @@ public class ApplicationService {
 
     @Autowired
     TeamChangeDao teamChangeDao;
+    @Autowired
+    Team_userDao team_userDao;
 
     public int applicationTeam(String postJosn) {
 
@@ -52,6 +55,16 @@ public class ApplicationService {
             }
         }else  {
             return 2;
+        }
+        Long teamId=0l;
+        try {
+            teamId = teamChangeDao.foudByLeader(leaderId);
+            team.setId(teamId);
+            team_userDao.updateLeader(team);
+        }catch (Exception e) {
+            e.getStackTrace();
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            return 0;
         }
 
         return 1;

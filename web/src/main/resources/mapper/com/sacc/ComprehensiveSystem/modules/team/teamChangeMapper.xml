@@ -12,6 +12,12 @@
     <select id="foudByName" resultType="String">
         SELECT team_name
         FROM sys_user_team
-        WHERE team_name = #{name};
+        WHERE team_name = #{name} AND del_flag =0
+    </select>
+
+    <select id="foudByLeader" resultType="Long">
+        SELECT id
+        FROM sys_user_team
+        WHERE leader = #{leaderId} AND del_flag =0
     </select>
 </mapper>
