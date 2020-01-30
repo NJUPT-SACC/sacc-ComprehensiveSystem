@@ -143,9 +143,6 @@ public class SysUserService extends BasicService<SysUser> {
             result = 2;
             throw new RuntimeException();
         }
-
-
-        System.out.println(result + "aaaaaaaaaaaaaaaaaaa");
         return result;
     }
 

@@ -92,6 +92,8 @@
         a.update_by as "updateBy",
         a.del_flag as "delFlag",
         a.remarks as "remarks",
+        a.teamleader_flag as "teamLeaderFlag",
+        a.team_id as "teamId"
     </sql>
     <sql id="customJoins">
     </sql>

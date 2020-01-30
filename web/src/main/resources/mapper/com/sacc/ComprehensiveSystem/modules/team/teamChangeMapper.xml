@@ -4,9 +4,24 @@
 <mapper namespace="com.sacc.comprehensivesystem.modules.team.dao.TeamChangeDao">
 
 
+    <resultMap id="ResultMap" type="com.sacc.comprehensivesystem.modules.team.entity.Team">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="leader"    jdbcType="BIGINT"  property="leaderId"/>
+        <result column="team_name" jdbcType="VARCHAR" property="name" />
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="competition_id" jdbcType="BIGINT" property="competitionId"/>
+        <result column="member_b"  jdbcType="BIGINT" property="memberBId"/>
+        <result column="member_c"  jdbcType="BIGINT" property="memberCId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, leader, team_name,  create_by, update_by,competition_id,member_b,member_c
+    </sql>
+
     <insert id="createTeam" parameterType="com.sacc.comprehensivesystem.modules.team.entity.Team">
-        INSERT INTO sys_user_team (leader,create_by,update_by,competition_id,team_name)
-        VALUES (#{leaderId},#{createBy},#{updateBy},#{competitionId},#{name})
+        INSERT INTO sys_user_team (leader,create_by,update_by,competition_id,team_name,member_b,member_c)
+        VALUES (#{leaderId},#{createBy},#{updateBy},#{competitionId},#{name},0,0)
     </insert>
 
     <select id="foudByName" resultType="String">
@@ -20,4 +35,23 @@
         FROM sys_user_team
         WHERE leader = #{leaderId} AND del_flag =0
     </select>
+
+    <select id="returnTeam" resultMap="ResultMap" parameterType="String">
+        SELECT <include refid="Base_Column_List" />
+        FROM sys_user_team
+        WHERE team_name = #{teamName}
+    </select>
+    
+    <update id="updateTeamB" >
+        UPDATE sys_user_team
+        SET    member_b = #{user_id}
+        WHERE id = #{team_id}
+    </update>
+
+    <update id="updateTeamC" >
+        UPDATE sys_user_team
+        SET    member_c = #{user_id}
+        WHERE id = #{team_id}
+    </update>
+
 </mapper>

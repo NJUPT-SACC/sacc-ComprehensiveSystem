@@ -53,6 +53,26 @@ public class _SysUser extends BasicEntity {
 
     private String picUrl;
 
+    private boolean teamLeaderFlag;
+    private Long teamId;
+
+    public boolean isTeamLeaderFlag() {
+        return teamLeaderFlag;
+    }
+
+    public _SysUser setTeamLeaderFlag(boolean teamLeaderFlag) {
+        this.teamLeaderFlag = teamLeaderFlag;
+        return this;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public _SysUser setTeamId(Long teamId) {
+        this.teamId = teamId;
+        return this;
+    }
 
     public String getName() {
         return this.name;

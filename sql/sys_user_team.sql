@@ -1,7 +1,7 @@
 create table sys_user_team
 (
 	id bigint auto_increment,
-	leader bigint null comment '队长',
+	leader bigint  null null comment '队长',
 	member_b bigint null comment '队员b',
 	member_c bigint null comment '队员c',
 	create_by bigint not null,

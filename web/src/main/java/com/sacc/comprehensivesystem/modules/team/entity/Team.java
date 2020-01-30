@@ -4,8 +4,8 @@ public class Team {
     private long id;
     private long competitionId;
     private long leaderId;
-    private long memberBId;
-    private long memberCId;
+    private long memberBId=0;
+    private long memberCId=0;
     private long updateBy;
     private long createBy;
     private String name;
@@ -25,6 +25,17 @@ public class Team {
         this.updateBy = updateBy;
         this.createBy = createBy;
         this.name = name;
+    }
+
+    public Team(long id,long leaderId,String name,long createBy,Long updateBy,long competitionId,long memberBId, long memberCId) {
+        this.competitionId = competitionId;
+        this.leaderId = leaderId;
+        this.updateBy = updateBy;
+        this.createBy = createBy;
+        this.name = name;
+        this.id = id;
+        this.memberBId = memberBId;
+        this.memberCId = memberCId;
     }
 
     public String getName() {

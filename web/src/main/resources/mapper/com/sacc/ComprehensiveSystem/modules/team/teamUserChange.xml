@@ -8,4 +8,10 @@
         SET teamleader_flag = 1,team_id = #{id}
         WHERE id = #{leaderId}
     </update>
-</mapper>
+
+    <update id="updateMember" >
+        UPDATE sys_user
+        SET    team_id = #{team_id}
+        WHERE id = #{user_id}
+    </update>
+ </mapper>
