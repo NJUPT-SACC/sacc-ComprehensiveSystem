@@ -54,4 +54,10 @@
         WHERE id = #{team_id}
     </update>
 
+    <select id="getTeam" resultMap="ResultMap" parameterType="Long">
+        SELECT <include refid="Base_Column_List" />
+        FROM sys_user_team a
+        where  a.id = #{team_id} and a.del_flag = 0
+    </select>
+
 </mapper>

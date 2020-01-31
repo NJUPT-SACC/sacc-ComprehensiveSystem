@@ -28,6 +28,7 @@ public interface SysUserDao extends BasicDao<SysUser> {
 
     List<SysUser> findUserNotAdmin(SysUser sysUser);
 
+    String findUserNameByUserId(Long id);
 
 
 }

@@ -1,14 +1,30 @@
 package com.sacc.comprehensivesystem.modules.team.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Team {
+    @JsonIgnore
     private long id;
+    @JsonIgnore
     private long competitionId;
+    @JsonIgnore
     private long leaderId;
+    @JsonIgnore
     private long memberBId=0;
+    @JsonIgnore
     private long memberCId=0;
+
+    private String memberB;
+
+    private String memberC;
+    @JsonIgnore
     private long updateBy;
+    @JsonIgnore
     private long createBy;
+
     private String name;
+
+    private String leaderName;
 
     public Team( long competitionId, long leaderId, long memberBId, long memberCId, long updateBy, long createBy) {
         this.competitionId = competitionId;
@@ -28,6 +44,7 @@ public class Team {
     }
 
     public Team(long id,long leaderId,String name,long createBy,Long updateBy,long competitionId,long memberBId, long memberCId) {
+
         this.competitionId = competitionId;
         this.leaderId = leaderId;
         this.updateBy = updateBy;
@@ -38,12 +55,39 @@ public class Team {
         this.memberCId = memberCId;
     }
 
+    public String getLeaderName() {
+        return leaderName;
+    }
+
+    public Team setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
     public Team setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getMemberB() {
+        return memberB;
+    }
+
+    public Team setMemberB(String memberB) {
+        this.memberB = memberB;
+        return this;
+    }
+
+    public String getMemberC() {
+        return memberC;
+    }
+
+    public Team setMemberC(String memberC) {
+        this.memberC = memberC;
         return this;
     }
 

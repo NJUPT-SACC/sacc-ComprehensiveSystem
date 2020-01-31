@@ -88,10 +88,8 @@
         select
         a.id
         from sacc_frontend.competition_question a
-        <where>
-            and a.question_id=#{questionId}
+        where  a.question_id=#{questionId}
             and a.competition_id=#{competitionId}
-        </where>
     </select>
 
 
