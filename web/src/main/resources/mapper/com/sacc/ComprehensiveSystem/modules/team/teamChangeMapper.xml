@@ -60,4 +60,10 @@
         where  a.id = #{team_id} and a.del_flag = 0
     </select>
 
+    <select id="getAllTeam" resultMap="ResultMap" parameterType="Long">
+        SELECT <include refid="Base_Column_List" />
+        FROM sys_user_team a
+        where a.del_flag = 0
+    </select>
+
 </mapper>

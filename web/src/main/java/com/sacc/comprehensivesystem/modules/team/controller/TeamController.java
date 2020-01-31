@@ -38,4 +38,15 @@ public class TeamController {
             return new RestResult<>(RestResult.STATUS_OTHERS, "异常，调用失败", null);
         }
     }
+
+    @RequestMapping("team/getAllList")
+    public RestResult getAllList() {
+        List<Team> list = new ArrayList<>();
+        list = agreeJoinService.getAllList();
+        if (list != null) {
+            return new RestResult<>(RestResult.STATUS_SUCCESS, "队伍提取成功", list);
+        }else {
+            return new RestResult<>(RestResult.STATUS_OTHERS, "异常，调用失败", null);
+        }
+    }
 }

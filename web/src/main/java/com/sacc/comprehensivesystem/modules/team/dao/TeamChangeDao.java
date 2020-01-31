@@ -13,4 +13,5 @@ public interface TeamChangeDao {
     void updateTeamB(@Param("team_id") Long teamId, @Param("user_id") Long userId);
     void updateTeamC(@Param("team_id") Long teamId, @Param("user_id") Long userId);
     List<Team> getTeam(Long team_id);
+    List<Team> getAllTeam();
 }

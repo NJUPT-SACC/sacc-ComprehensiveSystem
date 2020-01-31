@@ -89,4 +89,15 @@ public class TeamService {
         }
         return list;
     }
+
+    public List<Team> getAllList() {
+        List<Team> list = new ArrayList<>();
+        list = teamChangeDao.getAllTeam();
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setMemberB(sysUserDao.findUserNameByUserId(list.get(i).getMemberBId()));
+            list.get(i).setMemberC(sysUserDao.findUserNameByUserId(list.get(i).getMemberCId()));
+            list.get(i).setLeaderName(sysUserDao.findUserNameByUserId(list.get(i).getLeaderId()));
+        }
+        return list;
+    }
 }
