@@ -27,6 +27,7 @@ public class MailService  {
 
     private final String preUrl = "localhost:8080/admin/check?signature=";
 
+
     public void sendSimpleMail(String to, String subject, String signature) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
@@ -36,6 +37,28 @@ public class MailService  {
             helper.setSubject(subject);
             Context context = new Context();
             String url = preUrl + signature;
+            context.setVariable("url", url);
+            String mailContext = templateEngine.process("email", context);
+            helper.setText(mailContext, true);
+            System.out.println(url);
+            mailSender.send(message);
+            logger.info("邮件已经发送");
+        } catch (Exception e) {
+            logger.error("Error: {}\n{}", e.getMessage(), e.getStackTrace());
+        }
+    }
+
+    private final String confirmTeamUrl = "localhost:8080/team/check?team_name=";
+
+    public void sendTeamConfirmMail(String to, String subject, String signature,String team_name) {
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            Context context = new Context();
+            String url = confirmTeamUrl +"team_name"+"?signature="+ signature;
             context.setVariable("url", url);
             String mailContext = templateEngine.process("email", context);
             helper.setText(mailContext, true);
