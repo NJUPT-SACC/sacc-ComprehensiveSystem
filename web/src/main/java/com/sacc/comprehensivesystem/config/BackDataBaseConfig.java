@@ -23,7 +23,7 @@ import java.sql.SQLException;
 public class BackDataBaseConfig {
     static final String PACKAGE = "com.sacc.comprehensivesystem.modules.voj.dao";
 
-    private static final String MAPPER_LOCATION = "classpath:mapper/com/sacc/comprehensivesystem/modules/voj/*.xml";
+    private static final String MAPPER_LOCATION = "classpath*:mapper/com/sacc/comprehensivesystem/modules/voj/*.xml";
 
     @Value("${spring.back.datasource.url}")
     private String url;
