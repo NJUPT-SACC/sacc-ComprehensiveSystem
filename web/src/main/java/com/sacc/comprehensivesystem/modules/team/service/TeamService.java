@@ -2,9 +2,11 @@ package com.sacc.comprehensivesystem.modules.team.service;
 
 import com.sacc.comprehensivesystem.admin.Utils.CacheUtils;
 import com.sacc.comprehensivesystem.admin.service.LoginService;
+import com.sacc.comprehensivesystem.admin.service.RegistService;
 import com.sacc.comprehensivesystem.admin.shrio.entity.UserSimpleAuthorizationInfo;
 import com.sacc.comprehensivesystem.admin.sys.dao.SysUserDao;
 import com.sacc.comprehensivesystem.admin.sys.entity.SysUser;
+import com.sacc.comprehensivesystem.modules.mail.MailService;
 import com.sacc.comprehensivesystem.modules.team.dao.TeamChangeDao;
 import com.sacc.comprehensivesystem.modules.team.dao.Team_userDao;
 import com.sacc.comprehensivesystem.modules.team.entity.Team;
@@ -14,9 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author zhongchenyu
+ */
 
 @Service
 public class TeamService {
@@ -28,13 +35,11 @@ public class TeamService {
     @Autowired
     Team_userDao team_userDao;
 
-    public int agreeJoin(String postJosn) {
-        String token = SecurityUtils.getSubject().getPrincipal().toString();
-        UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
+    public int agreeJoin(String authKey,String team_name) {
+        UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(authKey);
         SysUser sysUser = info.getSysUser();
         System.out.println(info);
-        JSONObject jsonObject = new JSONObject(postJosn);
-        String teamName = jsonObject.getString("team_name");
+        String teamName = team_name;
         Team team = null;
         try {
             team = teamChangeDao.returnTeam(teamName);
@@ -99,5 +104,30 @@ public class TeamService {
             list.get(i).setLeaderName(sysUserDao.findUserNameByUserId(list.get(i).getLeaderId()));
         }
         return list;
+    }
+
+    @Autowired
+    RegistService registService;
+    @Autowired
+    MailService mailService;
+    public int sendEmail(String postJosn){
+        String token = SecurityUtils.getSubject().getPrincipal().toString();
+        UserSimpleAuthorizationInfo info = (UserSimpleAuthorizationInfo) CacheUtils.getUserCache(token);
+        SysUser sysUser = info.getSysUser();
+        System.out.println(info);
+        JSONObject jsonObject = new JSONObject(postJosn);
+        String team_name = jsonObject.getString("team_name");
+        String teamMate_name = jsonObject.getString("teamMate_name");
+        SysUser toUser = sysUserDao.findUserByLoginName(teamMate_name);
+        String signature = registService.userEmailPost(toUser);
+        String to = sysUser.getEmail();
+        try {
+            mailService.sendTeamConfirmMail(to,"test", signature,team_name);
+        }catch (Exception e){
+            e.getStackTrace();
+            logger.error("Error: {}\n3{}", e.getMessage(), e.getStackTrace());
+            return 0;
+        }
+        return 1;
     }
 }

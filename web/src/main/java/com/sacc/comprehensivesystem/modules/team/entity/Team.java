@@ -2,6 +2,10 @@ package com.sacc.comprehensivesystem.modules.team.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * @author zhongchenyu
+ */
+
 public class Team {
     @JsonIgnore
     private long id;

@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @author zhongchenyu
+ */
+
 public interface TeamChangeDao {
     void createTeam(Team team);
     String foudByName(String name);
