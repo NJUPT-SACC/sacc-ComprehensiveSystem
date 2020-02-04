@@ -26,7 +26,7 @@ public class PrimaryDataBaseConfig {
     /**
      * 加載子目錄所有的mapper
      */
-    private static final String MAPPER_LOCATION = "classpath:mapper/com/sacc/comprehensivesystem/**/*.xml";
+    private static final String MAPPER_LOCATION = "classpath*:mapper/com/sacc/comprehensivesystem/**/*.xml";
     private static final String CONFIG_LOCATION = "classpath:mybatis-config.xml";
 
     @Value("${primary.datasource.url}")
