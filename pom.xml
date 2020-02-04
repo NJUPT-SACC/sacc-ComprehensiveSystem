@@ -95,7 +95,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.1.10</version>
+			<version>1.1.21</version>
 		</dependency>
 
 		<!-- for ehcache -->
@@ -166,6 +166,14 @@
 		</repository>
 	</repositories>
 	<build>
+		<!--	因为这个不是标准的maven工程目录结构 所以需要手动指定代码资源存放路径	-->
+		<sourceDirectory>${project.basedir}/web/src/main/java</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/web/src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/web/src/main/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
